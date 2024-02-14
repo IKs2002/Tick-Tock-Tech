@@ -4,13 +4,17 @@ import Tabs from "../Componets/Tabs";
 import "./DefaultPage.css"
 import TimesheetEdit from "../TabContent/TimesheetEditing.js";
 import PersonalTimeSheet from "../TabContent/PersonalTimeSheet.js";
+import AdminDashboard from "../TabContent/AdminDashboard.js";
+
 
 const DefaultPage = () => {
   const tabData = [
     { label: "Personal Timesheet", content: <React.Fragment>
     <PersonalTimeSheet/>
 </React.Fragment> },
-    { label: "Admin Dashboard" },
+    { label: "Admin Dashboard", content: <React.Fragment>
+    <AdminDashboard/>
+</React.Fragment> },
     { label: "Timesheet Editing", content: <React.Fragment>
         <TimesheetEdit/>
     </React.Fragment> },
