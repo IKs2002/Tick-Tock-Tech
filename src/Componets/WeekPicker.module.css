@@ -1,0 +1,46 @@
+.weekPicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  font-family: Arial, sans-serif;
+}
+
+.innerContainer {
+  display: flex;
+  align-items: center;
+  background-color: #e0e0e0; /* Gray background for the inner container */
+  border-radius: 10px; /* Rounded edges for the inner container */
+}
+
+.arrowButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0; /* Remove padding to make the triangles sharper */
+  margin: 0 10px; /* Space between the triangles and the weekDisplay */
+  width: 0; 
+  height: 0; 
+  border-style: solid;
+}
+
+.leftArrow {
+  border-width: 10px 15px 10px 0; /* Adjust size as needed */
+  border-color: transparent #3a3a3a transparent transparent; /* Right side is white, others are transparent */
+}
+
+.rightArrow {
+  border-width: 10px 0 10px 15px; /* Adjust size as needed */
+  border-color: transparent transparent transparent #3a3a3a; /* Left side is white, others are transparent */
+}
+
+.arrowButton:focus {
+  outline: none;
+}
+
+.weekDisplay {
+  text-align: center;
+  font-weight: bold;
+  padding: 5px 10px; /* Padding around the text */
+  color: #4F4F4F; /* Dark gray color for the text */
+}

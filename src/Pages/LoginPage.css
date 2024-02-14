@@ -1,0 +1,59 @@
+.Body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+.container {
+  display: block;
+  width: 600px;
+  text-align: center;
+}
+
+.logo {
+  width: 25vw;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5vh;
+}
+
+input[type="text"],
+input[type="password"] {
+  min-width: 200px; /* Adjust this value as needed */
+  width: 30.531vw; /* Adjust this value as needed */
+  height: 10.187vh;
+  padding: 12px 20px;
+  margin: 8px auto; /* This will center the input boxes */
+  display: block;
+  border: 1px solid #373740;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-size: 1vw;
+}
+
+
+.loginbutton {
+  width: 16.395vw;
+  height: 5.607vh;
+  background-color: #de0000;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  border-radius: .5vw;
+  font-size: 0.9vw;
+  font-weight: bold;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+.PasswordRecovery {
+  margin-top: 1.5vh;
+  margin-bottom: 1.5vh;
+  display: flex;
+  justify-content: center;
+  font-size: 0.9vw;
+}

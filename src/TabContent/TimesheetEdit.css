@@ -1,0 +1,11 @@
+.GenericButtons {
+  margin-right: 0px;
+  width: 200px;
+  margin-right: 0px;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  padding-left: 100px;
+}

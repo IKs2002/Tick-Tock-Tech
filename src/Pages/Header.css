@@ -1,0 +1,33 @@
+.MainHeaders {
+  display: flex;
+  align-items: center;
+  background-color: #708090;
+}
+
+.Logos {
+  width: 20vw;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+  margin-left: 38.5vw;
+}
+
+.header-buttons {
+  font-weight: bold;
+  color: white;
+  font-size: 1.5vw;
+  overflow: hidden;
+  background-color: transparent;
+  border: transparent;
+  margin: 0.5vw;
+}
+
+.temp {
+  margin-top: 8vh;
+  margin-left: 15vw;
+  white-space: nowrap;
+  width: 10vw;
+} 
+
+.buttonImage {
+  width: 2vw;
+}
