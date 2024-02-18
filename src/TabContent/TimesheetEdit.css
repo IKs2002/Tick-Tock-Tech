@@ -1,11 +1,24 @@
-.GenericButtons {
-  margin-right: 0px;
-  width: 200px;
-  margin-right: 0px;
+.Week-of {
+  display: flex;
+  justify-content: center; /* Centers the WeekPicker horizontally */
+  width: 100%; /* Ensures the container takes full width */
 }
 
-.wrapper {
-  width: 100%;
+.center-container {
+  flex-grow: 1; /* Makes the container grow to fill available space */
   display: flex;
-  padding-left: 100px;
+  justify-content: center; /* Centers the WeekPicker horizontally */
+}
+
+.GenericButtons {
+  position: absolute; /* This ensures the button aligns to the right */
+  right: 5%;
+  width: 7vw;
+  height: 4vh;
+  color: #4f4f4f;
+  background-color: #d9d9d9;
+  border-color: transparent;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: auto;
 }

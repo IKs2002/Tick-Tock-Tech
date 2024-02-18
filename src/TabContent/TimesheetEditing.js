@@ -11,14 +11,17 @@ const TimesheetEdit = () => {
 
   return (
     <div>
-      <div className="wrapper">
+    <div className="Week-of">
+      <div className="center-container">
         <WeekPicker onChange={handleWeekChange} />
-        <button className="GenericButtons">Save Changes</button>
       </div>
+      <button className="GenericButtons">Save Changes</button>
+    </div>
       <container>
         <TimeSheet />
       </container>
     </div>
   );
 };
-export default TimesheetEdit;
+export default TimesheetEdit; 
+
