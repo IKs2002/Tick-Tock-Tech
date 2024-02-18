@@ -2,23 +2,23 @@ import React from 'react';
 import './TimeSheet.css'
 
 const data = [
-  { Day: "Monday", Date: "## XXX ####" , Clockin: "##:## AM" , Clockout: "##:## AM"  , Clockin: "##:## AM", Clockout: "##:## AM", Clockin: "##:## AM", Clockout: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
-  { Day: "Tuesday", Date: "## XXX ####" , Clockin: "##:## AM" , Clockout: "##:## AM"  , Clockin: "##:## AM", Clockout: "##:## AM", Clockin: "##:## AM", Clockout: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
-  { Day: "Wednesday", Date: "## XXX ####" , Clockin: "##:## AM" , Clockout: "##:## AM"  , Clockin: "##:## AM", Clockout: "##:## AM", Clockin: "##:## AM", Clockout: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
-  { Day: "Thursday", Date: "## XXX ####" , Clockin: "##:## AM" , Clockout: "##:## AM"  , Clockin: "##:## AM", Clockout: "##:## AM", Clockin: "##:## AM", Clockout: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
-  { Day: "Friday", Date: "## XXX ####" , Clockin: "##:## AM" , Clockout: "##:## AM"  , Clockin: "##:## AM", Clockout: "##:## AM", Clockin: "##:## AM", Clockout: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
-  { Day: "Saturday", Date: "## XXX ####" , Clockin: "##:## AM" , Clockout: "##:## AM"  , Clockin: "##:## AM", Clockout: "##:## AM", Clockin: "##:## AM", Clockout: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
-  { Day: "Sunday", Date: "## XXX ####" , Clockin: "##:## AM" , Clockout: "##:## AM"  , Clockin: "##:## AM", Clockout: "##:## AM", Clockin: "##:## AM", Clockout: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"}
+  { Day: "Monday", Date: "## XXX ####" , Clockin1: "##:## AM" , Clockout1: "##:## AM"  , Clockin2: "##:## AM", Clockout2: "##:## AM", Clockin3: "##:## AM", Clockout3: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
+  { Day: "Tuesday", Date: "## XXX ####" , Clockin1: "##:## AM" , Clockout1: "##:## AM"  , Clockin2: "##:## AM", Clockout2: "##:## AM", Clockin3: "##:## AM", Clockout3: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
+  { Day: "Wednesday", Date: "## XXX ####" , Clockin1: "##:## AM" , Clockout1: "##:## AM"  , Clockin2: "##:## AM", Clockout2: "##:## AM", Clockin3: "##:## AM", Clockout3: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
+  { Day: "Thursday", Date: "## XXX ####" , Clockin1: "##:## AM" , Clockout1: "##:## AM"  , Clockin2: "##:## AM", Clockout2: "##:## AM", Clockin3: "##:## AM", Clockout3: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
+  { Day: "Friday", Date: "## XXX ####" , Clockin1: "##:## AM" , Clockout1: "##:## AM"  , Clockin2: "##:## AM", Clockout2: "##:## AM", Clockin3: "##:## AM", Clockout3: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
+  { Day: "Saturday", Date: "## XXX ####" , Clockin1: "##:## AM" , Clockout1: "##:## AM"  , Clockin2: "##:## AM", Clockout2: "##:## AM", Clockin3: "##:## AM", Clockout3: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
+  { Day: "Sunday", Date: "## XXX ####" , Clockin1: "##:## AM" , Clockout1: "##:## AM"  , Clockin2: "##:## AM", Clockout2: "##:## AM", Clockin3: "##:## AM", Clockout3: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"}
 ]
 
 const data1 = [
-  { Day: "Monday", Date: "## XXX ####" , Clockin: "##:## AM" , Clockout: "##:## AM"  , Clockin: "##:## AM", Clockout: "##:## AM", Clockin: "##:## AM", Clockout: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
-  { Day: "Tuesday", Date: "## XXX ####" , Clockin: "##:## AM" , Clockout: "##:## AM"  , Clockin: "##:## AM", Clockout: "##:## AM", Clockin: "##:## AM", Clockout: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
-  { Day: "Wednesday", Date: "## XXX ####" , Clockin: "##:## AM" , Clockout: "##:## AM"  , Clockin: "##:## AM", Clockout: "##:## AM", Clockin: "##:## AM", Clockout: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
-  { Day: "Thursday", Date: "## XXX ####" , Clockin: "##:## AM" , Clockout: "##:## AM"  , Clockin: "##:## AM", Clockout: "##:## AM", Clockin: "##:## AM", Clockout: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
-  { Day: "Friday", Date: "## XXX ####" , Clockin: "##:## AM" , Clockout: "##:## AM"  , Clockin: "##:## AM", Clockout: "##:## AM", Clockin: "##:## AM", Clockout: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
-  { Day: "Saturday", Date: "## XXX ####" , Clockin: "##:## AM" , Clockout: "##:## AM"  , Clockin: "##:## AM", Clockout: "##:## AM", Clockin: "##:## AM", Clockout: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
-  { Day: "Sunday", Date: "## XXX ####" , Clockin: "##:## AM" , Clockout: "##:## AM"  , Clockin: "##:## AM", Clockout: "##:## AM", Clockin: "##:## AM", Clockout: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"}
+  { Day: "Monday", Date: "## XXX ####" , Clockin1: "##:## AM" , Clockout1: "##:## AM"  , Clockin2: "##:## AM", Clockout2: "##:## AM", Clockin3: "##:## AM", Clockout3: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
+  { Day: "Tuesday", Date: "## XXX ####" , Clockin1: "##:## AM" , Clockout1: "##:## AM"  , Clockin2: "##:## AM", Clockout2: "##:## AM", Clockin3: "##:## AM", Clockout3: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
+  { Day: "Wednesday", Date: "## XXX ####" , Clockin1: "##:## AM" , Clockout1: "##:## AM"  , Clockin2: "##:## AM", Clockout2: "##:## AM", Clockin3: "##:## AM", Clockout3: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
+  { Day: "Thursday", Date: "## XXX ####" , Clockin1: "##:## AM" , Clockout1: "##:## AM"  , Clockin2: "##:## AM", Clockout2: "##:## AM", Clockin3: "##:## AM", Clockout3: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
+  { Day: "Friday", Date: "## XXX ####" , Clockin1: "##:## AM" , Clockout1: "##:## AM"  , Clockin2: "##:## AM", Clockout2: "##:## AM", Clockin3: "##:## AM", Clockout3: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
+  { Day: "Saturday", Date: "## XXX ####" , Clockin1: "##:## AM" , Clockout1: "##:## AM"  , Clockin2: "##:## AM", Clockout2: "##:## AM", Clockin3: "##:## AM", Clockout3: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"},
+  { Day: "Sunday", Date: "## XXX ####" , Clockin1: "##:## AM" , Clockout1: "##:## AM"  , Clockin2: "##:## AM", Clockout2: "##:## AM", Clockin3: "##:## AM", Clockout3: "##:## AM", Project: "XXXXXXXXXXXXXX", Regular: "XX hrs", Overtime: "XX hrs"}
 
 ]
 const Paydata = [ 
@@ -32,7 +32,7 @@ const WeekTotal = [
 function TimeSheet(){
   return (
 <div className="App">
-  <section className='App-Timesheet'>
+  <section className='Timesheet-Table'>
      <table>
        <tr>
          <th>Day of the Week</th>
@@ -55,14 +55,14 @@ function TimeSheet(){
              <tr key={key}>
                <td>{val.Day}</td>
                <td>{val.Date}</td>
-               <td>{val.Clockin}</td>
-               <td>{val.Clockout}</td>
+               <td>{val.Clockin1}</td>
+               <td>{val.Clockout1}</td>
                <td></td>
-               <td>{val.Clockin}</td>
-               <td>{val.Clockout}</td>
+               <td>{val.Clockin2}</td>
+               <td>{val.Clockout2}</td>
                <td></td>
-               <td>{val.Clockin}</td>
-               <td>{val.Clockout}</td>
+               <td>{val.Clockin3}</td>
+               <td>{val.Clockout3}</td>
                <td></td>
                <td>{val.Project}</td>
                <td>{val.Regular}</td>
@@ -75,7 +75,7 @@ function TimeSheet(){
    </section>
 
 
-   <section className='App-TotalHours'>
+   <section className='Timesheet-TotalHours'>
    <table>
      <tr> 
        <th></th>
@@ -95,7 +95,7 @@ function TimeSheet(){
    </section>
 
 
-   <section className='App-Timesheet'>
+   <section className='Timesheet-Table'>
      <table>
        <tr>
          <th>Day of the Week</th>
@@ -115,22 +115,22 @@ function TimeSheet(){
        </tr>
          {data1.map((val, key) => {
            return (
-             <tr key={key}>
-               <td>{val.Day}</td>
-               <td>{val.Date}</td>
-               <td>{val.Clockin}</td>
-               <td>{val.Clockout}</td>
-               <td></td>
-               <td>{val.Clockin}</td>
-               <td>{val.Clockout}</td>
-               <td></td>
-               <td>{val.Clockin}</td>
-               <td>{val.Clockout}</td>
-               <td></td>
-               <td>{val.Project}</td>
-               <td>{val.Regular}</td>
-               <td>{val.Overtime}</td>
-             </tr>
+            <tr key={key}>
+            <td>{val.Day}</td>
+            <td>{val.Date}</td>
+            <td>{val.Clockin1}</td>
+            <td>{val.Clockout1}</td>
+            <td></td>
+            <td>{val.Clockin2}</td>
+            <td>{val.Clockout2}</td>
+            <td></td>
+            <td>{val.Clockin3}</td>
+            <td>{val.Clockout3}</td>
+            <td></td>
+            <td>{val.Project}</td>
+            <td>{val.Regular}</td>
+            <td>{val.Overtime}</td>
+          </tr>
              )
          })}
 
@@ -138,7 +138,7 @@ function TimeSheet(){
    </section>
 
 
-   <section className='App-TotalHours'>
+   <section className='Timesheet-TotalHours'>
    <table>
      <tr> 
        <th></th>
@@ -158,7 +158,7 @@ function TimeSheet(){
    </section>
 
       
-   <section className='App-PayPeriod'>
+   <section className='Timesheet-PayPeriod'>
      <table>
        <tr> 
          <th></th>

@@ -1,27 +1,8 @@
-.App {
+.Timesheet {
     text-align: center;
   }
   
-  .App-header {
-    background-color: #282c34;
-    min-height: 150px;
-    display: flex;
-    flex-direction: column;
-    font-size: calc(10px + 2vmin);
-    color: white;
-  }
-  
-  .App-nav{
-    display: flex;
-    position: relative;
-    width: 100%;
-    background-color: gray;
-    overflow: auto;
-    padding: 10px;
-    margin-top: 20px;
-  }
-  
-  .App-Timesheet{
+  .Timesheet-Table{
     display: flex;
     padding: 20px 10px 0px 10px;
     text-align: center;
@@ -93,7 +74,7 @@
     } 
   }
   
-  .App-PayPeriod{
+  .Timesheet-PayPeriod{
     display: flex;
     position: relative;
     padding: 20px;
@@ -145,7 +126,7 @@
     } 
   }
   
-  .App-TotalHours{
+  .Timesheet-TotalHours{
     display: flex;
     position: relative;
     padding-top: 5px;
