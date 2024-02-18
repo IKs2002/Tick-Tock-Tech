@@ -23,9 +23,8 @@
 
 .temp {
   margin-top: 8vh;
-  margin-left: 15vw;
-  white-space: nowrap;
-  width: 10vw;
+  margin-left: auto;
+  width: auto;
 } 
 
 .buttonImage {

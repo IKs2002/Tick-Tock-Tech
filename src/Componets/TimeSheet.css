@@ -23,9 +23,7 @@
   
   .App-Timesheet{
     display: flex;
-    position: relative;
     padding: 20px 10px 0px 10px;
-    overflow: auto;
     text-align: center;
     font-family: "Roboto", sans-serif;
   
