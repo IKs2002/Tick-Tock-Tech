@@ -1,5 +1,4 @@
 import React from "react";
-import WeekPicker from "../Componets/WeekPicker.js";
 import AdminTable from "../Componets/AdminTable.js";
 const AdminDashboard= () => {
   // Define the handleWeekChange function

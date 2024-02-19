@@ -2,15 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./LoginPage.css";
 import Logo from "../Photos/HeaderPhotos/dgf.png";
-import DefaultPage from "./DefaultPage";
-import PasswordRecovery from "./PasswordRecoveryPage";
 
 const Login = () => {
   return (
     <body className="Body">
       <div class="container">
         <div>
-          <img src={Logo} alt="Logo" class="logo"/>
+          <img src={Logo} alt="Logo" class="logo" />
         </div>
 
         <label for="uname"></label>
@@ -24,9 +22,7 @@ const Login = () => {
         <label for="psw"></label>
         <input type="password" placeholder="Password" name="psw" required />
         <Link to="PasswordRecovery">
-          <text  className="PasswordRecovery">
-            Forgot your password?
-          </text>
+          <text className="PasswordRecovery">Forgot your password?</text>
         </Link>
         <Link to="DefaultPage">
           <button className="loginbutton" type="submit">

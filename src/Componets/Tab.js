@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const Tab = ({ label, onClick, isActive }) => (
   <div className={`tab ${isActive ? "active" : ""}`} onClick={onClick}>
