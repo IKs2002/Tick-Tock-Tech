@@ -10,11 +10,26 @@ const AdminTable = () => {
         { id: 4, name: '', status: 'Clocked Out', locked: false },
     ]);
 
+    const statusColors = {
+        'Clocked Out': '#FEEFF0', // red
+        'Clocked In': '#EEF8F2', // green
+        'Break': '#E4F1F9', // blue
+        'Lunch': '#FFF8ED' // yellow
+    };
+
+    const statusColorsText = {
+        'Clocked Out': '#ED5E61', // red
+        'Clocked In': '#59B77A', // green
+        'Break': '#7EB6FF', // blue
+        'Lunch': '#FFA114' // yellow
+    };
+
     // toggle employee lock status
     const toggleLock = (id) => {
         setEmployees(prevEmployees =>
             prevEmployees.map(emp =>
                 emp.id === id ? { ...emp, locked: !emp.locked } : emp
+                
             )
         );
     };
@@ -37,6 +52,18 @@ const AdminTable = () => {
         );
     };
 
+    //for delete button
+    const handleDeleteSelected = () => {
+    };
+
+    //for lock all button
+    const handleLockAll = () => {
+        setEmployees(prevEmployees =>
+            prevEmployees.map(emp => ({ ...emp, locked: true }))
+        );
+    };
+
+
     // rows for employees
     const renderRows = () => {
         return employees.map(emp => (
@@ -51,17 +78,19 @@ const AdminTable = () => {
                         value={emp.name}
                         onChange={e => handleNameChange(emp.id, e.target.value)}
                         style={{ height: '50px', borderRadius: '0'}}
+                        
                     />
                 </td>
                 <td>
                     <select
                         value={emp.status}
                         onChange={e => handleStatusChange(emp.id, e.target.value)}
+                        style={{ backgroundColor: statusColors[emp.status], color: statusColorsText[emp.status], border: 'none', outline: 'none', height: '30px', border: '0', fontSize: '16px', fontWeight: 'bold', textAlign: 'center' }}
                     >
-                        <option value="Clocked Out">Clocked Out</option>
-                        <option value="Clocked In">Clocked In</option>
-                        <option value="Break">Break</option>
-                        <option value="Lunch">Lunch</option>
+                    <option value="Clocked Out" style={{ backgroundColor: statusColors['Clocked Out'] }}>Clocked Out</option>
+                    <option value="Clocked In" style={{ backgroundColor: statusColors['Clocked In'] }}>Clocked In</option>
+                    <option value="Break" style={{ backgroundColor: statusColors['Break'] }}>Break</option>
+                    <option value="Lunch" style={{ backgroundColor: statusColors['Lunch'] }}>Lunch</option>
                     </select>
                 </td>
                 <td>
@@ -114,6 +143,8 @@ const AdminTable = () => {
                     </tr>
                 </thead>
                 <tbody>{renderRows()}</tbody>
+                <button onClick={handleDeleteSelected}>Delete Selected Employee(s)</button>
+                <button onClick={handleLockAll}>Lock All</button>
                 <tfoot>
                     {/*footer*/}
                 </tfoot>
@@ -124,4 +155,4 @@ const AdminTable = () => {
 
 export default AdminTable;
 
-//last updated 2/14 -sierra
+//last updated 2/19 -sierra

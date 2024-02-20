@@ -1,5 +1,6 @@
 /* whole table  */
 .table {
+    margin-left: auto;
     width: 100%;
     border-collapse: collapse;
 }
