@@ -23,7 +23,7 @@ const TimesheetEdit = () => {
       </div>
       <container class="tableArea">
         <div class="ImgArea">
-          <img src={ProfilePicBlack} alt="No Profile Picture Found" class="ProfImg" />
+          <img src={ProfilePicBlack} alt="No Profile Pic Found" class="ProfImg" />
         </div>
         <div class="TimesheetArea">
           <TimeSheet editable={true} />
