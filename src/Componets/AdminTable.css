@@ -91,11 +91,12 @@
 .AdminDashboard_DeleteButton {
   width: 14vw;
   height: 4vh;
-  margin-left: 1.5vw;
-  margin-right: 23.7vw;
+  margin-left: 2.8vw;
+  margin-right: 22.7vw;
   border: 0.15vw solid #ed5e61;
   color: #ed5e61;
   font-size: 0.9vw;
+  font-weight: bold;
 }
 
 .AdminDashboard_LockAllButton {
@@ -104,5 +105,6 @@
   border: 0.15vw solid #ed5e61;
   color: #ed5e61;
   font-size: 0.9vw;
+  font-weight: bold;
 }
 /*last updated 2/14 -sierra */
