@@ -163,49 +163,62 @@ const AdminTable = () => {
   };
 
   return (
-    <div className="container mt-5">
-      {/* input for adding a new employees */}
-      <input
-        type="text"
-        placeholder="Enter New Employee"
-        onKeyPress={(e) => {
-          // calls add employee funct when you hit enter
-          if (e.key === "Enter") {
-            addEmployee();
-          }
-        }}
-        style={{ height: "30px", borderRadius: "0" }}
-      />
+    <div>
+      <div className="container mt-5">
+        {/* input for adding a new employees */}
+        <input
+          type="text"
+          placeholder="Enter New Employee"
+          onKeyPress={(e) => {
+            // calls add employee funct when you hit enter
+            if (e.key === "Enter") {
+              addEmployee();
+            }
+          }}
+          style={{ height: "30px", borderRadius: "0" }}
+        />
 
-      {/* search table */}
-      <input
-        type="text"
-        className="float-right"
-        placeholder="Search table"
-        style={{ height: "30px", borderRadius: "0" }}
-      />
-      <table className="table mt-3">
-        <thead>
-          <tr>
-            <th>
-              <input
-                type="checkbox"
-                checked={isAllChecked}
-                onChange={handleMasterCheckboxChange}
-              />
-            </th>
-            <th>Employee Name</th>
-            <th>Status</th>
-            <th>Unlock</th>
-          </tr>
-        </thead>
-        <tbody>{renderRows()}</tbody>
-        <button onClick={handleDeleteSelected}>
+        {/* search table */}
+        <input
+          type="text"
+          className="float-right"
+          placeholder="Search table"
+          style={{ height: "30px", borderRadius: "0" }}
+        />
+        <table className="table mt-3">
+          <thead>
+            <tr>
+              <th>
+                <input
+                  type="checkbox"
+                  checked={isAllChecked}
+                  onChange={handleMasterCheckboxChange}
+                />
+              </th>
+              <th>Employee Name</th>
+              <th>Status</th>
+              <th>Unlock</th>
+            </tr>
+          </thead>
+          <tbody>{renderRows()}</tbody>
+          <tfoot>{/*footer*/}</tfoot>
+        </table>
+      </div>
+      {/* bottom buttons */}
+      <div className="AdminDashboard_BottomButtons">
+        <button
+          onClick={handleDeleteSelected}
+          className="AdminDashboard_DeleteButton"
+        >
           Delete Selected Employee(s)
         </button>
-        <button onClick={handleLockAll}>Lock All</button>
-        <tfoot>{/*footer*/}</tfoot>
-      </table>
+        <button
+          onClick={handleLockAll}
+          className="AdminDashboard_LockAllButton"
+        >
+          Lock All
+        </button>
+      </div>
     </div>
   );
 };
