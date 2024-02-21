@@ -1,10 +1,10 @@
 import React from "react";
-import "./TimesheetEdit.css";
-import ProfilePicBlack from "../Photos/HeaderPhotos/ProfilePicBlack.png"
+import "./TimesheetViewing.css";
 import TimeSheet from "../Componets/TimeSheet.js";
 import WeekPicker from "../Componets/WeekPicker.js";
+import ProfilePicBlack from "../Photos/HeaderPhotos/ProfilePicBlack.png";
 
-const TimesheetEdit = () => {
+const TimesheetViewing = () => {
   const handleWeekChange = (weeks) => {
     // Implement what should happen when weeks change
     console.log(weeks); // For example, log the new weeks to the console
@@ -12,13 +12,12 @@ const TimesheetEdit = () => {
 
   return (
     <div>
-    <div className="Week-of">
-      <div className="center-container">
-        <WeekPicker onChange={handleWeekChange} />
+      <div className="Week-of">
+        <div className="center-container">
+          <WeekPicker onChange={handleWeekChange} />
+        </div>
       </div>
-      <button className="GenericButtons">Save Changes</button>
-    </div>
-    <div>
+      <div>
         <label class="EmpName">Employee Name</label>
       </div>
       <container class="tableArea">
@@ -32,5 +31,4 @@ const TimesheetEdit = () => {
     </div>
   );
 };
-export default TimesheetEdit; 
-
+export default TimesheetViewing;

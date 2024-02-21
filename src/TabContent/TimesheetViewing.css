@@ -1,0 +1,31 @@
+.tableArea {
+    display: flex;
+
+}
+
+
+
+.ImgArea {
+width: auto;
+margin-right: 3vw;
+margin-left: 1vw;
+margin-top: 2vh;
+}
+.ProfImg {
+max-height: 200px;
+height: 17vh;
+}
+
+
+
+.TimesheetArea {
+    width: 85%;
+}
+
+
+.EmpName {
+    font-size: 2vw;
+    font-weight: bold;
+    margin-left: 1vw;
+    text-decoration: underline;
+}
