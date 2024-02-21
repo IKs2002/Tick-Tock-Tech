@@ -1,6 +1,6 @@
 import React from "react";
 import "./TimesheetEdit.css";
-import ProfilePicBlack from "../Photos/HeaderPhotos/ProfilePicBlack.png"
+import ProfilePicBlack from "../Photos/HeaderPhotos/ProfilePicBlack.png";
 import TimeSheet from "../Componets/TimeSheet.js";
 import WeekPicker from "../Componets/WeekPicker.js";
 
@@ -12,13 +12,13 @@ const TimesheetEdit = () => {
 
   return (
     <div>
-    <div className="Week-of">
-      <div className="center-container">
-        <WeekPicker onChange={handleWeekChange} />
+      <div className="Week-of">
+        <div className="center-container">
+          <WeekPicker onChange={handleWeekChange} />
+        </div>
+        <button className="GenericButtons">Save Changes</button>
       </div>
-      <button className="GenericButtons">Save Changes</button>
-    </div>
-    <div>
+      <div>
         <label class="EmpName">Employee Name</label>
       </div>
       <container class="tableArea">
@@ -26,11 +26,10 @@ const TimesheetEdit = () => {
           <img src={ProfilePicBlack} class="ProfImg" />
         </div>
         <div class="TimesheetArea">
-          <TimeSheet />
+          <TimeSheet editable={true} />
         </div>
       </container>
     </div>
   );
 };
-export default TimesheetEdit; 
-
+export default TimesheetEdit;
