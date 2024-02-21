@@ -1,6 +1,13 @@
+.AdminDashboard_ParentBorder {
+  background-color: #ededed;
+  margin-top: 1vh;
+  width: 47.5vw;
+  height: 75vh;
+}
+
 /* whole table  */
 .table {
-  margin-left: auto;
+  margin-left: 8.3vw;
   width: 100%;
   border-collapse: collapse;
 }
@@ -8,12 +15,12 @@
 /* table header (blue row */
 .table th {
   background-color: #708090;
-  padding: 10px;
+  padding: 0.65vw;
   text-align: center;
   font-weight: normal;
   color: white;
-  font-size: 20px;
-  border: 5px solid #ddd;
+  font-size: 1.3vw;
+  border: 0.4vw solid #ddd;
 }
 
 /* table rows and boxes */
@@ -23,9 +30,9 @@
 
 /* table border */
 .table td {
-  padding: 10px;
-  border-left: 5px solid #ddd;
-  border-right: 5px solid #ddd;
+  padding: 0.65vw;
+  border-left: 0.4vw solid #ddd;
+  border-right: 0.4vw solid #ddd;
 }
 
 /* alternating row colors */
@@ -42,29 +49,32 @@
 .table input[type="text"] {
   border: none;
   color: #333;
-  width: 350px;
+  width: 22.8vw;
   background-color: inherit;
+  font-size: 1.1vw;
 }
 
 .AdminDashboard_BottomButtons {
   display: flex;
   margin-top: 2vh;
-  width: 42.4vw;
+  width: 46.25vw;
 }
 
 .AdminDashboard_DeleteButton {
-    width: 14vw;
-    height: 4vh;
-    margin-left: 1.5vw;
-    margin-right: 20.5vw;
-    border: 2px solid #ED5E61;
-    color: #ED5E61;
+  width: 14vw;
+  height: 4vh;
+  margin-left: 1.5vw;
+  margin-right: 23.7vw;
+  border: 2px solid #ed5e61;
+  color: #ed5e61;
+  font-size: 0.9vw;
 }
 
 .AdminDashboard_LockAllButton {
-    width: 6vw;
-    height: 4vh;
-    border: 2px solid #ED5E61;
-    color: #ED5E61;
+  width: 6vw;
+  height: 4vh;
+  border: 2px solid #ed5e61;
+  color: #ed5e61;
+  font-size: 0.9vw;
 }
 /*last updated 2/14 -sierra */

@@ -107,9 +107,10 @@ const AdminTable = () => {
               backgroundColor: statusColors[emp.status],
               color: statusColorsText[emp.status],
               outline: "none",
-              height: "30px",
+              width: "8vw",
+              height: "4.3vh",
               border: "0",
-              fontSize: "16px",
+              fontSize: "1.1vw",
               fontWeight: "bold",
               textAlign: "center",
             }}
@@ -141,7 +142,19 @@ const AdminTable = () => {
           </select>
         </td>
         <td>
-          <button className="btn btn-link" onClick={() => toggleLock(emp.id)}>
+          <button
+            className="btn btn-link"
+            onClick={() => toggleLock(emp.id)}
+            style={{
+              color: emp.locked ? "#ED5E61" : "#1C2D5A",
+              border: "0px",
+              width: "6vw",
+              height: "4.3vh",
+              fontSize: "1.2vw",
+              fontWeight: "bold",
+              textAlign: "center",
+            }}
+          >
             {emp.locked ? "Unlock" : "Lock"}
           </button>
         </td>
@@ -163,7 +176,7 @@ const AdminTable = () => {
   };
 
   return (
-    <div>
+    <div className="AdminDashboard_ParentBorder">
       <div className="container mt-5">
         {/* input for adding a new employees */}
         <input
