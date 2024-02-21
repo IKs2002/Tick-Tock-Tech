@@ -29,7 +29,6 @@ const AdminTable = () => {
         setEmployees(prevEmployees =>
             prevEmployees.map(emp =>
                 emp.id === id ? { ...emp, locked: !emp.locked } : emp
-                
             )
         );
     };
@@ -58,8 +57,10 @@ const AdminTable = () => {
 
     //for lock all button
     const handleLockAll = () => {
+        const allLocked = employees.every(emp => emp.locked); 
+
         setEmployees(prevEmployees =>
-            prevEmployees.map(emp => ({ ...emp, locked: true }))
+            prevEmployees.map(emp => ({ ...emp, locked: !allLocked })) 
         );
     };
 
@@ -77,7 +78,7 @@ const AdminTable = () => {
                         placeholder="Employee Name"
                         value={emp.name}
                         onChange={e => handleNameChange(emp.id, e.target.value)}
-                        style={{ height: '50px', borderRadius: '0'}}
+                        style={{ height: '50px', borderRadius: '0', fontSize: '20px' }}
                         
                     />
                 </td>
@@ -155,4 +156,4 @@ const AdminTable = () => {
 
 export default AdminTable;
 
-//last updated 2/19 -sierra
+//last updated 2/20 -sierra
