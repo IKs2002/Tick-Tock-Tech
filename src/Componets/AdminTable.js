@@ -42,6 +42,13 @@ const AdminTable = () => {
     Lunch: "#FFA114", // yellow
   };
 
+  const DropDownstatusColorsText = {
+    "Clocked Out": "#ED5E61", // red
+    "Clocked In": "#59B77A", // green
+    Break: "#7EB6FF", // blue
+    Lunch: "#FFA114", // yellow
+  };
+
   // toggle employee lock status
   const toggleLock = (id) => {
     setEmployees((prevEmployees) =>
@@ -117,25 +124,25 @@ const AdminTable = () => {
           >
             <option
               value="Clocked Out"
-              style={{ backgroundColor: statusColors["Clocked Out"] }}
+              style={{ backgroundColor: statusColors["Clocked Out"], color: statusColorsText["Clocked Out"], fontWeight: "bold"}}
             >
               Clocked Out 
             </option>
             <option
               value="Clocked In"
-              style={{ backgroundColor: statusColors["Clocked In"] }}
+              style={{ backgroundColor: statusColors["Clocked In"], color: statusColorsText["Clocked In"], fontWeight: "bold"}}
             >
               Clocked In 
             </option>
             <option
               value="Break"
-              style={{ backgroundColor: statusColors["Break"] }}
+              style={{ backgroundColor: statusColors["Break"], color: statusColorsText["Break"], fontWeight: "bold"}}
             >
               Break 
             </option>
             <option
               value="Lunch"
-              style={{ backgroundColor: statusColors["Lunch"] }}
+              style={{ backgroundColor: statusColors["Lunch"], color: statusColorsText["Lunch"], fontWeight: "bold"}}
             >
               Lunch 
             </option>
