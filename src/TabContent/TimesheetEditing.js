@@ -16,14 +16,14 @@ const TimesheetEdit = () => {
         <div className="center-container">
           <WeekPicker onChange={handleWeekChange} />
         </div>
-        <button className="GenericButtons">Save Changes</button>
+        <button className="SaveChangesButton">Save Changes</button>
       </div>
       <div>
         <label class="EmpName">Employee Name</label>
       </div>
       <container class="tableArea">
         <div class="ImgArea">
-          <img src={ProfilePicBlack} class="ProfImg" />
+          <img src={ProfilePicBlack} alt="No Profile Picture Found" class="ProfImg" />
         </div>
         <div class="TimesheetArea">
           <TimeSheet editable={true} />
