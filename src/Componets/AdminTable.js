@@ -119,25 +119,25 @@ const AdminTable = () => {
               value="Clocked Out"
               style={{ backgroundColor: statusColors["Clocked Out"] }}
             >
-              Clocked Out
+              Clocked Out 
             </option>
             <option
               value="Clocked In"
               style={{ backgroundColor: statusColors["Clocked In"] }}
             >
-              Clocked In
+              Clocked In 
             </option>
             <option
               value="Break"
               style={{ backgroundColor: statusColors["Break"] }}
             >
-              Break
+              Break 
             </option>
             <option
               value="Lunch"
               style={{ backgroundColor: statusColors["Lunch"] }}
             >
-              Lunch
+              Lunch 
             </option>
           </select>
         </td>
@@ -177,27 +177,28 @@ const AdminTable = () => {
 
   return (
     <div className="AdminDashboard_ParentBorder">
-      <div className="container mt-5">
+      <div className="AdminDashboardTable">
         {/* input for adding a new employees */}
-        <input
-          type="text"
-          placeholder="Enter New Employee"
-          onKeyPress={(e) => {
-            // calls add employee funct when you hit enter
-            if (e.key === "Enter") {
-              addEmployee();
-            }
-          }}
-          style={{ height: "30px", borderRadius: "0" }}
-        />
+        <div classname="AdminDashboardInputs">
+          <input
+            className="AdminDashboard_EmployeeNew"
+            type="text"
+            placeholder="  Enter New Employee"
+            onKeyPress={(e) => {
+              // calls add employee funct when you hit enter
+              if (e.key === "Enter") {
+                addEmployee();
+              }
+            }}
+          />
 
-        {/* search table */}
-        <input
-          type="text"
-          className="float-right"
-          placeholder="Search table"
-          style={{ height: "30px", borderRadius: "0" }}
-        />
+          {/* search table */}
+          <input
+            className="AdminDashboard_EmployeeAdd"
+            type="text"
+            placeholder="  Search table"
+          />
+        </div>
         <table className="table mt-3">
           <thead>
             <tr>
@@ -216,21 +217,22 @@ const AdminTable = () => {
           <tbody>{renderRows()}</tbody>
           <tfoot>{/*footer*/}</tfoot>
         </table>
-      </div>
-      {/* bottom buttons */}
-      <div className="AdminDashboard_BottomButtons">
-        <button
-          onClick={handleDeleteSelected}
-          className="AdminDashboard_DeleteButton"
-        >
-          Delete Selected Employee(s)
-        </button>
-        <button
-          onClick={handleLockAll}
-          className="AdminDashboard_LockAllButton"
-        >
-          Lock All
-        </button>
+
+        {/* bottom buttons */}
+        <div className="AdminDashboard_BottomButtons">
+          <button
+            onClick={handleDeleteSelected}
+            className="AdminDashboard_DeleteButton"
+          >
+            Delete Selected Employee(s)
+          </button>
+          <button
+            onClick={handleLockAll}
+            className="AdminDashboard_LockAllButton"
+          >
+            Lock All
+          </button>
+        </div>
       </div>
     </div>
   );

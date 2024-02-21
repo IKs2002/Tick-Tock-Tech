@@ -13,6 +13,7 @@ const Login = () => {
 
         <label for="uname"></label>
         <input
+        className="Login_Username"
           type="text"
           placeholder="user@digitaldreamforge.com"
           name="uname"
@@ -20,7 +21,7 @@ const Login = () => {
         />
 
         <label for="psw"></label>
-        <input type="password" placeholder="Password" name="psw" required />
+        <input className="Login_Password" type="password" placeholder="Password" name="psw" required />
         <Link to="PasswordRecovery">
           <text className="PasswordRecovery">Forgot your password?</text>
         </Link>

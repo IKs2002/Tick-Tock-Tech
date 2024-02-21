@@ -1,14 +1,40 @@
+
 .AdminDashboard_ParentBorder {
-  background-color: #ededed;
   margin-top: 1vh;
-  width: 47.5vw;
-  height: 75vh;
+  width: 100%;
+  height: 100%;
+}
+
+.AdminDashboardTable {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  background-color: #ededed;
+}
+
+.AdminDashboardInputs {
+  background-color: black;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.AdminDashboard_EmployeeNew,
+.AdminDashboard_EmployeeAdd {
+  width: 20vw;
+  height: 4vh;
+  margin-left: 4.5%;
+  margin-bottom: 1vh;
+  margin-top: 1vh;
+  font-size: 0.9vw;
 }
 
 /* whole table  */
 .table {
-  margin-left: 8.3vw;
-  width: 100%;
+  width: 45.1vw;
+  height: 55vh; /* You can adjust this value to suit your needs */
+  margin: auto;
+  border-bottom: 0.4vw solid #ddd;
   border-collapse: collapse;
 }
 
@@ -58,6 +84,7 @@
   display: flex;
   margin-top: 2vh;
   width: 46.25vw;
+  margin-bottom: 1vh;
 }
 
 .AdminDashboard_DeleteButton {
@@ -65,7 +92,7 @@
   height: 4vh;
   margin-left: 1.5vw;
   margin-right: 23.7vw;
-  border: 2px solid #ed5e61;
+  border: 0.15vw solid #ed5e61;
   color: #ed5e61;
   font-size: 0.9vw;
 }
@@ -73,7 +100,7 @@
 .AdminDashboard_LockAllButton {
   width: 6vw;
   height: 4vh;
-  border: 2px solid #ed5e61;
+  border: 0.15vw solid #ed5e61;
   color: #ed5e61;
   font-size: 0.9vw;
 }

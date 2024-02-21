@@ -21,8 +21,8 @@
   margin-bottom: 5vh;
 }
 
-input[type="text"],
-input[type="password"] {
+.Login_Username[type="text"],
+.Login_Password[type="password"] {
   min-width: 200px;
   width: 30.531vw;
   height: 10.187vh;
