@@ -19,11 +19,19 @@
   flex-direction: row;
 }
 
-.AdminDashboard_EmployeeNew,
+.AdminDashboard_EmployeeNew {
+  width: 20vw;
+  height: 4vh;
+  margin-left: 5%;
+  margin-bottom: 1vh;
+  margin-top: 1vh;
+  font-size: 0.9vw;
+}
+
 .AdminDashboard_EmployeeAdd {
   width: 20vw;
   height: 4vh;
-  margin-left: 4.5%;
+  margin-left: 10.2%;
   margin-bottom: 1vh;
   margin-top: 1vh;
   font-size: 0.9vw;
@@ -88,17 +96,6 @@
   margin-left: 0.8vw;
 }
 
-.AdminDashboard_DeleteButton {
-  width: 14vw;
-  height: 4vh;
-  margin-left: 2.8vw;
-  margin-right: 22.7vw;
-  border: 0.15vw solid #ed5e61;
-  color: #ed5e61;
-  font-size: 0.9vw;
-  font-weight: bold;
-}
-
 .AdminDashboard_LockAllButton {
   width: 6vw;
   height: 4vh;
@@ -106,5 +103,6 @@
   color: #ed5e61;
   font-size: 0.9vw;
   font-weight: bold;
+  margin-left: 38.9vw;
 }
 /*last updated 2/14 -sierra */

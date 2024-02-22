@@ -4,7 +4,6 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./Pages/LoginPage";
 import DefaultPage from "./Pages/DefaultPage";
 import PasswordRecovery from "./Pages/PasswordRecoveryPage";
-import ProfileSettings from "./Pages/ProfileSettings";
 
 const App = () => {
   return (
@@ -13,10 +12,6 @@ const App = () => {
       <Route path="DefaultPage" element={<DefaultPage />} />
       <Route path="PasswordRecovery" element={<PasswordRecovery />} />
       <Route path="Login" element={<Login />} />
-      <Route
-        path="/DefaultPage/ProfileSettings"
-        element={<ProfileSettings />}
-      />
     </Routes>
   );
 };

@@ -1,6 +1,5 @@
 import React from "react";
 import "./TimesheetEdit.css";
-import ProfilePicBlack from "../Photos/HeaderPhotos/ProfilePicBlack.png";
 import TimeSheet from "../Componets/TimeSheet.js";
 import WeekPicker from "../Componets/WeekPicker.js";
 
@@ -22,9 +21,6 @@ const TimesheetEdit = () => {
         <label class="EmpName">Employee Name</label>
       </div>
       <container class="tableArea">
-        <div class="ImgArea">
-          <img src={ProfilePicBlack} alt="No Profile Pic Found" class="ProfImg" />
-        </div>
         <div class="TimesheetArea">
           <TimeSheet editable={true} />
         </div>

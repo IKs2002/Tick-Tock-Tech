@@ -2,7 +2,6 @@ import React from "react";
 import "./TimesheetViewing.css";
 import TimeSheet from "../Componets/TimeSheet.js";
 import WeekPicker from "../Componets/WeekPicker.js";
-import ProfilePicBlack from "../Photos/HeaderPhotos/ProfilePicBlack.png";
 
 const TimesheetViewing = () => {
   const handleWeekChange = (weeks) => {
@@ -21,9 +20,6 @@ const TimesheetViewing = () => {
         <label class="EmpName">Employee Name</label>
       </div>
       <container class="tableArea">
-        <div class="ImgArea">
-          <img src={ProfilePicBlack} class="ProfImg" />
-        </div>
         <div class="TimesheetArea">
           <TimeSheet />
         </div>

@@ -10,24 +10,6 @@ const AdminTable = () => {
     { id: 4, name: "", status: "Clocked Out", locked: false },
   ]);
 
-  // State for master checkbox
-  const [isAllChecked, setIsAllChecked] = useState(false);
-
-  // Handle master checkbox change
-  const handleMasterCheckboxChange = () => {
-    setIsAllChecked(!isAllChecked);
-    setEmployees(employees.map((emp) => ({ ...emp, checked: !isAllChecked })));
-  };
-
-  // Update individual checkbox
-  const handleCheckboxChange = (id) => {
-    setEmployees(
-      employees.map((emp) =>
-        emp.id === id ? { ...emp, checked: !emp.checked } : emp
-      )
-    );
-  };
-
   const statusColors = {
     "Clocked Out": "#FEEFF0", // red
     "Clocked In": "#EEF8F2", // green
@@ -81,6 +63,7 @@ const AdminTable = () => {
 
   //for lock all button
   const handleLockAll = () => {
+    
 
     const anyUnlocked = employees.some(emp => !emp.locked);
 
@@ -93,13 +76,6 @@ const AdminTable = () => {
   const renderRows = () => {
     return employees.map((emp) => (
       <tr key={emp.id}>
-        <td>
-          <input
-            type="checkbox"
-            checked={emp.checked}
-            onChange={() => handleCheckboxChange(emp.id)}
-          />
-        </td>
         <td>
           <input
             type="text"
@@ -212,13 +188,6 @@ const AdminTable = () => {
         <table className="table mt-3">
           <thead>
             <tr>
-              <th>
-                <input
-                  type="checkbox"
-                  checked={isAllChecked}
-                  onChange={handleMasterCheckboxChange}
-                />
-              </th>
               <th>Employee Name</th>
               <th>Status</th>
               <th>Unlock</th>
@@ -230,12 +199,6 @@ const AdminTable = () => {
 
         {/* bottom buttons */}
         <div className="AdminDashboard_BottomButtons">
-          <button
-            onClick={handleDeleteSelected}
-            className="AdminDashboard_DeleteButton"
-          >
-            Delete Selected Employee(s)
-          </button>
           <button
             onClick={handleLockAll}
             className="AdminDashboard_LockAllButton"
