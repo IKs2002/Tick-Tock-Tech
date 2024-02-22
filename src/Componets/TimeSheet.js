@@ -1,5 +1,6 @@
 import React from "react";
 import "./TimeSheet.css";
+import moment from 'moment' //we will need this to switch between 24 horu and AM/PM
 import DataTable from "react-data-table-component";
 
 // Sample data for timesheet entries
