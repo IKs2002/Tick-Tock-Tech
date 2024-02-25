@@ -77,32 +77,23 @@ const AdminTable = () => {
   const renderRows = () => {
     return employees.map((emp) => (
       <tr key={emp.id}>
-        <td>
-          <input
-            type="text"
-            placeholder="Employee Name"
-            value={emp.name}
-            onChange={(e) => handleNameChange(emp.id, e.target.value)}
-            style={{ height: "4vh", borderRadius: "0", fontSize: "1.5vw" }} 
-          />
-        </td>
-        <td>
-        <div className="popup" onClick={() => myFunction(emp.id)}>
-          <button
-            className="btn btn-link"
-            onClick={() => handleConfirm(emp.id, emp.name)}
-            style={{
-              color: "#1C2D5A",
-              border: "0px",
-              width: "6vw",
-              height: "4.3vh",
-              fontSize: "1.2vw",
-              fontWeight: "bold",
-              textAlign: "center",
-            }}
-          >
-            🗑️
-          </button>
+        <td style={{ display: "flex", alignItems: "center" }}>
+          <div className="employee-input-container">
+            <input
+              type="text"
+              placeholder="Employee Name"
+              value={emp.name}
+              onChange={(e) => handleNameChange(emp.id, e.target.value)}
+              className="employee-name-input"
+            />
+          </div>
+          <div className="popup" onClick={() => myFunction(emp.id)}>
+            <button
+              className="btn btn-link delete-btn"
+              onClick={() => handleConfirm(emp.id, emp.name)}
+            >
+              🗑️
+            </button>
           </div>
         </td>
         <td>
@@ -205,7 +196,6 @@ const AdminTable = () => {
               }
             }}
           />
-
           {/* Search table */}
           <input
             className="AdminDashboard_EmployeeAdd"
@@ -217,9 +207,8 @@ const AdminTable = () => {
           <thead>
             <tr>
               <th>Employee Name</th>
-              <th>Delete</th>
               <th>Status</th>
-              <th>Unlock</th>
+              <th>Manage</th>
             </tr>
           </thead>
           <tbody>{renderRows()}</tbody>
