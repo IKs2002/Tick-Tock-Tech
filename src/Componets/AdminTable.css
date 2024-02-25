@@ -115,20 +115,23 @@
   text-align: center;
 }
 
-.employee-input-container {
+.employee-name-container {
   display: flex;
   align-items: center;
   border: none; 
   padding: 5px; 
 }
 
-.employee-name-input {
+.employee-name {
   flex-grow: 1; 
   height: 4vh;
   max-width: 15vw; 
   border-radius: 0;
   font-size: 1.5vw;
   border: none; 
+  color: #5c5c5c; 
+  text-align: left; 
+  padding: 8px; 
 }
 
 .delete-btn {
@@ -139,5 +142,12 @@
   cursor: pointer; 
 }
 
-/*last updated 2/25, moved some styling from .js to .css -sierra */
+.employee-status-select{
+  text-align: center;
+}
+
+.lock-button{
+  text-align: center;
+}
+/*last updated 2/25,-sierra */
 
