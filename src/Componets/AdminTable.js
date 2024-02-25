@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "./AdminTable.css";
 
+
 const AdminTable = () => {
   // state of employees
   const [employees, setEmployees] = useState([
-    { id: 1, name: "", status: "Clocked Out", locked: false },
-    { id: 2, name: "", status: "Clocked Out", locked: false },
+    { id: 1, name: "John Smith", status: "Clocked Out", locked: false },
+    { id: 2, name: "Jane Doe", status: "Clocked Out", locked: false },
     { id: 3, name: "", status: "Clocked Out", locked: false },
     { id: 4, name: "", status: "Clocked Out", locked: false },
   ]);
@@ -18,13 +19,6 @@ const AdminTable = () => {
   };
 
   const statusColorsText = {
-    "Clocked Out": "#ED5E61", // red
-    "Clocked In": "#59B77A", // green
-    Break: "#7EB6FF", // blue
-    Lunch: "#FFA114", // yellow
-  };
-
-  const DropDownstatusColorsText = {
     "Clocked Out": "#ED5E61", // red
     "Clocked In": "#59B77A", // green
     Break: "#7EB6FF", // blue
@@ -49,7 +43,7 @@ const AdminTable = () => {
     );
   };
 
-  // chnages in employee status
+  // changes in employee status
   const handleStatusChange = (id, newStatus) => {
     setEmployees((prevEmployees) =>
       prevEmployees.map((emp) =>
@@ -58,21 +52,28 @@ const AdminTable = () => {
     );
   };
 
-  //for delete button
-  const handleDeleteSelected = () => {};
-
-  //for lock all button
+  // For "Lock All"/ "Unlock All" button
   const handleLockAll = () => {
-    
-
     const anyUnlocked = employees.some(emp => !emp.locked);
-
-    setEmployees(prevEmployees =>
-      prevEmployees.map(emp => ({ ...emp, locked: anyUnlocked }))
-    );
+    const action = anyUnlocked ? "lock" : "unlock";
+    const confirmed = window.confirm(`Are you sure you want to ${action} all employees?`);
+    
+    if (confirmed) {
+      setEmployees(prevEmployees =>
+        prevEmployees.map(emp => ({ ...emp, locked: anyUnlocked }))
+      );
+    }
   };
 
-  // rows for employees
+  // popup toggle function
+  const myFunction = (empId) => {
+    var popup = document.getElementById(`myPopup-${empId}`);
+    if (popup) {
+      popup.classList.toggle("show");
+    }
+  };
+  
+  // Render rows for employees
   const renderRows = () => {
     return employees.map((emp) => (
       <tr key={emp.id}>
@@ -84,6 +85,25 @@ const AdminTable = () => {
             onChange={(e) => handleNameChange(emp.id, e.target.value)}
             style={{ height: "4vh", borderRadius: "0", fontSize: "1.5vw" }} 
           />
+        </td>
+        <td>
+        <div className="popup" onClick={() => myFunction(emp.id)}>
+          <button
+            className="btn btn-link"
+            onClick={() => handleConfirm(emp.id, emp.name)}
+            style={{
+              color: "#1C2D5A",
+              border: "0px",
+              width: "6vw",
+              height: "4.3vh",
+              fontSize: "1.2vw",
+              fontWeight: "bold",
+              textAlign: "center",
+            }}
+          >
+            🗑️
+          </button>
+          </div>
         </td>
         <td>
           <select
@@ -147,8 +167,16 @@ const AdminTable = () => {
       </tr>
     ));
   };
+  
+  const handleConfirm = (id, name) => {
+    const confirmed = window.confirm(`Are you sure you want to delete ${name}?`);
+    if (confirmed) {
+      // handle confirmation
+      console.log("Confirmed for employee ID:", id);
+    }
+  };
 
-  // add new employees
+  // Add new employees
   const addEmployee = () => {
     setEmployees((prevEmployees) => [
       ...prevEmployees,
@@ -164,21 +192,21 @@ const AdminTable = () => {
   return (
     <div className="AdminDashboard_ParentBorder">
       <div className="AdminDashboardTable">
-        {/* input for adding a new employees */}
+        {/* input for adding a new employee */}
         <div classname="AdminDashboardInputs">
           <input
             className="AdminDashboard_EmployeeNew"
             type="text"
             placeholder="  Enter New Employee"
             onKeyPress={(e) => {
-              // calls add employee funct when you hit enter
+              // calls addEmployee function when you hit enter
               if (e.key === "Enter") {
                 addEmployee();
               }
             }}
           />
 
-          {/* search table */}
+          {/* Search table */}
           <input
             className="AdminDashboard_EmployeeAdd"
             type="text"
@@ -189,21 +217,22 @@ const AdminTable = () => {
           <thead>
             <tr>
               <th>Employee Name</th>
+              <th>Delete</th>
               <th>Status</th>
               <th>Unlock</th>
             </tr>
           </thead>
           <tbody>{renderRows()}</tbody>
-          <tfoot>{/*footer*/}</tfoot>
+          <tfoot>{/* Footer */}</tfoot>
         </table>
 
-        {/* bottom buttons */}
+        {/* Bottom buttons */}
         <div className="AdminDashboard_BottomButtons">
           <button
             onClick={handleLockAll}
             className="AdminDashboard_LockAllButton"
           >
-            Lock All
+            {employees.every(emp => emp.locked) ? "Unlock All" : "Lock All"}
           </button>
         </div>
       </div>
@@ -213,4 +242,4 @@ const AdminTable = () => {
 
 export default AdminTable;
 
-//last updated 2/22 -Sierra
+//last updated 2/24 -Sierra
