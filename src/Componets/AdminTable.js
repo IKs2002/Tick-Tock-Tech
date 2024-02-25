@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./AdminTable.css";
-
+import AddEmployeeForm from "./AddEmployeeForm";
 
 const AdminTable = () => {
   // state of employees
@@ -54,13 +54,15 @@ const AdminTable = () => {
 
   // For "Lock All"/ "Unlock All" button
   const handleLockAll = () => {
-    const anyUnlocked = employees.some(emp => !emp.locked);
+    const anyUnlocked = employees.some((emp) => !emp.locked);
     const action = anyUnlocked ? "lock" : "unlock";
-    const confirmed = window.confirm(`Are you sure you want to ${action} all employees?`);
-    
+    const confirmed = window.confirm(
+      `Are you sure you want to ${action} all employees?`
+    );
+
     if (confirmed) {
-      setEmployees(prevEmployees =>
-        prevEmployees.map(emp => ({ ...emp, locked: anyUnlocked }))
+      setEmployees((prevEmployees) =>
+        prevEmployees.map((emp) => ({ ...emp, locked: anyUnlocked }))
       );
     }
   };
@@ -72,7 +74,7 @@ const AdminTable = () => {
       popup.classList.toggle("show");
     }
   };
-  
+
   // Render rows for employees
   const renderRows = () => {
     return employees.map((emp) => (
@@ -107,27 +109,43 @@ const AdminTable = () => {
           >
             <option
               value="Clocked Out"
-              style={{ backgroundColor: statusColors["Clocked Out"], color: statusColorsText["Clocked Out"], fontWeight: "bold"}}
+              style={{
+                backgroundColor: statusColors["Clocked Out"],
+                color: statusColorsText["Clocked Out"],
+                fontWeight: "bold",
+              }}
             >
-              Clocked Out 
+              Clocked Out
             </option>
             <option
               value="Clocked In"
-              style={{ backgroundColor: statusColors["Clocked In"], color: statusColorsText["Clocked In"], fontWeight: "bold"}}
+              style={{
+                backgroundColor: statusColors["Clocked In"],
+                color: statusColorsText["Clocked In"],
+                fontWeight: "bold",
+              }}
             >
-              Clocked In 
+              Clocked In
             </option>
             <option
               value="Break"
-              style={{ backgroundColor: statusColors["Break"], color: statusColorsText["Break"], fontWeight: "bold"}}
+              style={{
+                backgroundColor: statusColors["Break"],
+                color: statusColorsText["Break"],
+                fontWeight: "bold",
+              }}
             >
-              Break 
+              Break
             </option>
             <option
               value="Lunch"
-              style={{ backgroundColor: statusColors["Lunch"], color: statusColorsText["Lunch"], fontWeight: "bold"}}
+              style={{
+                backgroundColor: statusColors["Lunch"],
+                color: statusColorsText["Lunch"],
+                fontWeight: "bold",
+              }}
             >
-              Lunch 
+              Lunch
             </option>
           </select>
         </td>
@@ -151,9 +169,11 @@ const AdminTable = () => {
       </tr>
     ));
   };
-  
+
   const handleConfirm = (id, name) => {
-    const confirmed = window.confirm(`Are you sure you want to delete ${name}?`);
+    const confirmed = window.confirm(
+      `Are you sure you want to delete ${name}?`
+    );
     if (confirmed) {
       // handle confirmation
       console.log("Confirmed for employee ID:", id);
@@ -177,18 +197,8 @@ const AdminTable = () => {
     <div className="AdminDashboard_ParentBorder">
       <div className="AdminDashboardTable">
         {/* input for adding a new employee */}
-        <div classname="AdminDashboardInputs">
-          <input
-            className="AdminDashboard_EmployeeNew"
-            type="text"
-            placeholder="  Enter New Employee"
-            onKeyPress={(e) => {
-              // calls addEmployee function when you hit enter
-              if (e.key === "Enter") {
-                addEmployee();
-              }
-            }}
-          />
+        <div className="AdminDashboardInputs">
+          <AddEmployeeForm addEmployee={addEmployee} />
           {/* Search table */}
           <input
             className="AdminDashboard_EmployeeAdd"
@@ -214,7 +224,7 @@ const AdminTable = () => {
             onClick={handleLockAll}
             className="AdminDashboard_LockAllButton"
           >
-            {employees.every(emp => emp.locked) ? "Unlock All" : "Lock All"}
+            {employees.every((emp) => emp.locked) ? "Unlock All" : "Lock All"}
           </button>
         </div>
       </div>
