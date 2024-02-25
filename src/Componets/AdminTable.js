@@ -201,7 +201,7 @@ const AdminTable = () => {
           <AddEmployeeForm addEmployee={addEmployee} />
           {/* Search table */}
           <input
-            className="AdminDashboard_EmployeeAdd"
+            className="AdminDashboard_SearchEmployee"
             type="text"
             placeholder="  Search table"
           />

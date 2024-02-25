@@ -19,10 +19,10 @@
   margin-left: 1vw;
 }
 
-.AdminDashboard_EmployeeAdd {
+.AdminDashboard_SearchEmployee {
   width: 20vw;
   height: 4vh;
-  margin-left: 10.2%;
+  margin-left: 33.6%;
   margin-bottom: 1vh;
   margin-top: 1vh;
   font-size: 0.9vw;
@@ -39,7 +39,7 @@
   border-collapse: collapse;
 }
 
-/* table header (blue row */
+/* table header (blue row) */
 .table th {
   background-color: #708090;
   padding: 0.65vw;
