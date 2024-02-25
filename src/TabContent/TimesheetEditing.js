@@ -9,13 +9,25 @@ const TimesheetEdit = () => {
     console.log(weeks); // For example, log the new weeks to the console
   };
 
+  // Save changes Pop-Up confirmation 
+  const handleSaveChanges = () => {
+    // Display a confirmation dialog
+    const isConfirmed = window.confirm("Are you sure you want to save changes?");
+    if (isConfirmed) {
+      // Implement the save logic here
+      console.log("Changes saved");
+    } else {
+      console.log("Save cancelled");
+    }
+  };
+
   return (
     <div>
       <div className="Week-of">
         <div className="center-container">
           <WeekPicker onChange={handleWeekChange} />
         </div>
-        <button className="SaveChangesButton">Save Changes</button>
+        <button className="SaveChangesButton" onClick={handleSaveChanges}>Save Changes</button> 
       </div>
       <div>
         <label class="EmpName">Employee Name</label>
