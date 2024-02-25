@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./AdminTable.css";
-
+import AddEmployeeForm from "./AddEmployeeForm";
 
 const AdminTable = () => {
   // state of employees
@@ -54,13 +54,15 @@ const AdminTable = () => {
 
   // For "Lock All"/ "Unlock All" button
   const handleLockAll = () => {
-    const anyUnlocked = employees.some(emp => !emp.locked);
+    const anyUnlocked = employees.some((emp) => !emp.locked);
     const action = anyUnlocked ? "lock" : "unlock";
-    const confirmed = window.confirm(`Are you sure you want to ${action} all employees?`);
-    
+    const confirmed = window.confirm(
+      `Are you sure you want to ${action} all employees?`
+    );
+
     if (confirmed) {
-      setEmployees(prevEmployees =>
-        prevEmployees.map(emp => ({ ...emp, locked: anyUnlocked }))
+      setEmployees((prevEmployees) =>
+        prevEmployees.map((emp) => ({ ...emp, locked: anyUnlocked }))
       );
     }
   };
@@ -72,25 +74,34 @@ const AdminTable = () => {
       popup.classList.toggle("show");
     }
   };
-  
+
   // Render rows for employees
   const renderRows = () => {
     return employees.map((emp) => (
       <tr key={emp.id}>
-        <td style={{ display: "flex", alignItems: "center" }}>
-          <div className="employee-input-container">
-            <input
-              type="text"
-              placeholder="Employee Name"
-              value={emp.name}
-              onChange={(e) => handleNameChange(emp.id, e.target.value)}
-              className="employee-name-input"
-            />
-          </div>
+        <td>
+          <input
+            type="text"
+            placeholder="Employee Name"
+            value={emp.name}
+            onChange={(e) => handleNameChange(emp.id, e.target.value)}
+            style={{ height: "4vh", borderRadius: "0", fontSize: "1.5vw" }}
+          />
+        </td>
+        <td>
           <div className="popup" onClick={() => myFunction(emp.id)}>
             <button
-              className="btn btn-link delete-btn"
+              className="btn btn-link"
               onClick={() => handleConfirm(emp.id, emp.name)}
+              style={{
+                color: "#1C2D5A",
+                border: "0px",
+                width: "6vw",
+                height: "4.3vh",
+                fontSize: "1.2vw",
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
             >
               🗑️
             </button>
@@ -114,27 +125,43 @@ const AdminTable = () => {
           >
             <option
               value="Clocked Out"
-              style={{ backgroundColor: statusColors["Clocked Out"], color: statusColorsText["Clocked Out"], fontWeight: "bold"}}
+              style={{
+                backgroundColor: statusColors["Clocked Out"],
+                color: statusColorsText["Clocked Out"],
+                fontWeight: "bold",
+              }}
             >
-              Clocked Out 
+              Clocked Out
             </option>
             <option
               value="Clocked In"
-              style={{ backgroundColor: statusColors["Clocked In"], color: statusColorsText["Clocked In"], fontWeight: "bold"}}
+              style={{
+                backgroundColor: statusColors["Clocked In"],
+                color: statusColorsText["Clocked In"],
+                fontWeight: "bold",
+              }}
             >
-              Clocked In 
+              Clocked In
             </option>
             <option
               value="Break"
-              style={{ backgroundColor: statusColors["Break"], color: statusColorsText["Break"], fontWeight: "bold"}}
+              style={{
+                backgroundColor: statusColors["Break"],
+                color: statusColorsText["Break"],
+                fontWeight: "bold",
+              }}
             >
-              Break 
+              Break
             </option>
             <option
               value="Lunch"
-              style={{ backgroundColor: statusColors["Lunch"], color: statusColorsText["Lunch"], fontWeight: "bold"}}
+              style={{
+                backgroundColor: statusColors["Lunch"],
+                color: statusColorsText["Lunch"],
+                fontWeight: "bold",
+              }}
             >
-              Lunch 
+              Lunch
             </option>
           </select>
         </td>
@@ -158,9 +185,11 @@ const AdminTable = () => {
       </tr>
     ));
   };
-  
+
   const handleConfirm = (id, name) => {
-    const confirmed = window.confirm(`Are you sure you want to delete ${name}?`);
+    const confirmed = window.confirm(
+      `Are you sure you want to delete ${name}?`
+    );
     if (confirmed) {
       // handle confirmation
       console.log("Confirmed for employee ID:", id);
@@ -168,12 +197,12 @@ const AdminTable = () => {
   };
 
   // Add new employees
-  const addEmployee = () => {
+  const addEmployee = (newEmployee) => {
     setEmployees((prevEmployees) => [
       ...prevEmployees,
       {
         id: prevEmployees.length + 1,
-        name: "",
+        name: newEmployee.name,
         status: "Clocked Out",
         locked: false,
       },
@@ -184,31 +213,22 @@ const AdminTable = () => {
     <div className="AdminDashboard_ParentBorder">
       <div className="AdminDashboardTable">
         {/* input for adding a new employee */}
-        <div classname="AdminDashboardInputs">
-          <input
-            className="AdminDashboard_EmployeeNew"
-            type="text"
-            placeholder="  Enter New Employee"
-            onKeyPress={(e) => {
-              // calls addEmployee function when you hit enter
-              if (e.key === "Enter") {
-                addEmployee();
-              }
-            }}
-          />
-          {/* Search table */}
-          <input
-            className="AdminDashboard_EmployeeAdd"
-            type="text"
-            placeholder="  Search table"
-          />
-        </div>
+        <div className="AdminDashboardInputs">
+  <AddEmployeeForm addEmployee={addEmployee} />
+  {/* Search table */}
+  <input
+    className="AdminDashboard_EmployeeAdd"
+    type="text"
+    placeholder="  Search table"
+  />
+</div>
         <table className="table mt-3">
           <thead>
             <tr>
               <th>Employee Name</th>
+              <th>Delete</th>
               <th>Status</th>
-              <th>Manage</th>
+              <th>Unlock</th>
             </tr>
           </thead>
           <tbody>{renderRows()}</tbody>
@@ -221,7 +241,7 @@ const AdminTable = () => {
             onClick={handleLockAll}
             className="AdminDashboard_LockAllButton"
           >
-            {employees.every(emp => emp.locked) ? "Unlock All" : "Lock All"}
+            {employees.every((emp) => emp.locked) ? "Unlock All" : "Lock All"}
           </button>
         </div>
       </div>
