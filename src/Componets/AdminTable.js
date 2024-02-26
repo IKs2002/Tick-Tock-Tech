@@ -11,6 +11,14 @@ const AdminTable = () => {
     { id: 4, name: "Mark Rodgers", status: "Clocked Out", locked: false },
   ]);
 
+  const handleSearch = (query) => {
+    const filteredEmployees = employees.filter((employee) =>
+      employee.name.toLowerCase().includes(query.toLowerCase())
+    );
+    setEmployees(filteredEmployees);
+  };
+//WORKS
+
   const statusColors = {
     "Clocked Out": "#FEEFF0", // red
     "Clocked In": "#EEF8F2", // green
@@ -161,6 +169,7 @@ const AdminTable = () => {
               fontSize: "1.2vw",
               fontWeight: "bold",
               textAlign: "center",
+              background: "none",
             }}
           >
             {emp.locked ? "Unlock" : "Lock"}
@@ -202,6 +211,7 @@ const AdminTable = () => {
           {/* Search table */}
           <input
             className="AdminDashboard_SearchEmployee"
+            onChange={(e) => handleSearch(e.target.value)}
             type="text"
             placeholder="  Search table"
           />
@@ -234,4 +244,4 @@ const AdminTable = () => {
 
 export default AdminTable;
 
-//last updated 2/24 -Sierra
+//last updated 2/25 -Sierra
