@@ -11,13 +11,8 @@ const AdminTable = () => {
     { id: 4, name: "Mark Rodgers", status: "Clocked Out", locked: false },
   ]);
 
-  const handleSearch = (query) => {
-    const filteredEmployees = employees.filter((employee) =>
-      employee.name.toLowerCase().includes(query.toLowerCase())
-    );
-    setEmployees(filteredEmployees);
-  };
-//WORKS
+  // Add a state for the search query
+  const [searchQuery, setSearchQuery] = useState("");
 
   const statusColors = {
     "Clocked Out": "#FEEFF0", // red
@@ -85,107 +80,118 @@ const AdminTable = () => {
 
   // Render rows for employees
   const renderRows = () => {
-    return employees.map((emp) => (
-      <tr key={emp.id}>
-        <td style={{ display: "flex", alignItems: "center", marginRight: "-0.745%" }}>
-          <div className="employee-name">{emp.name}</div>
-          <div
-            className="popup"
-            onClick={(e) => {
-              e.stopPropagation(); // Prevent triggering other onClick events
-              myFunction(emp.id);
+    return employees
+      .filter((emp) =>
+        emp.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+      .map((emp) => (
+        <tr key={emp.id}>
+          <td
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginRight: "-0.745%",
             }}
           >
-            <button
-              className="btn btn-link delete-btn"
+            <div className="employee-name">{emp.name}</div>
+            <div
+              className="popup"
               onClick={(e) => {
-                e.stopPropagation(); // Prevent triggering the popup's onClick
-                deleteEmployee(emp.id);
+                e.stopPropagation(); // Prevent triggering other onClick events
+                myFunction(emp.id);
               }}
             >
-              🗑️
+              <button
+                className="btn btn-link delete-btn"
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent triggering the popup's onClick
+                  deleteEmployee(emp.id);
+                }}
+              >
+                🗑️
+              </button>
+            </div>
+          </td>
+          <td>
+            <select
+              className="employee-status-select"
+              value={emp.status}
+              onChange={(e) => handleStatusChange(emp.id, e.target.value)}
+              style={{
+                backgroundColor: statusColors[emp.status],
+                color: statusColorsText[emp.status],
+                outline: "none",
+                width: "8vw",
+                height: "4.3vh",
+                fontSize: "1.1vw",
+                fontWeight: "bold",
+                textAlign: "center",
+                marginLeft: "17%",
+                borderWidth: "0vw",
+              }}
+            >
+              <option
+                value="Clocked Out"
+                style={{
+                  backgroundColor: statusColors["Clocked Out"],
+                  color: statusColorsText["Clocked Out"],
+                  fontWeight: "bold",
+                }}
+              >
+                Clocked Out
+              </option>
+              <option
+                value="Clocked In"
+                style={{
+                  backgroundColor: statusColors["Clocked In"],
+                  color: statusColorsText["Clocked In"],
+                  fontWeight: "bold",
+                }}
+              >
+                Clocked In
+              </option>
+              <option
+                value="Break"
+                style={{
+                  backgroundColor: statusColors["Break"],
+                  color: statusColorsText["Break"],
+                  fontWeight: "bold",
+                }}
+              >
+                Break
+              </option>
+              <option
+                value="Lunch"
+                style={{
+                  backgroundColor: statusColors["Lunch"],
+                  color: statusColorsText["Lunch"],
+                  fontWeight: "bold",
+                }}
+              >
+                Lunch
+              </option>
+            </select>
+          </td>
+          <td>
+            <button
+              className="btn btn-link"
+              onClick={() => toggleLock(emp.id)}
+              style={{
+                color: emp.locked ? "#ED5E61" : "#1C2D5A",
+                border: "0px",
+                width: "6vw",
+                height: "4.3vh",
+                fontSize: "1.2vw",
+                fontWeight: "bold",
+                textAlign: "center",
+                marginLeft: "16%",
+              }}
+            >
+              {emp.locked ? "Unlock" : "Lock"}
             </button>
-          </div>
-        </td>
-        <td>
-          <select
-            className="employee-status-select"
-            value={emp.status}
-            onChange={(e) => handleStatusChange(emp.id, e.target.value)}
-            style={{
-              backgroundColor: statusColors[emp.status],
-              color: statusColorsText[emp.status],
-              outline: "none",
-              width: "8vw",
-              height: "4.3vh",
-              fontSize: "1.1vw",
-              fontWeight: "bold",
-              textAlign: "center",
-              marginLeft: "17%",
-              borderWidth: "0vw",
-            }}
-          >
-            <option
-              value="Clocked Out"
-              style={{
-                backgroundColor: statusColors["Clocked Out"],
-                color: statusColorsText["Clocked Out"],
-                fontWeight: "bold",
-              }}
-            >
-              Clocked Out
-            </option>
-            <option
-              value="Clocked In"
-              style={{
-                backgroundColor: statusColors["Clocked In"],
-                color: statusColorsText["Clocked In"],
-                fontWeight: "bold",
-              }}
-            >
-              Clocked In
-            </option>
-            <option
-              value="Break"
-              style={{
-                backgroundColor: statusColors["Break"],
-                color: statusColorsText["Break"],
-                fontWeight: "bold",
-              }}
-            >
-              Break
-            </option>
-            <option
-              value="Lunch"
-              style={{
-                backgroundColor: statusColors["Lunch"],
-                color: statusColorsText["Lunch"],
-                fontWeight: "bold",
-              }}
-            >
-              Lunch
-            </option>
-          </select>
-        </td>
-        <td>
-          <button
-            className="btn btn-link"
-            onClick={() => toggleLock(emp.id)}
-            style={{
-              color: emp.locked ? "#ED5E61" : "#1C2D5A",
-              border: "0px",
-              width: "6vw",
-              height: "4.3vh",
-              fontSize: "1.2vw",
-              fontWeight: "bold",
-              textAlign: "center",
-            }}
-          >
-            {emp.locked ? "Unlock" : "Lock"}
-          </button>
-        </td>
-      </tr>
-    ));
+          </td>
+        </tr>
+      ));
   };
 
   // Add new employees
@@ -210,9 +216,10 @@ const AdminTable = () => {
           {/* Search table */}
           <input
             className="AdminDashboard_SearchEmployee"
-            onChange={(e) => handleSearch(e.target.value)}
             type="text"
             placeholder="  Search table"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
         <table className="table mt-3">
