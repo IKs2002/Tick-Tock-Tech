@@ -53,13 +53,13 @@
 
 /* table rows and boxes */
 .table tr {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 0.4vw solid #ddd;
+  border-left: 0.4vw solid #ddd;
 }
 
 /* table border */
 .table td {
   padding: 0.65vw;
-  border-left: 0.4vw solid #ddd;
   border-right: 0.4vw solid #ddd;
 }
 
@@ -98,7 +98,7 @@
   color: #708090;
   font-size: 0.9vw;
   font-weight: bold;
-  margin-left: 38.9vw;
+  margin-left: 37.9vw;
 }
 
 .popup {
@@ -116,13 +116,6 @@
   text-align: center;
 }
 
-.employee-name-container {
-  display: flex;
-  align-items: center;
-  border: none; 
-  padding: 5px; 
-}
-
 .employee-name {
   flex-grow: 1; 
   height: 4vh;
@@ -131,8 +124,7 @@
   font-size: 1.5vw;
   border: none; 
   color: #5c5c5c; 
-  text-align: left; 
-  padding: 8px; 
+  text-align: left;
 }
 
 .delete-btn {
@@ -140,7 +132,7 @@
   font-weight: bold;
   text-align: center;
   background: none; 
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 .employee-status-select{
