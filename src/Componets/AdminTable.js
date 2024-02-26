@@ -181,12 +181,12 @@ const AdminTable = () => {
   };
 
   // Add new employees
-  const addEmployee = () => {
+  const addEmployee = (newEmployee) => {
     setEmployees((prevEmployees) => [
       ...prevEmployees,
       {
         id: prevEmployees.length + 1,
-        name: "",
+        name: newEmployee.name,
         status: "Clocked Out",
         locked: false,
       },
