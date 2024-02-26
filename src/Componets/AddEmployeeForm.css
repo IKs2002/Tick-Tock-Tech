@@ -22,9 +22,10 @@
   margin-top: 1vh;
   font-size: 0.9vw;
   background-color: #FFFFFF;
-  border: 0.1vw solid #333;
+  border: 0.2vw solid #708090;
   border-radius: 0.1vw;
-  color: #333;
+  color: #708090;
+  font-weight: bold;
 }
 
 .employee-form {

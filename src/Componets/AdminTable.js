@@ -67,6 +67,15 @@ const AdminTable = () => {
     }
   };
 
+  const deleteEmployee = (id) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this employee?"
+    );
+    if (confirmed) {
+      setEmployees(employees.filter((emp) => emp.id !== id));
+    }
+  };
+
   // popup toggle function
   const myFunction = (empId) => {
     var popup = document.getElementById(`myPopup-${empId}`);
@@ -81,10 +90,19 @@ const AdminTable = () => {
       <tr key={emp.id}>
         <td style={{ display: "flex", alignItems: "center" }}>
           <div className="employee-name">{emp.name}</div>
-          <div className="popup" onClick={() => myFunction(emp.id)}>
+          <div
+            className="popup"
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent triggering other onClick events
+              myFunction(emp.id);
+            }}
+          >
             <button
               className="btn btn-link delete-btn"
-              onClick={() => handleConfirm(emp.id, emp.name)}
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent triggering the popup's onClick
+                deleteEmployee(emp.id);
+              }}
             >
               🗑️
             </button>
