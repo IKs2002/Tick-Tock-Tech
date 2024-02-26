@@ -42,15 +42,6 @@ const AdminTable = () => {
     );
   };
 
-  // changes in employee name
-  const handleNameChange = (id, newName) => {
-    setEmployees((prevEmployees) =>
-      prevEmployees.map((emp) =>
-        emp.id === id ? { ...emp, name: newName } : emp
-      )
-    );
-  };
-
   // changes in employee status
   const handleStatusChange = (id, newStatus) => {
     setEmployees((prevEmployees) =>
@@ -75,6 +66,15 @@ const AdminTable = () => {
     }
   };
 
+  const deleteEmployee = (id) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this employee?"
+    );
+    if (confirmed) {
+      setEmployees(employees.filter((emp) => emp.id !== id));
+    }
+  };
+
   // popup toggle function
   const myFunction = (empId) => {
     var popup = document.getElementById(`myPopup-${empId}`);
@@ -87,12 +87,21 @@ const AdminTable = () => {
   const renderRows = () => {
     return employees.map((emp) => (
       <tr key={emp.id}>
-        <td style={{ display: "flex", alignItems: "center" }}>
+        <td style={{ display: "flex", alignItems: "center", marginRight: "-0.745%" }}>
           <div className="employee-name">{emp.name}</div>
-          <div className="popup" onClick={() => myFunction(emp.id)}>
+          <div
+            className="popup"
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent triggering other onClick events
+              myFunction(emp.id);
+            }}
+          >
             <button
               className="btn btn-link delete-btn"
-              onClick={() => handleConfirm(emp.id, emp.name)}
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent triggering the popup's onClick
+                deleteEmployee(emp.id);
+              }}
             >
               🗑️
             </button>
@@ -109,10 +118,11 @@ const AdminTable = () => {
               outline: "none",
               width: "8vw",
               height: "4.3vh",
-              border: "0",
               fontSize: "1.1vw",
               fontWeight: "bold",
               textAlign: "center",
+              marginLeft: "17%",
+              borderWidth: "0vw",
             }}
           >
             <option
@@ -169,7 +179,6 @@ const AdminTable = () => {
               fontSize: "1.2vw",
               fontWeight: "bold",
               textAlign: "center",
-              background: "none",
             }}
           >
             {emp.locked ? "Unlock" : "Lock"}
@@ -179,23 +188,13 @@ const AdminTable = () => {
     ));
   };
 
-  const handleConfirm = (id, name) => {
-    const confirmed = window.confirm(
-      `Are you sure you want to delete ${name}?`
-    );
-    if (confirmed) {
-      // handle confirmation
-      console.log("Confirmed for employee ID:", id);
-    }
-  };
-
   // Add new employees
-  const addEmployee = () => {
+  const addEmployee = (newEmployee) => {
     setEmployees((prevEmployees) => [
       ...prevEmployees,
       {
         id: prevEmployees.length + 1,
-        name: "",
+        name: newEmployee.name,
         status: "Clocked Out",
         locked: false,
       },
