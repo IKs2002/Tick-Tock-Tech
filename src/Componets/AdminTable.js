@@ -185,6 +185,7 @@ const AdminTable = () => {
                 fontWeight: "bold",
                 textAlign: "center",
                 marginLeft: "16%",
+                background: "none",
               }}
             >
               {emp.locked ? "Unlock" : "Lock"}
