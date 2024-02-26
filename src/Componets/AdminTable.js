@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import "./AdminTable.css";
 import AddEmployeeForm from "./AddEmployeeForm";
+import DeleteButton from "../Photos/AdminDashboardButtons/DeleteButton.png";
 
 const AdminTable = () => {
   // state of employees
   const [employees, setEmployees] = useState([
     { id: 1, name: "John Smith", status: "Clocked Out", locked: false },
-    { id: 2, name: "Jane Doe", status: "Clocked Out", locked: false },
-    { id: 3, name: "Emily Johnson", status: "Clocked Out", locked: false },
-    { id: 4, name: "Mark Rodgers", status: "Clocked Out", locked: false },
+    { id: 2, name: "Jane Doe", status: "Clocked In", locked: false },
+    { id: 3, name: "Emily Johnson", status: "Lunch", locked: false },
+    { id: 4, name: "Mark Rodgers", status: "Break", locked: false },
   ]);
 
   // Add a state for the search query
@@ -33,15 +34,6 @@ const AdminTable = () => {
     setEmployees((prevEmployees) =>
       prevEmployees.map((emp) =>
         emp.id === id ? { ...emp, locked: !emp.locked } : emp
-      )
-    );
-  };
-
-  // changes in employee status
-  const handleStatusChange = (id, newStatus) => {
-    setEmployees((prevEmployees) =>
-      prevEmployees.map((emp) =>
-        emp.id === id ? { ...emp, status: newStatus } : emp
       )
     );
   };
@@ -78,7 +70,6 @@ const AdminTable = () => {
     }
   };
 
-  // Render rows for employees
   const renderRows = () => {
     return employees
       .filter((emp) =>
@@ -100,77 +91,18 @@ const AdminTable = () => {
                 e.stopPropagation(); // Prevent triggering other onClick events
                 myFunction(emp.id);
               }}
-            >
-              <button
-                className="btn btn-link delete-btn"
-                onClick={(e) => {
-                  e.stopPropagation(); // Prevent triggering the popup's onClick
-                  deleteEmployee(emp.id);
-                }}
-              >
-                🗑️
-              </button>
-            </div>
+            ></div>
           </td>
           <td>
-            <select
+            <div
               className="employee-status-select"
-              value={emp.status}
-              onChange={(e) => handleStatusChange(emp.id, e.target.value)}
               style={{
-                backgroundColor: statusColors[emp.status],
-                color: statusColorsText[emp.status],
-                outline: "none",
-                width: "8vw",
-                height: "4.3vh",
-                fontSize: "1.1vw",
-                fontWeight: "bold",
-                textAlign: "center",
-                marginLeft: "17%",
-                borderWidth: "0vw",
+                "--statusColors": statusColors[emp.status],
+                "--statusColorsText": statusColorsText[emp.status],
               }}
             >
-              <option
-                value="Clocked Out"
-                style={{
-                  backgroundColor: statusColors["Clocked Out"],
-                  color: statusColorsText["Clocked Out"],
-                  fontWeight: "bold",
-                }}
-              >
-                Clocked Out
-              </option>
-              <option
-                value="Clocked In"
-                style={{
-                  backgroundColor: statusColors["Clocked In"],
-                  color: statusColorsText["Clocked In"],
-                  fontWeight: "bold",
-                }}
-              >
-                Clocked In
-              </option>
-              <option
-                value="Break"
-                style={{
-                  backgroundColor: statusColors["Break"],
-                  color: statusColorsText["Break"],
-                  fontWeight: "bold",
-                }}
-              >
-                Break
-              </option>
-              <option
-                value="Lunch"
-                style={{
-                  backgroundColor: statusColors["Lunch"],
-                  color: statusColorsText["Lunch"],
-                  fontWeight: "bold",
-                }}
-              >
-                Lunch
-              </option>
-            </select>
+              {emp.status}
+            </div>
           </td>
           <td>
             <button
@@ -184,11 +116,25 @@ const AdminTable = () => {
                 fontSize: "1.2vw",
                 fontWeight: "bold",
                 textAlign: "center",
-                marginLeft: "16%",
+                marginLeft: "12%",
                 background: "none",
               }}
             >
               {emp.locked ? "Unlock" : "Lock"}
+            </button>
+          </td>
+          <td>
+            <button
+              className="btn btn-link delete-btn"
+              onClick={(e) => {
+                deleteEmployee(emp.id);
+              }}
+            >
+              <img
+                src={DeleteButton}
+                alt="not found"
+                className="DeleteButton"
+              />
             </button>
           </td>
         </tr>
@@ -228,6 +174,7 @@ const AdminTable = () => {
             <tr>
               <th>Employee Name</th>
               <th>Status</th>
+              <th>Access</th>
               <th>Manage</th>
             </tr>
           </thead>
