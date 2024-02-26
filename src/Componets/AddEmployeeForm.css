@@ -13,7 +13,7 @@
   color: #708090;
 }
 
-/* This is the button that opens the modal */
+/* This is the button that opens the modal and it is called in AdminTable.js*/
 .AdminDashboard_EnterNewEmployee {
   width: 10vw;
   height: 4vh;
@@ -21,7 +21,7 @@
   margin-bottom: 1vh;
   margin-top: 1vh;
   font-size: 0.9vw;
-  background-color: #FFFFFF;
+  background-color: #ededed;
   border: 0.2vw solid #708090;
   border-radius: 0.1vw;
   color: #708090;
@@ -41,7 +41,7 @@
   margin-top: 1vh;
   font-size: 0.9vw;
   border: 0.2vw solid #708090;
-  border-radius: 0.4vw;
+  border-radius: 0.2vw;
   background-color: #FFFFFF;
 }
 
@@ -61,7 +61,7 @@
   border-radius: 0.1vw;
   color: #FFFFFF;
   font-weight: bold;
-  border-radius: 0.4vw;
+  border-radius: 0.2vw;
 }
 
 .ConfirmButton {
@@ -76,7 +76,7 @@
   border-radius: 0.1vw;
   color: #FFFFFF;
   font-weight: bold;
-  border-radius: 0.4vw;
+  border-radius: 0.2vw;
 }
 
 /*Created and last edited by Seif Ikbarieh on 2/25/2024.*/
