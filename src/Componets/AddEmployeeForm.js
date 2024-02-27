@@ -44,6 +44,7 @@ const AddEmployeeForm = ({ addEmployee, initialName }) => {
             value={form.name}
             onChange={handleInputChange}
             required
+            autocomplete="off"
             className="employee-form-field"
           />
           <input
@@ -52,8 +53,8 @@ const AddEmployeeForm = ({ addEmployee, initialName }) => {
             placeholder="Email"
             value={form.email}
             required
+            autocomplete="off"
             onChange={handleInputChange}
-
             className="employee-form-field"
           />
           <input
@@ -63,6 +64,7 @@ const AddEmployeeForm = ({ addEmployee, initialName }) => {
             value={form.password}
             required
             onChange={handleInputChange}
+            autocomplete="off"
             className="employee-form-field"
           />
           <div className="form-buttons">
