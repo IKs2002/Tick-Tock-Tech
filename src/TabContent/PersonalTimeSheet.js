@@ -1,9 +1,8 @@
 import React, { useRef } from "react";
 
-import SaveAsPDFButton from "../Componets/SaveAsPDFButton"
+import SaveAsPDFButton from "../Componets/SaveAsPDFButton";
 import WeekPicker from "../Componets/WeekPicker.js";
 import TimeSheet from "../Componets/TimeSheet.js";
-
 
 const PersonalTimeSheet = () => {
   // Define the handleWeekChange function
@@ -14,23 +13,18 @@ const PersonalTimeSheet = () => {
 
   let docToPrint = useRef(); // Needs to be in every page for save-as-pdf
   return (
-    
-      <div >
-      <div className="center-container">
-        <WeekPicker onChange={handleWeekChange} />
-
-      <SaveAsPDFButton ref={docToPrint} />
-      
-    </div >
     <div>
+        <SaveAsPDFButton ref={docToPrint} />
+        <div ref={docToPrint}>
+        <WeekPicker onChange={handleWeekChange} />
+      <div>
         <label class="EmpName">Employee Name</label>
       </div>
-    <div ref={docToPrint} >
+      
         <TimeSheet />
         {/* Other content for Personal Timesheet can go here */}
-        </div>
       </div>
-    
+    </div>
   );
 };
 
