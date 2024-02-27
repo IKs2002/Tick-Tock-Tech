@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { startOfWeek, endOfWeek, addWeeks, subWeeks, format, addDays } from 'date-fns';
+import { startOfWeek, addWeeks, subWeeks, format, addDays } from 'date-fns';
 import styles from './WeekPicker.module.css'; // Import the CSS module
 
 const WeekPicker = ({ onChange }) => {

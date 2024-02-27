@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { v4 as uuidv4 } from 'uuid'; // Import uuidv4 from the uuid library
 import "./AddEmployeeForm.css";
 import Modal from "react-modal";
 
 const AddEmployeeForm = ({ addEmployee, initialName }) => {
   const [form, setForm] = useState({
+    id: uuidv4(), // Import uuidv4 from a library like uuid
     name: initialName,
     email: "",
     password: "Password.@123",
@@ -17,8 +19,9 @@ const AddEmployeeForm = ({ addEmployee, initialName }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addEmployee(form);
-    setForm({ name: "", email: "", password: "Password.@123" });
+    const employeeWithId = { ...form, id: uuidv4() };
+    addEmployee(employeeWithId);
+    setForm({ id: uuidv4(), name: "", email: "", password: "Password.@123" });
     setModalIsOpen(false);
   };
 
