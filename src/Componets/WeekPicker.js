@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { startOfWeek, endOfWeek, addWeeks, subWeeks, format } from 'date-fns';
+import { startOfWeek, endOfWeek, addWeeks, subWeeks, format, addDays } from 'date-fns';
 import styles from './WeekPicker.module.css'; // Import the CSS module
 
 const WeekPicker = ({ onChange }) => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(addWeeks(new Date(), 1)); // Start one week ahead
 
   const updateWeeks = (newDate) => {
     setSelectedDate(newDate);
 
     const firstWeekStart = startOfWeek(newDate, { weekStartsOn: 1 });
-    const firstWeekEnd = endOfWeek(newDate, { weekStartsOn: 1 });
-    const secondWeekStart = startOfWeek(addWeeks(newDate, 1), { weekStartsOn: 1 });
-    const secondWeekEnd = endOfWeek(addWeeks(newDate, 1), { weekStartsOn: 1 });
+    const firstWeekEnd = addDays(firstWeekStart, 13);
+    const secondWeekStart = addDays(firstWeekStart, 14);
+    const secondWeekEnd = addDays(secondWeekStart, 13);
 
     onChange({
       firstWeek: { start: firstWeekStart, end: firstWeekEnd },
@@ -38,7 +38,7 @@ const WeekPicker = ({ onChange }) => {
       <div className={styles.innerContainer}>
         <button className={`${styles.arrowButton} ${styles.leftArrow}`} onClick={handlePrevClick}></button>
         <div className={styles.weekDisplay}>
-          Weeks of: {formatDate(startOfWeek(selectedDate, { weekStartsOn: 1 }))} - {formatDate(endOfWeek(addWeeks(selectedDate, 1), { weekStartsOn: 1 }))}
+          Weeks of: {formatDate(startOfWeek(selectedDate, { weekStartsOn: 1 }))} - {formatDate(addDays(startOfWeek(selectedDate, { weekStartsOn: 1 }), 13))}
         </div>
         <button className={`${styles.arrowButton} ${styles.rightArrow}`} onClick={handleNextClick}></button>
       </div>

@@ -22,6 +22,9 @@ const PersonalTimeSheet = () => {
       <SaveAsPDFButton ref={docToPrint} />
       
     </div >
+    <div>
+        <label class="EmpName">Employee Name</label>
+      </div>
     <div ref={docToPrint} >
         <TimeSheet />
         {/* Other content for Personal Timesheet can go here */}
