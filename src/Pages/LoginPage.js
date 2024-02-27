@@ -15,7 +15,7 @@ const Login = () => {
         <input
         className="Login_Username"
           type="text"
-          placeholder="user@digitaldreamforge.com"
+          placeholder="Email"
           name="uname"
           required
         />

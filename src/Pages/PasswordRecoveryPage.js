@@ -20,8 +20,7 @@ const PasswordRecovery = () => {
         <img src={Logo} alt=" not found" className="PasswordRecovery_Logo"/>
       </div>
       <div className="PasswordRecovery_Body">
-        To reset your password, please contact IT at
-        itservices@digitaldreamforge.com.
+        To recover your password, please contact either IT services, or a manager.
         <br />
         <br />
         Thanks!
