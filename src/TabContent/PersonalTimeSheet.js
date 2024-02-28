@@ -16,12 +16,16 @@ const PersonalTimeSheet = () => {
     <div>
         <SaveAsPDFButton ref={docToPrint} />
         <div ref={docToPrint}>
-        <WeekPicker onChange={handleWeekChange} />
-      <div>
+      <div class="WeekPickerPrint">
+      <WeekPicker  onChange={handleWeekChange}/>
+      </div>
+        
+      <div class="EmployeeNamePrint">
         <label class="EmpName">Employee Name</label>
       </div>
-      
+        <div class="TimeSheetPrint">
         <TimeSheet />
+        </div>
         {/* Other content for Personal Timesheet can go here */}
       </div>
     </div>

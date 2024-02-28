@@ -1,0 +1,13 @@
+/* This will apply to the TimeSheet component when printing */
+@media print {
+    .TimeSheetPrint {
+        min-width: 50vw;
+    }
+    .WeekPickerPrint {
+        min-width: 50vw;
+        /* Your print styles for WeekPicker go here */
+    }
+    .EmployeeNamePrint {
+        min-width: 50vw;
+    }
+}

@@ -1,15 +1,40 @@
-/* Styles for the 'Save as PDF' button used in various parts of the application */
+/* SaveAsPDFButton.css */
 
 .PDFButton {
-    position: absolute; /* Positions the button absolutely within its parent container */
-    right: 5%; /* Aligns the button 5% from the right of its parent container */
-    width: 10vw; /* Sets the button width to 10% of the viewport width */
-    height: 4vh; /* Sets the button height to 4% of the viewport height */
-    color: #4f4f4f; /* Sets the text color to a dark grey */
-    background-color: #d9d9d9; /* Sets the background color to a light grey */
-    border-color: transparent; /* Makes the button border transparent */
-    border-radius: 5px; /* Rounds the corners of the button */
-    font-weight: bold; /* Makes the button text bold */
-    font-size: 0.8vw; /* Sets the font size to 0.8% of the viewport width */
-    margin-top: 0.8vh; /* Sets the top margin to 0.8% of the viewport height */
+    position: absolute;
+    right: 5%;
+    width: 10vw;
+    height: 4vh;
+    color: #4f4f4f;
+    background-color: #d9d9d9;
+    border-color: transparent;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.8vw;
+    margin-top: 0.8vh;
+}
+
+/* This will apply to the pdfContent in all cases */
+.pdfContent {
+    /* Your regular styles go here */
+}
+
+/* This will only apply to the pdfContent when printing */
+@media print {
+    .pdfContent {
+        /* Your print styles go here */
+        width: 210mm; /* A4 width */
+        height: 297mm; /* A4 height */
+    }
+    .print-mode {
+        /* Your print styles for SaveAsPDFButton go here */
+        width: 1080px; /* A4 width */
+        height: 1920px; /* A4 height */
+    }
+}
+
+/* This will apply to the pdfContent when the SaveAsPDFButton is pressed */
+.print-mode {
+    width: 1080px; /* A4 width */
+    height: 1920px;
 }
