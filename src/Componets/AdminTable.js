@@ -9,7 +9,7 @@ const AdminTable = () => {
   const [employees, setEmployees] = useState([
     { id: 1, name: "John Smith", status: "Clocked Out", locked: false },
     { id: 2, name: "Jane Doe", status: "Clocked In", locked: false },
-    { id: 3, name: "Emily Johnson", status: "Lunch", locked: false },
+    { id: 3, name: "Emily Johnson", status: "Meal", locked: false },
     { id: 4, name: "Mark Rodgers", status: "Break", locked: false },
   ]);
 
@@ -21,14 +21,14 @@ const AdminTable = () => {
     "Clocked Out": "#FEEFF0", // red
     "Clocked In": "#EEF8F2", // green
     Break: "#E4F1F9", // blue
-    Lunch: "#FFF8ED", // yellow
+    Meal: "#FFF8ED", // yellow
   };
 
   const statusColorsText = {
     "Clocked Out": "#ED5E61", // red
     "Clocked In": "#59B77A", // green
     Break: "#7EB6FF", // blue
-    Lunch: "#FFA114", // yellow
+    Meal: "#FFA114", // yellow
   };
 
   // Function to toggle the lock status of an employee
