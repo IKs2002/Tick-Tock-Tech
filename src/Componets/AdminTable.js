@@ -149,18 +149,27 @@ const AdminTable = () => {
       ));
   };
 
-  // Add new employees
-  const addEmployee = (newEmployee) => {
-    setEmployees((prevEmployees) => [
-      ...prevEmployees,
-      {
-        id: prevEmployees.length + 1,
-        name: newEmployee.name,
-        status: "Clocked Out",
-        locked: false,
-      },
-    ]);
-  };
+// Add new employees
+const addEmployee = (newEmployee) => {
+  console.log("Added employee:");
+  console.log("- ID:", newEmployee.id);
+  console.log("- Name:", newEmployee.name);
+  console.log("- Email:", newEmployee.email);
+  console.log("- Password:", newEmployee.password);
+
+  setEmployees((prevEmployees) => [
+    ...prevEmployees,
+    {
+      id: prevEmployees.length + 1,
+      name: newEmployee.name,
+      status: "Clocked Out",
+      locked: false,
+    },
+  ]);
+
+  console.log("Employee added successfully:", newEmployee);
+};
+
 // Main render for admintable component
   return (
     <div className="AdminDashboard_ParentBorder">
