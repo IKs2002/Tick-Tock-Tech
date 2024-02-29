@@ -11,30 +11,10 @@
     border-radius: 5px;
     font-weight: bold;
     font-size: 0.8vw;
-    margin-top: 0.8vh;
 }
 
-/* This will apply to the pdfContent in all cases */
-.pdfContent {
-    /* Your regular styles go here */
-}
-
-/* This will only apply to the pdfContent when printing */
-@media print {
-    .pdfContent {
-        /* Your print styles go here */
-        width: 210mm; /* A4 width */
-        height: 297mm; /* A4 height */
-    }
-    .print-mode {
-        /* Your print styles for SaveAsPDFButton go here */
-        width: 1080px; /* A4 width */
-        height: 1920px; /* A4 height */
-    }
-}
-
-/* This will apply to the pdfContent when the SaveAsPDFButton is pressed */
+/* DO NOT CHANGE This will apply to the pdfContent when the SaveAsPDFButton is pressed */
 .print-mode {
-    width: 1080px; /* A4 width */
-    height: 1920px;
+    width: 263mm;
+    height: 360mm;
 }
