@@ -8,11 +8,31 @@ const SaveAsPDFButton = forwardRef((props, ref) => {
   const saveAsPDF = async () => {
     // Create a loading overlay
     const overlay = document.createElement('div');
+
     // ... (unchanged code for the loading overlay)
+
+    overlay.style.position = 'fixed';
+
+    overlay.style.top = 0;
+
+    overlay.style.left = 0;
+
+    overlay.style.width = '100%';
+
+    overlay.style.height = '100%';
+
+    overlay.style.backgroundColor = 'rgba(255, 255, 255)';
+
+    overlay.style.display = 'flex';
+
+    overlay.style.justifyContent = 'center';
+
+    overlay.style.alignItems = 'center';
+
+    overlay.innerHTML = '<div class="loader"></div>'; // Add your own loading spinner here
   
     // Append the overlay to the body
     document.body.appendChild(overlay);
-  
     // Add a class to the element before capturing it
     ref.current.classList.add('print-mode');
   
