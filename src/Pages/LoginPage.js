@@ -25,7 +25,7 @@ const Login = () => {
         <Link to="PasswordRecovery">
           <text className="PasswordRecovery">Forgot your password?</text>
         </Link>
-        <Link to="DefaultPage">
+        <Link to="DefaultPage/AdminDashboard">
           <button className="loginbutton" type="submit">
             Login
           </button>
