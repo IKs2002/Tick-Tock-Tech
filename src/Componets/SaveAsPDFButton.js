@@ -8,16 +8,7 @@ const SaveAsPDFButton = forwardRef((props, ref) => {
   const saveAsPDF = async () => {
     // Create a loading overlay
     const overlay = document.createElement('div');
-    overlay.style.position = 'fixed';
-    overlay.style.top = 0;
-    overlay.style.left = 0;
-    overlay.style.width = '100%';
-    overlay.style.height = '100%';
-    overlay.style.backgroundColor = 'rgba(255, 255, 255)';
-    overlay.style.display = 'flex';
-    overlay.style.justifyContent = 'center';
-    overlay.style.alignItems = 'center';
-    overlay.innerHTML = '<div class="loader"></div>'; // Add your own loading spinner here
+    // ... (unchanged code for the loading overlay)
   
     // Append the overlay to the body
     document.body.appendChild(overlay);
@@ -26,6 +17,7 @@ const SaveAsPDFButton = forwardRef((props, ref) => {
     ref.current.classList.add('print-mode');
   
     const canvas = await html2canvas(ref.current, {
+ // Set the left margin
       y: -20,
     });
   
@@ -39,7 +31,10 @@ const SaveAsPDFButton = forwardRef((props, ref) => {
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
   
-    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    // Adjust the left and right margins in the addImage method
+    const leftMargin = 10; // Adjust as needed
+    const rightMargin = 10; // Adjust as needed
+    pdf.addImage(imgData, 'PNG', leftMargin, 0, pdfWidth - leftMargin - rightMargin, pdfHeight);
   
     pdf.save('TimeChart.pdf');
   
@@ -48,6 +43,7 @@ const SaveAsPDFButton = forwardRef((props, ref) => {
     // Remove the overlay after the PDF has been saved
     document.body.removeChild(overlay);
   };
+  
 
   return (
     <div>
