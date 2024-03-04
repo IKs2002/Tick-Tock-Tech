@@ -4,7 +4,7 @@ import "./AddEmployeeForm.css";
 import Modal from "react-modal";
 
 // Component for adding a new employee, receives addEmployee function and initialName as props
-const AddEmployeeForm = ({ addEmployee, initialName }) => {
+const AddEmployeeForm = ({ addEmployee }) => {
   // Function to generate a random password
 const generateRandomPassword = () => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
@@ -18,7 +18,7 @@ const generateRandomPassword = () => {
   // State for managing form inputs and modal visibility
   const [form, setForm] = useState({
     id: uuidv4(), // Import uuidv4 from a library like uuid
-    name: initialName,
+    name: "",
     email: "",
     password: generateRandomPassword(), // Update password with a random password
   });
