@@ -6,6 +6,8 @@ import './SaveAsPDFButton.css';
 
 const SaveAsPDFButton = forwardRef((props, ref) => {
   const saveAsPDF = async () => {
+    const { start, end } = props;
+    
     // Create a loading overlay
     const overlay = document.createElement('div');
 
@@ -56,7 +58,7 @@ const SaveAsPDFButton = forwardRef((props, ref) => {
     const rightMargin = 10; // Adjust as needed
     pdf.addImage(imgData, 'PNG', leftMargin, 0, pdfWidth - leftMargin - rightMargin, pdfHeight);
   
-    pdf.save('TimeChart.pdf');
+    pdf.save(start +' through ' + end);
   
     ref.current.classList.remove('print-mode');
   

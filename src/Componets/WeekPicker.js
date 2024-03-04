@@ -15,7 +15,9 @@ const WeekPicker = ({ onChange }) => {
 
     onChange({
       firstWeek: { start: firstWeekStart, end: firstWeekEnd },
-      secondWeek: { start: secondWeekStart, end: secondWeekEnd }
+      secondWeek: { start: secondWeekStart, end: secondWeekEnd },
+      beginning: {firstWeekStart},
+      ending: {secondWeekEnd}
     });
   };
 
