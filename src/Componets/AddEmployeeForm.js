@@ -5,12 +5,22 @@ import Modal from "react-modal";
 
 // Component for adding a new employee, receives addEmployee function and initialName as props
 const AddEmployeeForm = ({ addEmployee, initialName }) => {
+  // Function to generate a random password
+const generateRandomPassword = () => {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+  let password = '';
+  for (let i = 0; i < 18; i++) {
+    password += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return password;
+};
+
   // State for managing form inputs and modal visibility
   const [form, setForm] = useState({
     id: uuidv4(), // Import uuidv4 from a library like uuid
     name: initialName,
     email: "",
-    password: "Password.@123",
+    password: generateRandomPassword(), // Update password with a random password
   });
 
   // State for controlling the visibility of the modal
@@ -21,15 +31,13 @@ const AddEmployeeForm = ({ addEmployee, initialName }) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Handles form submission, generates a new ID for the employee, calls addEmployee, resets the form, and closes the modal
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const employeeWithId = { ...form, id: uuidv4() };
-    addEmployee(employeeWithId);
-    setForm({ id: uuidv4(), name: "", email: "", password: "Password.@123" });
-    setModalIsOpen(false);
-  };
-
+// Inside the handleSubmit function
+const handleSubmit = (e) => {
+  e.preventDefault();
+  setForm({ id: uuidv4(), name: "", email: "", password: generateRandomPassword() });
+  addEmployee(form);
+  setModalIsOpen(false);
+};
   // Renders the button to open the modal and the modal itself, which contains the form for adding a new employee
   return (
     <div>
