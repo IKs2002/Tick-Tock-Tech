@@ -3,15 +3,15 @@ import { startOfWeek, addWeeks, subWeeks, format, addDays } from 'date-fns';
 import styles from './WeekPicker.module.css'; // Import the CSS module
 
 const WeekPicker = ({ onChange }) => {
-  const [selectedDate, setSelectedDate] = useState(addWeeks(new Date(), 1)); // Start one week ahead
+  const [selectedDate, setSelectedDate] = useState(new Date(), 1); // Start one week ahead
 
   const updateWeeks = (newDate) => {
     setSelectedDate(newDate);
 
     const firstWeekStart = startOfWeek(newDate, { weekStartsOn: 1 });
-    const firstWeekEnd = addDays(firstWeekStart, 13);
-    const secondWeekStart = addDays(firstWeekStart, 14);
-    const secondWeekEnd = addDays(secondWeekStart, 13);
+    const firstWeekEnd = addDays(firstWeekStart, 6);
+    const secondWeekStart = addDays(firstWeekStart, 7);
+    const secondWeekEnd = addDays(secondWeekStart, 6);
 
     onChange({
       firstWeek: { start: firstWeekStart, end: firstWeekEnd },
