@@ -212,7 +212,7 @@ function TimeSheet({ editable = false }) {
         <table>
           {/* Table headers */}
           <tr>
-            <th>Day of the Week</th>
+            <th>Day</th>
             <th>Date</th>
             <th>Clock In</th>
             <th>Clock out</th>

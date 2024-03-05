@@ -35,7 +35,11 @@
       border-top: 1px solid #bbb; /* Top border */
       color: white; /* Text color */
     }
-
+    /* Adjust the width of the first column in the table */
+    table tr th:nth-child(1){
+      width: 5%;
+      white-space: normal; /* Prevent text wrapping */
+    }
     /* Specific column styling for background and padding */
     table tr th:nth-child(5),
     table tr td:nth-child(5),
