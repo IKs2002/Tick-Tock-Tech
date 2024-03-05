@@ -1,14 +1,23 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState} from "react";
 import SaveAsPDFButton from "../Componets/SaveAsPDFButton";
 import WeekPicker from "../Componets/WeekPicker.js";
 import TimeSheet from "../Componets/TimeSheet.js";
-import { startOfWeek, addWeeks,addDays, format as formatDate } from "date-fns";
+import { startOfWeek,addDays, format as formatDate } from "date-fns";
 import moment from 'moment';
 
 const PersonalTimeSheet = () => {
-  const [firstWeekStart, setFirstWeekStart] = useState(null);
-  const [secondWeekEnd, setSecondWeekEnd] = useState(null);
-  // ...
+
+  const initialWeekStart = startOfWeek(new Date(), { weekStartsOn: 1 });
+  const initialWeekEnd = addDays(initialWeekStart, 13);
+
+
+  const initialFirstWeekStart = moment(initialWeekStart).startOf('day');
+  const initialSecondWeekEnd = moment(initialWeekEnd).endOf('day');
+
+
+  const [firstWeekStart, setFirstWeekStart] = useState(initialFirstWeekStart.toDate());
+  const [secondWeekEnd, setSecondWeekEnd] = useState(initialSecondWeekEnd.toDate());
+
 
   // Define the handleWeekChange function
   const handleWeekChange = (weeks) => {
@@ -25,16 +34,10 @@ const PersonalTimeSheet = () => {
 
 
 
-  const initialWeekStart = startOfWeek(new Date(), { weekStartsOn: 1 });
-  const initialWeekEnd = addDays(initialWeekStart, 13);
 
-  const initialFirstWeekStart = moment(initialWeekStart).startOf('day');
-  const initialSecondWeekEnd = moment(initialWeekEnd).endOf('day');
+  
 
-  useEffect(() => {
-    setFirstWeekStart(initialFirstWeekStart.toDate());
-    setSecondWeekEnd(initialSecondWeekEnd.toDate());
-  }, []);
+
 
   var name = "Employee Name"
 
