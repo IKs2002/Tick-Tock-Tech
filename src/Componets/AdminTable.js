@@ -3,8 +3,9 @@ import "./AdminTable.css";
 import AddEmployeeForm from "./AddEmployeeForm";
 import DeleteButton from "../Photos/AdminDashboardButtons/DeleteButton.png";
 
+// Defines the AdminTable component responsible for displaying and managing employees in the admin dashboard
 const AdminTable = () => {
-  // state of employees
+  // State to store and manage the list of employees
   const [employees, setEmployees] = useState([
     { id: 1, name: "John Smith", status: "Clocked Out", locked: false },
     { id: 2, name: "Jane Doe", status: "Clocked In", locked: false },
@@ -12,9 +13,10 @@ const AdminTable = () => {
     { id: 4, name: "Mark Rodgers", status: "Break", locked: false },
   ]);
 
-  // Add a state for the search query
+  // State to manage the search query for filtering employees
   const [searchQuery, setSearchQuery] = useState("");
 
+  // Object mapping employee statuses to their corresponding background and text colors
   const statusColors = {
     "Clocked Out": "#FEEFF0", // red
     "Clocked In": "#EEF8F2", // green
@@ -29,7 +31,7 @@ const AdminTable = () => {
     Lunch: "#FFA114", // yellow
   };
 
-  // toggle employee lock status
+  // Function to toggle the lock status of an employee
   const toggleLock = (id) => {
     setEmployees((prevEmployees) =>
       prevEmployees.map((emp) =>
@@ -38,7 +40,7 @@ const AdminTable = () => {
     );
   };
 
-  // For "Lock All"/ "Unlock All" button
+  // Function to lock or unlock all employees based on their current lock status
   const handleLockAll = () => {
     const anyUnlocked = employees.some((emp) => !emp.locked);
     const action = anyUnlocked ? "lock" : "unlock";
@@ -53,6 +55,7 @@ const AdminTable = () => {
     }
   };
 
+  // Function to delete an employee after confirmation
   const deleteEmployee = (id) => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this employee?"
@@ -62,7 +65,7 @@ const AdminTable = () => {
     }
   };
 
-  // popup toggle function
+  // Function to toggle the visibility of a popup associated with an employee
   const myFunction = (empId) => {
     var popup = document.getElementById(`myPopup-${empId}`);
     if (popup) {
@@ -70,6 +73,7 @@ const AdminTable = () => {
     }
   };
 
+  // Renders the rows of the employee table, filtering based on the search query
   const renderRows = () => {
     return employees
       .filter((emp) =>
@@ -77,6 +81,7 @@ const AdminTable = () => {
       )
       .map((emp) => (
         <tr key={emp.id}>
+          {/* Employee name and popup trigger */}
           <td
             style={{
               display: "flex",
@@ -93,6 +98,7 @@ const AdminTable = () => {
               }}
             ></div>
           </td>
+          {/* Employee status with dynamic coloring */}
           <td>
             <div
               className="employee-status-select"
@@ -104,6 +110,7 @@ const AdminTable = () => {
               {emp.status}
             </div>
           </td>
+          {/* Lock/Unlock button */}
           <td>
             <button
               className="btn btn-link"
@@ -120,14 +127,15 @@ const AdminTable = () => {
                 background: "none",
               }}
             >
-              {emp.locked ? "Unlock" : "Lock"}
+              {emp.locked ? "Unlock" : "Lock"} {/*Changes button text based on the lock status*/}
             </button>
           </td>
           <td>
+            {/* Delete Button */}
             <button
               className="btn btn-link delete-btn"
               onClick={(e) => {
-                deleteEmployee(emp.id);
+              deleteEmployee(emp.id); 
               }}
             >
               <img
@@ -153,42 +161,44 @@ const AdminTable = () => {
       },
     ]);
   };
-
+// Main render for admintable component
   return (
     <div className="AdminDashboard_ParentBorder">
       <div className="AdminDashboardTable">
-        {/* input for adding a new employee */}
+        {/*Search input for adding a new employee */}
         <div className="AdminDashboardInputs">
           <AddEmployeeForm addEmployee={addEmployee} />
           {/* Search table */}
           <input
             className="AdminDashboard_SearchEmployee"
             type="text"
-            placeholder="  Search table"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="  Search table"  /* placeholder text for the search*/
+            value={searchQuery} /*  Binds the input value to the searchQuery state*/
+            onChange={(e) => setSearchQuery(e.target.value)} /* Updates the searchQuery state on input change*/
           />
         </div>
+        {/* Table for displaying employees */}
         <table className="table mt-3">
           <thead>
             <tr>
-              <th>Employee Name</th>
-              <th>Status</th>
-              <th>Access</th>
-              <th>Manage</th>
+              <th>Employee Name</th> {/*Column header for employee names */ }
+              <th>Status</th> {/* Column header for employee status*/}
+              <th>Access</th> {/* Column header for lock/unlock action*/}
+              <th>Manage</th> {/* Column header for delete action*/}
             </tr>
           </thead>
-          <tbody>{renderRows()}</tbody>
+          <tbody>{renderRows()}</tbody> {/* Calls renderRows to populate the table body with employee data*/}
           <tfoot>{/* Footer */}</tfoot>
         </table>
 
         {/* Bottom buttons */}
         <div className="AdminDashboard_BottomButtons">
+         {/* Button to lock or unlock all employees */}
           <button
             onClick={handleLockAll}
             className="AdminDashboard_LockAllButton"
           >
-            {employees.every((emp) => emp.locked) ? "Unlock All" : "Lock All"}
+            {employees.every((emp) => emp.locked) ? "Unlock All" : "Lock All"} {/* Changes button text based on the lock status of all employees */}
           </button>
         </div>
       </div>
@@ -196,6 +206,9 @@ const AdminTable = () => {
   );
 };
 
-export default AdminTable;
+export default AdminTable; // export admintable component
 
 //last updated 2/25 -Sierra
+
+
+
