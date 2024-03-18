@@ -25,7 +25,7 @@ const Tabs = () => {
               key={index}
               className={location.pathname.includes(tab.path) ? "active" : ""}
               label = {tab.label}
-              path={`/DefaultPage/${tab.path}`}
+              path={`/Home/${tab.path}`}
               onClick={() => handleTabClick(index)}
               isActive={index === activeTab}
               />
