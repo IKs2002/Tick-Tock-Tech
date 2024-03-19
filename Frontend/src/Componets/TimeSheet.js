@@ -233,9 +233,7 @@ function TimeSheet({ editable = false }) {
               <tr key={key}>
                 {/* Displaying each piece of data in its respective column */}
                 <td>{val.Day}</td>
-                <EditableTimeSheet editable={editable}>
-                  {val.Date}
-                </EditableTimeSheet>
+                <td>{val.Date}</td> 
                 <EditableTimeSheet editable={editable}>
                   {val.Clockin1}
                 </EditableTimeSheet>
@@ -300,7 +298,7 @@ function TimeSheet({ editable = false }) {
         <table>
           {/* Similar structure to the first timesheet table */}
           <tr>
-            <th>Day of the Week</th>
+            <th>Day</th>
             <th>Date</th>
             <th>Clock In</th>
             <th>Clock out</th>
@@ -319,9 +317,7 @@ function TimeSheet({ editable = false }) {
             return (
               <tr key={key}>
                 <td>{val.Day}</td>
-                <EditableTimeSheet editable={editable}>
-                  {val.Date}
-                </EditableTimeSheet>
+                 <td>{val.Date}</td> 
                 <EditableTimeSheet editable={editable}>
                   {val.Clockin1}
                 </EditableTimeSheet>
