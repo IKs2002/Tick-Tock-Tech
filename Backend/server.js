@@ -2,12 +2,11 @@ require("dotenv").config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const Timesheet = require('./models/timeSheetModel.js')
 const mongoose = require('mongoose');
 
 
 app.listen(5000, () => console.log("Server is running"));
-
+app.use(express.json());
 
 
 
