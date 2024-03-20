@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 const timesheetSchema = new mongoose.Schema({
     day: String,
@@ -5,6 +6,7 @@ const timesheetSchema = new mongoose.Schema({
     project: String,
     regular: Number,
     overtime: Number, 
+    employeeID: Number,
     clockIn1: String, 
     clockOut1: String, 
     clockIn2: String, 
@@ -13,4 +15,4 @@ const timesheetSchema = new mongoose.Schema({
     clockOut3: String
 });
 
-module.exports=mongoose.model('Timesheet', timesheetSchema)
+module.exports = mongoose.model('timeSheets', timesheetSchema);
