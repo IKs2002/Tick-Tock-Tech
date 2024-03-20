@@ -15,4 +15,4 @@ const timesheetSchema = new mongoose.Schema({
     clockOut3: String
 });
 
-module.exports = mongoose.model('Timesheet', timesheetSchema);
+module.exports = mongoose.model('timeSheets', timesheetSchema);
