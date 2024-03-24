@@ -81,7 +81,7 @@ const handleSubmit = (e) => {
           />
           {/* Input for employee's password, visibility toggles based on if a password is present */ }
           <input
-            type={form.password ? "text" : "password"}
+            type="password"
             name="password"
             placeholder="Password"
             value={form.password}

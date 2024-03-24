@@ -4,8 +4,10 @@ const userSchema = new mongoose.Schema({
   password: String,
   role: String,
   employeeID: Number,
-  firstName: Number,
+  firstName: String,
   lastName: String,
+  status: String,
+  accessLock: String
 });
 
 module.exports = mongoose.model("users", userSchema);

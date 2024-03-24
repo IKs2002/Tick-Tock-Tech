@@ -17,7 +17,6 @@ const createTimesheet = async (req, res, next) => {
     res.status(201).json({ Timesheet: newTimesheet.toObject({ getters: true }) });
 };
 
-exports.createTimesheet = createTimesheet;
 
 const getTimeData = async (req, res, next) => {
     const tid = req.params.tid;
@@ -39,7 +38,7 @@ const getTimeData = async (req, res, next) => {
     res.json({ timesheet: timesheet.toObject({ getters: true }) });
 };
 
-const updateTimeData = async (req, res, next) => {
+const updateTimeData = async (req, res, next) => { //Editing Timesheet 
     const timesheetId = req.params.tid;
     const updatedData = req.body;
 
@@ -47,13 +46,11 @@ const updateTimeData = async (req, res, next) => {
     try {
         existingTimesheet = await Timesheet.findById(timesheetId);
     } catch (err) {
-        err.status = 500;
-        return next(new Error("Failed to find the timesheet for updating."));
+        res.status(404).json({ message:"Failed to find the timesheet for updating."});
     }
 
     if (!existingTimesheet) {
-        err.status = 404;
-        return next(new Error("No timesheet found with the provided ID."));
+        res.status(404).json({ message:"No timesheet found with the provided ID."});
     }
 
     // Update fields
@@ -70,6 +67,24 @@ const updateTimeData = async (req, res, next) => {
     res.status(200).json({ timesheet: existingTimesheet.toObject({ getters: true }) });
 };
 
+// const deleteTimeData = async (req, res, next) => {
+//     const timesheetId = req.params.tid;
+
+//     try {
+//         const deletedTimesheet = await Timesheet.findByIdAndDelete(timesheetId);
+
+//         if (!deletedTimesheet) {
+//             res.status(404).json({ message:"No timesheet found with the provided ID."});
+//         }
+
+//         res.status(200).json({ message: "Timesheet deleted successfully." });
+//     } catch (err) {
+//         console.error(err);
+//         return next(new Error("Failed to delete the timesheet."));
+//     }
+// };
+
 exports.getTimeData = getTimeData;
 exports.createTimesheet = createTimesheet;
 exports.updateTimeData = updateTimeData;
+// exports.deleteTimeData = deleteTimeData;

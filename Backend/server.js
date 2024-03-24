@@ -1,40 +1,26 @@
-require('dotenv').config();
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const timesheetroutes = require("./routes/timesheet-routes.js");
-
+const userroutes = require("./routes/user-routes.js");
 const app = express();
 
 app.use(bodyParser.json());
-
-app.use('/api', timesheetroutes);
-
-
+app.use("/api/userData", userroutes);
+app.use("/api/timeData", timesheetroutes);
 
 mongoose
-  .connect(
-    process.env.URI
-  )
+  .connect(process.env.URI)
   .then(() => {
     app.listen(5000);
   })
-  .catch(err => {
+  .catch((err) => {
     console.log(err);
   });
-
-
-
-
-
-
-
 
 //Get request for Timesheet infomration
 //testing connection
 
-
-
 // Define the GET request endpoint for timesheet
-
