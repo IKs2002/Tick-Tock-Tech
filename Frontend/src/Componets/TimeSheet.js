@@ -4,99 +4,99 @@ import "./TimeSheet.css";
 //import DataTable from "react-data-table-component";
 
 // Sample data for timesheet entries
-const data = [
-  {
-    Day: "Monday",
-    Date: "## XXX ####",
-    Clockin1: "##:## AM",
-    Clockout1: "##:## AM",
-    Clockin2: "##:## AM",
-    Clockout2: "##:## AM",
-    Clockin3: "##:## AM",
-    Clockout3: "##:## AM",
-    Project: "XXXXXXXXXXXXXX",
-    Regular: "XX hrs",
-    Overtime: "XX hrs",
-  },
-  {
-    Day: "Tuesday",
-    Date: "## XXX ####",
-    Clockin1: "##:## AM",
-    Clockout1: "##:## AM",
-    Clockin2: "##:## AM",
-    Clockout2: "##:## AM",
-    Clockin3: "##:## AM",
-    Clockout3: "##:## AM",
-    Project: "XXXXXXXXXXXXXX",
-    Regular: "XX hrs",
-    Overtime: "XX hrs",
-  },
-  {
-    Day: "Wednesday",
-    Date: "## XXX ####",
-    Clockin1: "##:## AM",
-    Clockout1: "##:## AM",
-    Clockin2: "##:## AM",
-    Clockout2: "##:## AM",
-    Clockin3: "##:## AM",
-    Clockout3: "##:## AM",
-    Project: "XXXXXXXXXXXXXX",
-    Regular: "XX hrs",
-    Overtime: "XX hrs",
-  },
-  {
-    Day: "Thursday",
-    Date: "## XXX ####",
-    Clockin1: "##:## AM",
-    Clockout1: "##:## AM",
-    Clockin2: "##:## AM",
-    Clockout2: "##:## AM",
-    Clockin3: "##:## AM",
-    Clockout3: "##:## AM",
-    Project: "XXXXXXXXXXXXXX",
-    Regular: "XX hrs",
-    Overtime: "XX hrs",
-  },
-  {
-    Day: "Friday",
-    Date: "## XXX ####",
-    Clockin1: "##:## AM",
-    Clockout1: "##:## AM",
-    Clockin2: "##:## AM",
-    Clockout2: "##:## AM",
-    Clockin3: "##:## AM",
-    Clockout3: "##:## AM",
-    Project: "XXXXXXXXXXXXXX",
-    Regular: "XX hrs",
-    Overtime: "XX hrs",
-  },
-  {
-    Day: "Saturday",
-    Date: "## XXX ####",
-    Clockin1: "##:## AM",
-    Clockout1: "##:## AM",
-    Clockin2: "##:## AM",
-    Clockout2: "##:## AM",
-    Clockin3: "##:## AM",
-    Clockout3: "##:## AM",
-    Project: "XXXXXXXXXXXXXX",
-    Regular: "XX hrs",
-    Overtime: "XX hrs",
-  },
-  {
-    Day: "Sunday",
-    Date: "## XXX ####",
-    Clockin1: "##:## AM",
-    Clockout1: "##:## AM",
-    Clockin2: "##:## AM",
-    Clockout2: "##:## AM",
-    Clockin3: "##:## AM",
-    Clockout3: "##:## AM",
-    Project: "XXXXXXXXXXXXXX",
-    Regular: "XX hrs",
-    Overtime: "XX hrs",
-  },
-];
+// const data = [
+//   {
+//     Day: "Monday",
+//     Date: "## XXX ####",
+//     Clockin1: "##:## AM",
+//     Clockout1: "##:## AM",
+//     Clockin2: "##:## AM",
+//     Clockout2: "##:## AM",
+//     Clockin3: "##:## AM",
+//     Clockout3: "##:## AM",
+//     Project: "XXXXXXXXXXXXXX",
+//     Regular: "XX hrs",
+//     Overtime: "XX hrs",
+//   },
+//   {
+//     Day: "Tuesday",
+//     Date: "## XXX ####",
+//     Clockin1: "##:## AM",
+//     Clockout1: "##:## AM",
+//     Clockin2: "##:## AM",
+//     Clockout2: "##:## AM",
+//     Clockin3: "##:## AM",
+//     Clockout3: "##:## AM",
+//     Project: "XXXXXXXXXXXXXX",
+//     Regular: "XX hrs",
+//     Overtime: "XX hrs",
+//   },
+//   {
+//     Day: "Wednesday",
+//     Date: "## XXX ####",
+//     Clockin1: "##:## AM",
+//     Clockout1: "##:## AM",
+//     Clockin2: "##:## AM",
+//     Clockout2: "##:## AM",
+//     Clockin3: "##:## AM",
+//     Clockout3: "##:## AM",
+//     Project: "XXXXXXXXXXXXXX",
+//     Regular: "XX hrs",
+//     Overtime: "XX hrs",
+//   },
+//   {
+//     Day: "Thursday",
+//     Date: "## XXX ####",
+//     Clockin1: "##:## AM",
+//     Clockout1: "##:## AM",
+//     Clockin2: "##:## AM",
+//     Clockout2: "##:## AM",
+//     Clockin3: "##:## AM",
+//     Clockout3: "##:## AM",
+//     Project: "XXXXXXXXXXXXXX",
+//     Regular: "XX hrs",
+//     Overtime: "XX hrs",
+//   },
+//   {
+//     Day: "Friday",
+//     Date: "## XXX ####",
+//     Clockin1: "##:## AM",
+//     Clockout1: "##:## AM",
+//     Clockin2: "##:## AM",
+//     Clockout2: "##:## AM",
+//     Clockin3: "##:## AM",
+//     Clockout3: "##:## AM",
+//     Project: "XXXXXXXXXXXXXX",
+//     Regular: "XX hrs",
+//     Overtime: "XX hrs",
+//   },
+//   {
+//     Day: "Saturday",
+//     Date: "## XXX ####",
+//     Clockin1: "##:## AM",
+//     Clockout1: "##:## AM",
+//     Clockin2: "##:## AM",
+//     Clockout2: "##:## AM",
+//     Clockin3: "##:## AM",
+//     Clockout3: "##:## AM",
+//     Project: "XXXXXXXXXXXXXX",
+//     Regular: "XX hrs",
+//     Overtime: "XX hrs",
+//   },
+//   {
+//     Day: "Sunday",
+//     Date: "## XXX ####",
+//     Clockin1: "##:## AM",
+//     Clockout1: "##:## AM",
+//     Clockin2: "##:## AM",
+//     Clockout2: "##:## AM",
+//     Clockin3: "##:## AM",
+//     Clockout3: "##:## AM",
+//     Project: "XXXXXXXXXXXXXX",
+//     Regular: "XX hrs",
+//     Overtime: "XX hrs",
+//   },
+// ];
 
 // Duplicate of the above data
 const data1 = [
@@ -204,7 +204,15 @@ const EditableTimeSheet = ({ children, editable = true }) => (
   <td contentEditable={editable}>{children}</td>
 );
 
-function TimeSheet({ editable = false }) {
+function TimeSheet({ editable = false }, props) {
+  const data = [props]
+
+
+
+
+
+
+
   return (
     <div className="App">
       {/* Timesheet table section */}
@@ -232,39 +240,39 @@ function TimeSheet({ editable = false }) {
             return (
               <tr key={key}>
                 {/* Displaying each piece of data in its respective column */}
-                <td>{val.Day}</td>
+                <td>{val.day}</td>
                 <EditableTimeSheet editable={editable}>
-                  {val.Date}
+                  {val.date}
                 </EditableTimeSheet>
                 <EditableTimeSheet editable={editable}>
-                  {val.Clockin1}
+                  {val.clockIn1}
                 </EditableTimeSheet>
                 <EditableTimeSheet editable={editable}>
-                  {val.Clockout1}
-                </EditableTimeSheet>
-                <td></td>
-                <EditableTimeSheet editable={editable}>
-                  {val.Clockin2}
-                </EditableTimeSheet>
-                <EditableTimeSheet editable={editable}>
-                  {val.Clockout2}
+                  {val.clockOut1}
                 </EditableTimeSheet>
                 <td></td>
                 <EditableTimeSheet editable={editable}>
-                  {val.Clockin3}
+                  {val.clockIn2}
                 </EditableTimeSheet>
                 <EditableTimeSheet editable={editable}>
-                  {val.Clockout3}
+                  {val.clockOut2}
                 </EditableTimeSheet>
                 <td></td>
                 <EditableTimeSheet editable={editable}>
-                  {val.Project}
+                  {val.clockIn3}
                 </EditableTimeSheet>
                 <EditableTimeSheet editable={editable}>
-                  {val.Regular}
+                  {val.clockOut3}
+                </EditableTimeSheet>
+                <td></td>
+                <EditableTimeSheet editable={editable}>
+                  {val.project}
                 </EditableTimeSheet>
                 <EditableTimeSheet editable={editable}>
-                  {val.Overtime}
+                  {val.regular}
+                </EditableTimeSheet>
+                <EditableTimeSheet editable={editable}>
+                  {val.overtime}
                 </EditableTimeSheet>
               </tr>
             );
@@ -300,7 +308,7 @@ function TimeSheet({ editable = false }) {
         <table>
           {/* Similar structure to the first timesheet table */}
           <tr>
-            <th>Day of the Week</th>
+            <th>Day</th>
             <th>Date</th>
             <th>Clock In</th>
             <th>Clock out</th>

@@ -19,24 +19,37 @@ const createTimesheet = async (req, res, next) => {
 
 
 const getTimeData = async (req, res, next) => {
-    const tid = req.params.tid;
+    const uid = req.params.uid;
+    const startDate = req.params.startDate;
+    const endDate = req.params.endDate;
+     // Assuming these are passed as query parameters
 
-    console.log(tid);
-    
-    let timesheet;
+    // Convert startDate and endDate to Date objects to ensure proper querying
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    //end.setHours(23, 59, 59, 999); // Adjust to the end of the endDate to include all entries of that day
+
+    let timesheets;
     try {
-        timesheet = await Timesheet.findById(tid);
-    }
-    catch (err) {
+        timesheets = await Timesheet.find({ 
+            employeeID: uid, // Match the timesheet to the given userID
+            date: {
+                $gte: start, // Greater than or equal to startDate
+                $lte: end   // Less than or equal to endDate
+            }
+        });
+    } catch (err) {
         return next(err);
     }
 
-    if (!timesheet) {
-        return res.status(404).json({ message: "No timesheet found for this ID" });
+    if (!timesheets || timesheets.length === 0) {
+        return res.status(404).json({ message: "No timesheets found for this user within the specified date range." });
     }
 
-    res.json({ timesheet: timesheet.toObject({ getters: true }) });
+    // Preparing data for table population
+    res.status(200).json({ timesheets: timesheets.map(timesheet => timesheet.toObject({ getters: true })) });
 };
+
 
 const updateTimeData = async (req, res, next) => { //Editing Timesheet 
     const timesheetId = req.params.tid;
