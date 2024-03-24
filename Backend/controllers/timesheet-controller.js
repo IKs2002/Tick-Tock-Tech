@@ -39,5 +39,37 @@ const getTimeData = async (req, res, next) => {
     res.json({ timesheet: timesheet.toObject({ getters: true }) });
 };
 
+const updateTimeData = async (req, res, next) => {
+    const timesheetId = req.params.tid;
+    const updatedData = req.body;
+
+    let existingTimesheet;
+    try {
+        existingTimesheet = await Timesheet.findById(timesheetId);
+    } catch (err) {
+        err.status = 500;
+        return next(new Error("Failed to find the timesheet for updating."));
+    }
+
+    if (!existingTimesheet) {
+        err.status = 404;
+        return next(new Error("No timesheet found with the provided ID."));
+    }
+
+    // Update fields
+    for (let key in updatedData) {
+        existingTimesheet[key] = updatedData[key];
+    }
+
+    try {
+        await existingTimesheet.save();
+    } catch (err) {
+        return next(new Error("Failed to update the timesheet."));
+    }
+
+    res.status(200).json({ timesheet: existingTimesheet.toObject({ getters: true }) });
+};
+
 exports.getTimeData = getTimeData;
 exports.createTimesheet = createTimesheet;
+exports.updateTimeData = updateTimeData;
