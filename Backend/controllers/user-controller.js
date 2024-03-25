@@ -34,9 +34,11 @@ const getUserData = async (req, res, next) => {
     res.status(200).json({ user: user.toObject({ getters: true }) });
   };
   
-const updateUserData = async (req, res, next) =>{
-    
-}
+// const updateUserData = async (req, res, next) =>{
+//     try{
+
+//     }
+// }
 
 const deleteUserData = async (req, res, next) => {
      const uid = req.params.uid;
