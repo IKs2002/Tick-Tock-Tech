@@ -204,9 +204,9 @@ const EditableTimeSheet = ({ children, editable = true }) => (
   <td contentEditable={editable}>{children}</td>
 );
 
-function TimeSheet({ editable = false }, props) {
-  const data = [props]
-
+function TimeSheet({ editable = false,  timeData }) {
+  const data = [timeData]
+  console.log(data);
 
 
 

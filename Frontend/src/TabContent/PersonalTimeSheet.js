@@ -6,6 +6,7 @@ import { startOfWeek, addDays, format as formatDate } from "date-fns";
 import moment from "moment";
 
 const PersonalTimeSheet = () => {
+  let data;
   const initialWeekStart = startOfWeek(new Date(), { weekStartsOn: 1 });
   const initialWeekEnd = addDays(initialWeekStart, 13);
 
@@ -31,11 +32,13 @@ const PersonalTimeSheet = () => {
     console.log(weeks); // For example, log the new weeks to the console
   };
   const uid = 12345;
+  ;
   const fetchTimesheetData = async (uid, firstWeekStart, secondWeekEnd) => {
     const url = `http://localhost:5000/api/timeData/get/uid=${uid}&startDate=${firstWeekStart}&endDate=${secondWeekEnd}`;
-      
+
     const response = await fetch(url, {
       method: "GET",
+      mode: "cors",
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
@@ -50,8 +53,7 @@ const PersonalTimeSheet = () => {
     }
   };
 
-  let data = fetchTimesheetData();
-  console.log(data);
+  
   var name = "Employee Name";
 
   // Format dates before logging or passing them to other components
@@ -67,6 +69,8 @@ const PersonalTimeSheet = () => {
     name + " " + formattedFirstWeekStart + " through " + formattedSecondWeekEnd
   );
 
+  data = fetchTimesheetData(uid, formattedFirstWeekStart, formattedSecondWeekEnd);
+  console.log(data);
   // ...
 
   return (
