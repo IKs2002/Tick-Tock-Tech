@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import SaveAsPDFButton from "../Componets/SaveAsPDFButton";
 import WeekPicker from "../Componets/WeekPicker.js";
 import TimeSheet from "../Componets/TimeSheet.js";
@@ -6,33 +6,26 @@ import { startOfWeek, addDays, format as formatDate } from "date-fns";
 import moment from "moment";
 
 const PersonalTimeSheet = () => {
-  let data;
   const initialWeekStart = startOfWeek(new Date(), { weekStartsOn: 1 });
   const initialWeekEnd = addDays(initialWeekStart, 13);
 
   const initialFirstWeekStart = moment(initialWeekStart).startOf("day");
   const initialSecondWeekEnd = moment(initialWeekEnd).endOf("day");
 
-  const [firstWeekStart, setFirstWeekStart] = useState(
-    initialFirstWeekStart.toDate()
-  );
-  const [secondWeekEnd, setSecondWeekEnd] = useState(
-    initialSecondWeekEnd.toDate()
-  );
+  const [firstWeekStart, setFirstWeekStart] = useState(initialFirstWeekStart.toDate());
+  const [secondWeekEnd, setSecondWeekEnd] = useState(initialSecondWeekEnd.toDate());
+  const [timeSheetData, setTimeSheetData] = useState([]);
 
-  // Define the handleWeekChange function
   const handleWeekChange = (weeks) => {
     const newFirstWeekStart = moment(weeks.beginning.firstWeekStart).toDate();
     const newSecondWeekEnd = moment(weeks.ending.secondWeekEnd).toDate();
 
     setFirstWeekStart(newFirstWeekStart);
     setSecondWeekEnd(newSecondWeekEnd);
-
-    // Implement what should happen when weeks change
-    console.log(weeks); // For example, log the new weeks to the console
   };
+
   const uid = 12345;
-  ;
+
   const fetchTimesheetData = async (uid, firstWeekStart, secondWeekEnd) => {
     const url = `http://localhost:5000/api/timeData/get/uid=${uid}&startDate=${firstWeekStart}&endDate=${secondWeekEnd}`;
 
@@ -48,30 +41,30 @@ const PersonalTimeSheet = () => {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     } else {
-      data = await response.json();
-      return data;
+      return await response.json();
     }
   };
 
-  
-  var name = "Employee Name";
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchTimesheetData(uid, formattedFirstWeekStart, formattedSecondWeekEnd);
+        if (data && data.timesheets) {
+          setTimeSheetData(data.timesheets);
+        }
+      } catch (error) {
+        console.error("Failed to fetch timesheet data:", error);
+      }
+    };
 
-  // Format dates before logging or passing them to other components
-  const formattedFirstWeekStart = firstWeekStart
-    ? formatDate(firstWeekStart, "MM-dd-yy")
-    : null;
-  const formattedSecondWeekEnd = secondWeekEnd
-    ? formatDate(secondWeekEnd, "MM-dd-yy")
-    : null;
+    fetchData();
+  }, [uid, firstWeekStart, secondWeekEnd]);
 
-  let docToPrint = useRef(); // Needs to be in every page for save-as-pdf
-  console.log(
-    name + " " + formattedFirstWeekStart + " through " + formattedSecondWeekEnd
-  );
+  const name = "Employee Name";
+  const formattedFirstWeekStart = firstWeekStart ? formatDate(firstWeekStart, "MM-dd-yy") : null;
+  const formattedSecondWeekEnd = secondWeekEnd ? formatDate(secondWeekEnd, "MM-dd-yy") : null;
 
-  data = fetchTimesheetData(uid, formattedFirstWeekStart, formattedSecondWeekEnd);
-  console.log(data);
-  // ...
+  let docToPrint = useRef();
 
   return (
     <div>
@@ -85,14 +78,12 @@ const PersonalTimeSheet = () => {
         <div>
           <WeekPicker onChange={handleWeekChange} />
         </div>
-
         <div>
           <label className="EmpName">Employee Name</label>
         </div>
         <div>
-          <TimeSheet timeData={data} />
+          <TimeSheet timeData={timeSheetData} />
         </div>
-        {/* Other content for Personal Timesheet can go here */}
       </div>
     </div>
   );
