@@ -1,6 +1,7 @@
 import React from "react";
 import "./TimeSheet.css";
-import {format as formatDate } from "date-fns";
+import { format as formatDate } from "date-fns";
+import moment from "moment";
 
 //import moment from 'moment' //we will need this to switch between 24 horu and AM/PM
 //import DataTable from "react-data-table-component";
@@ -206,7 +207,14 @@ const EditableTimeSheet = ({ children, editable = true }) => (
   <td contentEditable={editable}>{children}</td>
 );
 
-function TimeSheet({ editable = false,  timeData }) {
+function TimeSheet({ editable = false, timeData }) {
+  // Calculate the midpoint of the timeData array
+  const midpoint = Math.ceil(timeData.length / 2);
+
+  // Split the timeData array into two halves
+  const firstHalf = timeData.slice(0, midpoint);
+  const secondHalf = timeData.slice(midpoint);
+
   console.log(timeData);
   return (
     <div className="App">
@@ -231,14 +239,13 @@ function TimeSheet({ editable = false,  timeData }) {
             <th>Overtime</th>
           </tr>
           {/* Mapping data to table rows */}
-          {timeData.map((val, key) => {
+          {firstHalf.map((val, key) => {
             return (
               <tr key={key}>
                 {/* Displaying each piece of data in its respective column */}
                 <td>{val.day}</td>
                 <EditableTimeSheet editable={editable}>
-                  {formatDate(val.date, "MM-dd-yy")
-}
+                  {moment.utc(val.date).format("MM-DD-YY")}
                 </EditableTimeSheet>
                 <EditableTimeSheet editable={editable}>
                   {val.clockIn1}
@@ -319,42 +326,42 @@ function TimeSheet({ editable = false,  timeData }) {
             <th>Regular</th>
             <th>Overtime</th>
           </tr>
-          {data1.map((val, key) => {
+          {secondHalf.map((val, key) => {
             return (
               <tr key={key}>
-                <td>{val.Day}</td>
+                <td>{val.day}</td>
                 <EditableTimeSheet editable={editable}>
-                  {val.Date}
+                  {moment.utc(val.date).format("MM-DD-YY")}
                 </EditableTimeSheet>
                 <EditableTimeSheet editable={editable}>
-                  {val.Clockin1}
+                  {val.clockIn1}
                 </EditableTimeSheet>
                 <EditableTimeSheet editable={editable}>
-                  {val.Clockout1}
-                </EditableTimeSheet>
-                <td></td>
-                <EditableTimeSheet editable={editable}>
-                  {val.Clockin2}
-                </EditableTimeSheet>
-                <EditableTimeSheet editable={editable}>
-                  {val.Clockout2}
+                  {val.clockOut1}
                 </EditableTimeSheet>
                 <td></td>
                 <EditableTimeSheet editable={editable}>
-                  {val.Clockin3}
+                  {val.clockIn2}
                 </EditableTimeSheet>
                 <EditableTimeSheet editable={editable}>
-                  {val.Clockout3}
+                  {val.clockOut2}
                 </EditableTimeSheet>
                 <td></td>
                 <EditableTimeSheet editable={editable}>
-                  {val.Project}
+                  {val.clockIn3}
                 </EditableTimeSheet>
                 <EditableTimeSheet editable={editable}>
-                  {val.Regular}
+                  {val.clockOut3}
+                </EditableTimeSheet>
+                <td></td>
+                <EditableTimeSheet editable={editable}>
+                  {val.project}
                 </EditableTimeSheet>
                 <EditableTimeSheet editable={editable}>
-                  {val.Overtime}
+                  {val.regular}
+                </EditableTimeSheet>
+                <EditableTimeSheet editable={editable}>
+                  {val.overtime}
                 </EditableTimeSheet>
               </tr>
             );

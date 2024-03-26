@@ -17,9 +17,9 @@ const PersonalTimeSheet = () => {
   const [timeSheetData, setTimeSheetData] = useState([]);
 
   const handleWeekChange = (weeks) => {
-    const newFirstWeekStart = moment(weeks.beginning.firstWeekStart).toDate();
-    const newSecondWeekEnd = moment(weeks.ending.secondWeekEnd).toDate();
-
+    const newFirstWeekStart = moment.utc(weeks.beginning.firstWeekStart).startOf("day").toDate();
+    const newSecondWeekEnd = moment.utc(weeks.ending.secondWeekEnd).endOf("day").toDate();
+  
     setFirstWeekStart(newFirstWeekStart);
     setSecondWeekEnd(newSecondWeekEnd);
   };
