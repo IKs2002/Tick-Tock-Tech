@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { startOfWeek, addWeeks, subWeeks, format, addDays } from 'date-fns';
+import { startOfWeek, addWeeks, subWeeks, format, addDays, parseISO } from 'date-fns';
 import styles from './WeekPicker.module.css'; // Import the CSS module
 
 const WeekPicker = ({ onChange }) => {
-  const [selectedDate, setSelectedDate] = useState(new Date(), 1); // Start one week ahead
+  const [selectedDate, setSelectedDate] = useState(parseISO("2024-03-18"));
 
   const updateWeeks = (newDate) => {
     setSelectedDate(newDate);
