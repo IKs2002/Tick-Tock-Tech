@@ -3,7 +3,7 @@ const router = express.Router();
 
 const usercontroller = require("../controllers/user-controller"); 
 
-router.post("/create",usercontroller.createUser); // Create user
+router.post("/post",usercontroller.createUser); // Create user
 
 router.get("/getuser/:uid", usercontroller.getUserData ); // Read user
 

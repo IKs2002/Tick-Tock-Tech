@@ -1,13 +1,17 @@
 const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
-  userName: String,
-  password: String,
-  role: String,
-  employeeID: Number,
-  firstName: String,
-  lastName: String,
-  status: String,
-  accessLock: String
+  name:{type: String, required: true},
+  email: {
+    type: String,
+    unique: true,
+    required: true,
+  },
+  password:{type: String, required: true,},
+  // role: String,
+  // employeeID: Number,
+  status:{type: String, default:'',},
+  accessLock:{type: String, default:'Unlocked'}
+  
 });
 
 module.exports = mongoose.model("users", userSchema);

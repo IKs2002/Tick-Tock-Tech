@@ -1,19 +1,22 @@
 import React, { useState } from "react";
-import { v4 as uuidv4 } from 'uuid'; // Import uuidv4 from the uuid library
+import { v4 as uuidv4 } from "uuid"; // Import uuidv4 from the uuid library
 import "./AddEmployeeForm.css";
 import Modal from "react-modal";
 
 // Component for adding a new employee, receives addEmployee function and initialName as props
 const AddEmployeeForm = ({ addEmployee }) => {
   // Function to generate a random password
-const generateRandomPassword = () => {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
-  let password = '';
-  for (let i = 0; i < 18; i++) {
-    password += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return password;
-};
+  const generateRandomPassword = () => {
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+    let password = "";
+    for (let i = 0; i < 18; i++) {
+      password += characters.charAt(
+        Math.floor(Math.random() * characters.length)
+      );
+    }
+    return password;
+  };
 
   // State for managing form inputs and modal visibility
   const [form, setForm] = useState({
@@ -31,13 +34,39 @@ const generateRandomPassword = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-// Inside the handleSubmit function
-const handleSubmit = (e) => {
-  e.preventDefault();
-  setForm({ id: uuidv4(), name: "", email: "", password: generateRandomPassword() });
-  addEmployee(form);
-  setModalIsOpen(false);
-};
+  // Inside the handleSubmit function
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch(`http://localhost:5000/api/userData/post/`, {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(form),
+    })
+      .then((response) => {
+        if (response.headers.get("Content-Type").includes("application/json")) {
+          return response.json();
+        } else {
+          throw new Error("Received non-JSON response from server");
+        }
+      })
+      .then((data) => {
+        console.log("Success:", data);
+        setForm({
+          id: uuidv4(),
+          name: "",
+          email: "",
+          password: generateRandomPassword(),
+        });
+        setModalIsOpen(false);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
   // Renders the button to open the modal and the modal itself, which contains the form for adding a new employee
   return (
     <div>
@@ -68,7 +97,7 @@ const handleSubmit = (e) => {
             autocomplete="off"
             className="employee-form-field"
           />
-          {/* Input for employee's email */ }
+          {/* Input for employee's email */}
           <input
             type="email"
             name="email"
@@ -79,7 +108,7 @@ const handleSubmit = (e) => {
             onChange={handleInputChange}
             className="employee-form-field"
           />
-          {/* Input for employee's password, visibility toggles based on if a password is present */ }
+          {/* Input for employee's password, visibility toggles based on if a password is present */}
           <input
             type="password"
             name="password"
