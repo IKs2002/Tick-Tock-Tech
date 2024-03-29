@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AdminTable.css";
 import AddEmployeeForm from "./AddEmployeeForm";
 import DeleteButton from "../Photos/AdminDashboardButtons/DeleteButton.png";
@@ -7,10 +7,6 @@ import DeleteButton from "../Photos/AdminDashboardButtons/DeleteButton.png";
 const AdminTable = () => {
   // State to store and manage the list of employees
   const [employees, setEmployees] = useState([
-    { id: 1, name: "John Smith", status: "Clocked Out", locked: false },
-    { id: 2, name: "Jane Doe", status: "Clocked In", locked: false },
-    { id: 3, name: "Emily Johnson", status: "Meal", locked: false },
-    { id: 4, name: "Mark Rodgers", status: "Break", locked: false },
   ]);
 
   // State to manage the search query for filtering employees
@@ -127,7 +123,8 @@ const AdminTable = () => {
                 background: "none",
               }}
             >
-              {emp.locked ? "Unlock" : "Lock"} {/*Changes button text based on the lock status*/}
+              {emp.locked ? "Unlock" : "Lock"}{" "}
+              {/*Changes button text based on the lock status*/}
             </button>
           </td>
           <td>
@@ -135,7 +132,7 @@ const AdminTable = () => {
             <button
               className="btn btn-link delete-btn"
               onClick={(e) => {
-              deleteEmployee(emp.id); 
+                deleteEmployee(emp.id);
               }}
             >
               <img
@@ -149,28 +146,52 @@ const AdminTable = () => {
       ));
   };
 
-// Add new employees
-const addEmployee = (newEmployee) => {
-  console.log("Added employee:");
-  console.log("- ID:", newEmployee.id);
-  console.log("- Name:", newEmployee.name);
-  console.log("- Email:", newEmployee.email);
-  console.log("- Password:", newEmployee.password);
+  // Add new employees
+  const addEmployee = (newEmployee) => {
+    console.log("Added employee:");
+    console.log("- ID:", newEmployee.id);
+    console.log("- Name:", newEmployee.name);
+    console.log("- Email:", newEmployee.email);
+    console.log("- Password:", newEmployee.password);
 
-  setEmployees((prevEmployees) => [
-    ...prevEmployees,
-    {
-      id: prevEmployees.length + 1,
-      name: newEmployee.name,
-      status: "Clocked Out",
-      locked: false,
-    },
-  ]);
+    setEmployees((prevEmployees) => [
+      ...prevEmployees,
+      {
+        id: prevEmployees.length + 1,
+        name: newEmployee.name,
+        status: "Clocked Out",
+        locked: false,
+      },
+    ]);
 
-  console.log("Employee added successfully:", newEmployee);
-};
+    console.log("Employee added successfully:", newEmployee);
+  };
 
-// Main render for admintable component
+  const fetchAllEmployees = () => {
+    fetch("http://localhost:5000/api/userData/getAll")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        const formattedEmployees = data.map((emp) => ({
+          id: emp.id,
+          name: emp.name,
+          status: "Clocked Out",
+          locked: false,
+        }));
+        setEmployees(formattedEmployees);
+      })
+      .catch((error) => console.error("Error:", error));
+  };
+
+  useEffect(() => {
+    fetchAllEmployees();
+  }, []);
+
+  // Main render for admintable component
   return (
     <div className="AdminDashboard_ParentBorder">
       <div className="AdminDashboardTable">
@@ -181,33 +202,39 @@ const addEmployee = (newEmployee) => {
           <input
             className="AdminDashboard_SearchEmployee"
             type="text"
-            placeholder="  Search table"  /* placeholder text for the search*/
-            value={searchQuery} /*  Binds the input value to the searchQuery state*/
-            onChange={(e) => setSearchQuery(e.target.value)} /* Updates the searchQuery state on input change*/
+            placeholder="  Search table" /* placeholder text for the search*/
+            value={
+              searchQuery
+            } /*  Binds the input value to the searchQuery state*/
+            onChange={(e) =>
+              setSearchQuery(e.target.value)
+            } /* Updates the searchQuery state on input change*/
           />
         </div>
         {/* Table for displaying employees */}
         <table className="table mt-3">
           <thead>
             <tr>
-              <th>Employee Name</th> {/*Column header for employee names */ }
+              <th>Employee Name</th> {/*Column header for employee names */}
               <th>Status</th> {/* Column header for employee status*/}
               <th>Access</th> {/* Column header for lock/unlock action*/}
               <th>Manage</th> {/* Column header for delete action*/}
             </tr>
           </thead>
-          <tbody>{renderRows()}</tbody> {/* Calls renderRows to populate the table body with employee data*/}
+          <tbody>{renderRows()}</tbody>{" "}
+          {/* Calls renderRows to populate the table body with employee data*/}
           <tfoot>{/* Footer */}</tfoot>
         </table>
 
         {/* Bottom buttons */}
         <div className="AdminDashboard_BottomButtons">
-         {/* Button to lock or unlock all employees */}
+          {/* Button to lock or unlock all employees */}
           <button
             onClick={handleLockAll}
             className="AdminDashboard_LockAllButton"
           >
-            {employees.every((emp) => emp.locked) ? "Unlock All" : "Lock All"} {/* Changes button text based on the lock status of all employees */}
+            {employees.every((emp) => emp.locked) ? "Unlock All" : "Lock All"}{" "}
+            {/* Changes button text based on the lock status of all employees */}
           </button>
         </div>
       </div>
@@ -218,6 +245,3 @@ const addEmployee = (newEmployee) => {
 export default AdminTable; // export admintable component
 
 //last updated 2/25 -Sierra
-
-
-

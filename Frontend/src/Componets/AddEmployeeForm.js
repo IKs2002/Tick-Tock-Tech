@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid"; // Import uuidv4 from the uuid library
 import "./AddEmployeeForm.css";
 import Modal from "react-modal";
 
@@ -20,7 +19,7 @@ const AddEmployeeForm = ({ addEmployee }) => {
 
   // State for managing form inputs and modal visibility
   const [form, setForm] = useState({
-    id: uuidv4(), // Import uuidv4 from a library like uuid
+    id: "", // Import uuidv4 from a library like uuid
     name: "",
     email: "",
     password: generateRandomPassword(), // Update password with a random password
@@ -54,9 +53,16 @@ const AddEmployeeForm = ({ addEmployee }) => {
         }
       })
       .then((data) => {
-        console.log("Success:", data);
+        const newEmployee = {
+          id: data.user._id,
+          name: data.user.name,
+          status: "Clocked Out",
+          locked: false,
+        };
+        addEmployee(newEmployee);
+
         setForm({
-          id: uuidv4(),
+          id: "",
           name: "",
           email: "",
           password: generateRandomPassword(),

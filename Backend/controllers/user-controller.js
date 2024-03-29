@@ -17,23 +17,48 @@ const createUser = async (req, res, next) => {
 };
 
 const getUserData = async (req, res, next) => {
-    const uid = req.params.uid;
-  
-    console.log(uid);
-  
-    let user;
-    try {
-      user = await User.findOne({employeeID: uid});
-    } catch (err) {
-      return next(err);
-    }
-  
-    if (!user) {
-      return res.status(404).json({ message: "No user found for this ID" });
-    }
-    res.status(200).json({ user: user.toObject({ getters: true }) });
-  };
-  
+  const uid = req.params.uid;
+
+  console.log(uid);
+
+  let user;
+  try {
+    user = await User.findOne({ employeeID: uid });
+  } catch (err) {
+    return next(err);
+  }
+
+  if (!user) {
+    return res.status(404).json({ message: "No user found for this ID" });
+  }
+  res.status(200).json({
+    user: {
+      id: user._id,
+      name: user.name,
+      status: "Clocked Out",
+      locked: false,
+    },
+  });
+};
+
+const getAllUsers = async (req, res, next) => {
+  try {
+    const users = await User.find();
+
+    const mapUsers = users.map((user) => ({
+      id: user._id,
+      name: user.name,
+      status: "Clocked Out",
+      locked: false,
+    }));
+
+    res.status(200).json(mapUsers);
+  } catch (err) {
+    console.error(err);
+    return next(err);
+  }
+};
+
 // const updateUserData = async (req, res, next) =>{
 //     try{
 
@@ -41,22 +66,25 @@ const getUserData = async (req, res, next) => {
 // }
 
 const deleteUserData = async (req, res, next) => {
-     const uid = req.params.uid;
-     let user;
-     try {
-         const deletedUser = await User.findOneAndDelete({employeeID: uid});
+  const uid = req.params.uid;
+  let user;
+  try {
+    const deletedUser = await User.findOneAndDelete({ employeeID: uid });
 
-         if (!deletedUser) {
-             return res.status(404).json({ message:"No user found with the provided ID."});
-         }
+    if (!deletedUser) {
+      return res
+        .status(404)
+        .json({ message: "No user found with the provided ID." });
+    }
 
-         res.status(200).json({ message: "User deleted successfully." });
-     } catch (err) {
-         console.error(err);
-         return next(new Error("Failed to delete the User."));
-     }
- };
+    res.status(200).json({ message: "User deleted successfully." });
+  } catch (err) {
+    console.error(err);
+    return next(new Error("Failed to delete the User."));
+  }
+};
 
 exports.createUser = createUser;
 exports.getUserData = getUserData;
+exports.getAllUsers = getAllUsers;
 exports.deleteUserData = deleteUserData;
