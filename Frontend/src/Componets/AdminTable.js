@@ -28,12 +28,25 @@ const AdminTable = ({ navigateToTimesheetEdit }) => {
   };
 
   // Function to toggle the lock status of an employee
-  const toggleLock = (id) => {
-    setEmployees((prevEmployees) =>
-      prevEmployees.map((emp) =>
-        emp.id === id ? { ...emp, locked: !emp.locked } : emp
-      )
-    );
+  const toggleLock = (email) => {
+    fetch(`http://localhost:5000/api/userData/update/accessLock/${encodeURIComponent(email)}`, {
+      method: "PATCH",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.message);
+        setEmployees((prevEmployees) =>
+          prevEmployees.map((emp) =>
+            emp.id === email ? { ...emp, locked: data.accessLock === 'Locked' } : emp
+          )
+        );
+      })
+      .then(() => {
+        fetchAllEmployees();
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   };
 
   // Function to lock or unlock all employees based on their current lock status
@@ -52,12 +65,25 @@ const AdminTable = ({ navigateToTimesheetEdit }) => {
   };
 
   // Function to delete an employee after confirmation
-  const deleteEmployee = (id) => {
+  const deleteEmployee = (email) => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this employee?"
     );
     if (confirmed) {
-      setEmployees(employees.filter((emp) => emp.id !== id));
+      const queryParameter = `?email=${encodeURIComponent(email)}`;
+      fetch(`http://localhost:5000/api/userData/delete${queryParameter}`, {
+        method: "DELETE",
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to delete the user");
+          }
+          return response.json();
+        })
+        .then(() => {
+          fetchAllEmployees();
+        })
+        .catch((error) => console.error("Error:", error));
     }
   };
 
@@ -70,14 +96,12 @@ const AdminTable = ({ navigateToTimesheetEdit }) => {
   };
 
   // Use React Router's useHistory hook to get access to the history object
-  
 
   // Modified onClick handler to navigate to another page
   // Function to navigate to the TimesheetEdit page with employee ID
-  const navigateToEmployeePage = (empId,empName) => {
-  navigateToTimesheetEdit(empId,empName);
+  const navigateToEmployeePage = (empId, empName) => {
+    navigateToTimesheetEdit(empId, empName);
   };
-
 
   // Renders the rows of the employee table, filtering based on the search query
   const renderRows = () => {
@@ -193,7 +217,7 @@ const AdminTable = ({ navigateToTimesheetEdit }) => {
           id: emp.id,
           name: emp.name,
           status: "Clocked Out",
-          locked: false,
+          locked: emp.accessLock === 'Locked',
         }));
         setEmployees(formattedEmployees);
       })

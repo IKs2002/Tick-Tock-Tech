@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const User = require("../models/User");
+const InactiveUser = require("../models/InactiveUser");
 
 const createUser = async (req, res, next) => {
   const userData = req.body;
@@ -17,13 +18,9 @@ const createUser = async (req, res, next) => {
 };
 
 const getUserData = async (req, res, next) => {
-  const uid = req.params.uid;
-
-  console.log(uid);
-
   let user;
   try {
-    user = await User.findOne({ employeeID: uid });
+    user = await User.findOne({ employeeID: email });
   } catch (err) {
     return next(err);
   }
@@ -33,7 +30,7 @@ const getUserData = async (req, res, next) => {
   }
   res.status(200).json({
     user: {
-      id: user._id,
+      id: user.email,
       name: user.name,
       status: "Clocked Out",
       locked: false,
@@ -59,32 +56,52 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
-// const updateUserData = async (req, res, next) =>{
-//     try{
-
-//     }
-// }
-
-const deleteUserData = async (req, res, next) => {
-  const uid = req.params.uid;
-  let user;
+const updateAccessLock = async (req, res, next) => {
+  const email = req.params.email;
   try {
-    const deletedUser = await User.findOneAndDelete({ employeeID: uid });
-
-    if (!deletedUser) {
-      return res
-        .status(404)
-        .json({ message: "No user found with the provided ID." });
+    let user = await User.findOne({ email: email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
-
-    res.status(200).json({ message: "User deleted successfully." });
+    user.accessLock = user.accessLock === 'Locked' ? 'Unlocked' : 'Locked';
+    await user.save();
+    res.status(200).json({ message: "User access lock status updated", accessLock: user.accessLock });
   } catch (err) {
     console.error(err);
-    return next(new Error("Failed to delete the User."));
+    return next(err);
   }
 };
+
+// Don't forget to expose this function in your exports
+exports.updateAccessLock = updateAccessLock;
+
+const deleteUserData = async (req, res, next) => {
+  const email = req.query.email;
+  try {
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      return res.status(404).json({ message: "No user found with the provided email." });
+    }
+  
+    const inactiveUser = new InactiveUser({
+      ...user.toObject(),
+      email: `${email}_inactive`,
+      accessLock: 'Locked',
+    });
+    await inactiveUser.save();
+    
+    await User.deleteOne({ email: email });
+
+    res.status(200).json({ message: "User marked as inactive successfully." });
+  } catch (err) {
+    console.error(err);
+    return next(new Error("Failed to mark the user as inactive."));
+  }
+};
+
 
 exports.createUser = createUser;
 exports.getUserData = getUserData;
 exports.getAllUsers = getAllUsers;
+exports.updateaccessLock = updateAccessLock;
 exports.deleteUserData = deleteUserData;
