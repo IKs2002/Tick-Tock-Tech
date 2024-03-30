@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
+//import { useHistory } from "react-router-dom"; // Import useHistory from react-router-dom
 import "./AdminTable.css";
 import AddEmployeeForm from "./AddEmployeeForm";
 import DeleteButton from "../Photos/AdminDashboardButtons/DeleteButton.png";
 
 // Defines the AdminTable component responsible for displaying and managing employees in the admin dashboard
-const AdminTable = () => {
+const AdminTable = ({ navigateToTimesheetEdit }) => {
   // State to store and manage the list of employees
-  const [employees, setEmployees] = useState([
-  ]);
+  const [employees, setEmployees] = useState([]);
 
   // State to manage the search query for filtering employees
   const [searchQuery, setSearchQuery] = useState("");
@@ -69,6 +69,16 @@ const AdminTable = () => {
     }
   };
 
+  // Use React Router's useHistory hook to get access to the history object
+  
+
+  // Modified onClick handler to navigate to another page
+  // Function to navigate to the TimesheetEdit page with employee ID
+  const navigateToEmployeePage = (empId,empName) => {
+  navigateToTimesheetEdit(empId,empName);
+  };
+
+
   // Renders the rows of the employee table, filtering based on the search query
   const renderRows = () => {
     return employees
@@ -79,11 +89,14 @@ const AdminTable = () => {
         <tr key={emp.id}>
           {/* Employee name and popup trigger */}
           <td
+            onClick={() => navigateToEmployeePage(emp.id, emp.name)} // Modified onClick handler
             style={{
               display: "flex",
               alignItems: "center",
               marginRight: "-0.745%",
+              cursor: "pointer", // Change cursor to pointer when hovering over the cell
             }}
+            className="clickable-cell" // Add a class for additional styling
           >
             <div className="employee-name">{emp.name}</div>
             <div

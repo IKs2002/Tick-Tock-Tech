@@ -11,7 +11,7 @@ const Tabs = () => {
     { label: "Timesheet Viewing", path: "TimesheetViewing" },
     { label: "Timesheet Editing", path: "TimesheetEdit" },
   ];
-  const [activeTab, setActiveTab] = useState(1);
+  const [activeTab, setActiveTab] = useState(0);
 
   const handleTabClick = (index) => {
     setActiveTab(index);
@@ -21,14 +21,14 @@ const Tabs = () => {
     <div className="tabs-container">
       <div className="tabs">
         {tabs.map((tab, index) => (
-            <Tab
-              key={index}
-              className={location.pathname.includes(tab.path) ? "active" : ""}
-              label = {tab.label}
-              path={`/Home/${tab.path}`}
-              onClick={() => handleTabClick(index)}
-              isActive={index === activeTab}
-              />
+          <Tab
+            key={index}
+            className={location.pathname.includes(tab.path) ? "active" : ""}
+            label={tab.label}
+            path={`/Home/${tab.path}`}
+            onClick={() => handleTabClick(index)}
+            isActive={index === activeTab}
+          />
         ))}
       </div>
     </div>

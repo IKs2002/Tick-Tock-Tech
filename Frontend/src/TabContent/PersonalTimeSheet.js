@@ -24,7 +24,7 @@ const PersonalTimeSheet = () => {
     setSecondWeekEnd(newSecondWeekEnd);
   };
 
-  const uid = 12345;
+  const uid = 'test@ddf.com';
 
   const fetchTimesheetData = async (uid, firstWeekStart, secondWeekEnd) => {
     const url = `http://localhost:5000/api/timeData/get/uid=${uid}&startDate=${firstWeekStart}&endDate=${secondWeekEnd}`;

@@ -1,11 +1,12 @@
 import React from "react";
 import AdminTable from "../Componets/AdminTable.js";
-const AdminDashboard= () => {
+
+const AdminDashboard = ({ navigateToTimesheetEdit }) => {
   // Define the handleWeekChange function
 
   return (
     <div> 
-      <AdminTable />
+      <AdminTable navigateToTimesheetEdit={navigateToTimesheetEdit} />
       {/* Other content for Personal Timesheet can go here */}
     </div>
   );

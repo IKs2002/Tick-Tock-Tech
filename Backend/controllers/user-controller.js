@@ -46,7 +46,7 @@ const getAllUsers = async (req, res, next) => {
     const users = await User.find();
 
     const mapUsers = users.map((user) => ({
-      id: user._id,
+      id: user.email,
       name: user.name,
       status: "Clocked Out",
       locked: false,
