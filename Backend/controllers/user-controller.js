@@ -46,7 +46,7 @@ const getAllUsers = async (req, res, next) => {
       id: user.email,
       name: user.name,
       status: "Clocked Out",
-      locked: false,
+      locked: user.accessLock,
     }));
 
     res.status(200).json(mapUsers);
@@ -56,24 +56,36 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
-const updateAccessLock = async (req, res, next) => {
+const toggleUserLock = async (req, res, next) => {
   const email = req.params.email;
   try {
-    let user = await User.findOne({ email: email });
+    const user = await User.findOne({ email: email });
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "User not found." });
     }
-    user.accessLock = user.accessLock === 'Locked' ? 'Unlocked' : 'Locked';
+    // Toggle the accessLock status
+    user.accessLock = !user.accessLock;
     await user.save();
-    res.status(200).json({ message: "User access lock status updated", accessLock: user.accessLock });
+    res.status(200).json({ user: user.toObject({ getters: true }) });
   } catch (err) {
     console.error(err);
-    return next(err);
+    return next(new Error("Updating user lock status failed."));
   }
 };
 
-// Don't forget to expose this function in your exports
-exports.updateAccessLock = updateAccessLock;
+const toggleAllUserLocks = async (req, res, next) => {
+  const { lockAll } = req.body;
+
+  try {
+    await User.updateMany({}, { $set: { accessLock: lockAll } });
+
+    res.status(200).json({ message: `All users have been ${lockAll ? "locked" : "unlocked"}.` });
+  } catch (err) {
+    console.error(err);
+    return next(new Error(`Failed to ${lockAll ? "lock" : "unlock"} all users.`));
+  }
+};
+
 
 const deleteUserData = async (req, res, next) => {
   const email = req.query.email;
@@ -86,7 +98,7 @@ const deleteUserData = async (req, res, next) => {
     const inactiveUser = new InactiveUser({
       ...user.toObject(),
       email: `${email}_inactive`,
-      accessLock: 'Locked',
+      accessLock: true,
     });
     await inactiveUser.save();
     
@@ -103,5 +115,6 @@ const deleteUserData = async (req, res, next) => {
 exports.createUser = createUser;
 exports.getUserData = getUserData;
 exports.getAllUsers = getAllUsers;
-exports.updateaccessLock = updateAccessLock;
+exports.toggleUserLock = toggleUserLock;
+exports.toggleAllUserLocks = toggleAllUserLocks;
 exports.deleteUserData = deleteUserData;

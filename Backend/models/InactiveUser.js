@@ -11,7 +11,7 @@ const inactiveUserSchema = new mongoose.Schema({
     // role: String,
     // employeeID: Number,
     status:{type: String, default:'',},
-    accessLock:{type: String, default:'Unlocked'}
+    accessLock:{type: Boolean, default: true}
 });
 
 const InactiveUser = mongoose.model('InactiveUser', inactiveUserSchema);

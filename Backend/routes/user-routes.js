@@ -9,7 +9,9 @@ router.get("/getuser/:uid", usercontroller.getUserData ); // Read user
 
 router.get("/getAll", usercontroller.getAllUsers); // Get all users
 
-router.patch("/update/accessLock/:email", usercontroller.updateAccessLock);
+router.patch("/toggleLock/:email", usercontroller.toggleUserLock); // lock/unlock user
+
+router.patch("/toggleAllLocks", usercontroller.toggleAllUserLocks); // lock/unlock all users
 
 router.delete("/delete", usercontroller.deleteUserData); // Delete user
 

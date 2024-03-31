@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
   // role: String,
   // employeeID: Number,
   status:{type: String, default:'',},
-  accessLock:{type: String, default:'Unlocked'}
+  accessLock:{type: Boolean, default: false},
   
 });
 

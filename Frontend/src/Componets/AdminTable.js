@@ -29,24 +29,35 @@ const AdminTable = ({ navigateToTimesheetEdit }) => {
 
   // Function to toggle the lock status of an employee
   const toggleLock = (email) => {
-    fetch(`http://localhost:5000/api/userData/update/accessLock/${encodeURIComponent(email)}`, {
+    const userIndex = employees.findIndex(emp => emp.id === email);
+    if (userIndex === -1) return;
+  
+    const newStatus = !employees[userIndex].locked;
+    
+    fetch(`http://localhost:5000/api/userData/toggleLock/${encodeURIComponent(email)}`, {
       method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ accessLock: newStatus }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.message);
-        setEmployees((prevEmployees) =>
-          prevEmployees.map((emp) =>
-            emp.id === email ? { ...emp, locked: data.accessLock === 'Locked' } : emp
-          )
-        );
-      })
-      .then(() => {
-        fetchAllEmployees();
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to toggle lock status");
+      }
+      return response.json();
+    })
+    .then(() => {
+      setEmployees((prevEmployees) =>
+        prevEmployees.map((emp, idx) =>
+          idx === userIndex ? { ...emp, locked: newStatus } : emp
+        )
+      );
+    })
+    // .then(() => {
+    //   fetchAllEmployees();
+    // })
+    .catch((error) => console.error("Error:", error));
   };
 
   // Function to lock or unlock all employees based on their current lock status
@@ -56,14 +67,33 @@ const AdminTable = ({ navigateToTimesheetEdit }) => {
     const confirmed = window.confirm(
       `Are you sure you want to ${action} all employees?`
     );
-
+  
     if (confirmed) {
-      setEmployees((prevEmployees) =>
-        prevEmployees.map((emp) => ({ ...emp, locked: anyUnlocked }))
-      );
+      // Send a request to the server to lock/unlock all users
+      fetch(`http://localhost:5000/api/userData/toggleAllLocks`, {
+        method: "PATCH",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ lockAll: anyUnlocked }),
+      })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to update lock status for all users");
+        }
+        return response.json();
+      })
+      .then(() => {
+        setEmployees((prevEmployees) =>
+          prevEmployees.map((emp) => ({ ...emp, locked: anyUnlocked }))
+        );
+      })
+      // .then(() => {
+      //   fetchAllEmployees();
+      // })
+      .catch((error) => console.error("Error:", error));
     }
   };
-
   // Function to delete an employee after confirmation
   const deleteEmployee = (email) => {
     const confirmed = window.confirm(
@@ -204,25 +234,26 @@ const AdminTable = ({ navigateToTimesheetEdit }) => {
     console.log("Employee added successfully:", newEmployee);
   };
 
-  const fetchAllEmployees = () => {
-    fetch("http://localhost:5000/api/userData/getAll")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        const formattedEmployees = data.map((emp) => ({
-          id: emp.id,
-          name: emp.name,
-          status: "Clocked Out",
-          locked: emp.accessLock === 'Locked',
-        }));
-        setEmployees(formattedEmployees);
-      })
-      .catch((error) => console.error("Error:", error));
-  };
+const fetchAllEmployees = () => {
+  fetch("http://localhost:5000/api/userData/getAll")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const formattedEmployees = data.map((user) => ({
+        id: user.email,
+        name: user.name,
+        status: user.status || "Clocked Out",
+        locked: user.accessLock,
+      }));
+      setEmployees(formattedEmployees);
+    })
+    .catch((error) => console.error("Error:", error));
+};
+
 
   useEffect(() => {
     fetchAllEmployees();
