@@ -149,7 +149,20 @@
 
 .DeleteButton {
   width: 1.5vw;
-  margin-left: 2vw;
+  margin-left: 1.5vw;
+}
+
+.EditButton{
+  width: 1.5vw;
+  margin-left: 1vw;
+}
+
+.edit-btn {
+  border: 0;
+  font-weight: bold;
+  text-align: center;
+  background: none; 
+  cursor: pointer;
 }
 
 .employee-status-select{
@@ -160,5 +173,5 @@
 .lock-button{
   text-align: center;
 }
-/*last updated 2/25,-sierra */
+/*last updated 4/1 pooja */
 

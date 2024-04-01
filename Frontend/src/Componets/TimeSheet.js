@@ -197,10 +197,10 @@ const data1 = [
 ];
 
 // Pay period data, likely intended for summary information
-const Paydata = [{ PeriodRegular: "XXX", PeriodOvertime: "XXX" }];
+const Paydata = [{ PeriodRegular: "000", PeriodOvertime: "000" }];
 
 // Weekly total hours, for summarizing at the end of a week
-const WeekTotal = [{ Regular: "XXX", Overtime: "XXX" }];
+const WeekTotal = [{ Regular: "000", Overtime: "000" }];
 
 // Main component function
 const EditableTimeSheet = ({ children, editable = true }) => (
@@ -244,9 +244,7 @@ function TimeSheet({ editable = false, timeData }) {
               <tr key={key}>
                 {/* Displaying each piece of data in its respective column */}
                 <td>{val.day}</td>
-                <EditableTimeSheet editable={editable}>
-                  {moment.utc(val.date).format("MM-DD-YY")}
-                </EditableTimeSheet>
+                <td> {moment.utc(val.date).format("MM-DD-YY")}</td> 
                 <EditableTimeSheet editable={editable}>
                   {val.clockIn1}
                 </EditableTimeSheet>
@@ -330,9 +328,7 @@ function TimeSheet({ editable = false, timeData }) {
             return (
               <tr key={key}>
                 <td>{val.day}</td>
-                <EditableTimeSheet editable={editable}>
-                  {moment.utc(val.date).format("MM-DD-YY")}
-                </EditableTimeSheet>
+                  <td>{moment.utc(val.date).format("MM-DD-YY")}</td>
                 <EditableTimeSheet editable={editable}>
                   {val.clockIn1}
                 </EditableTimeSheet>

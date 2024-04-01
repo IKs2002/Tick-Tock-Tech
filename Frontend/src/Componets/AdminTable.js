@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./AdminTable.css";
 import AddEmployeeForm from "./AddEmployeeForm";
 import DeleteButton from "../Photos/AdminDashboardButtons/DeleteButton.png";
+import EditButton from "../Photos/AdminDashboardButtons/pencil.png";
 
 // Defines the AdminTable component responsible for displaying and managing employees in the admin dashboard
 const AdminTable = ({ navigateToTimesheetEdit }) => {
@@ -118,6 +119,11 @@ const AdminTable = ({ navigateToTimesheetEdit }) => {
     }
   };
 
+  //Function to Edit an employee
+  const EditEmployee = (email) => {
+
+  }
+
   // Function to toggle the visibility of a popup associated with an employee
   const myFunction = (empId) => {
     var popup = document.getElementById(`myPopup-${empId}`);
@@ -215,6 +221,21 @@ const AdminTable = ({ navigateToTimesheetEdit }) => {
               />
             </button>
           </td>
+          <td>
+            {/* Edit Button */}
+            <button
+              className="btn btn-link edit-btn"
+              onClick={(e) => {
+                EditEmployee(emp.id);
+              }}
+            >
+              <img
+                src={EditButton}
+                alt="not found"
+                className="EditButton"
+              />
+            </button>
+          </td>
         </tr>
       ));
   };
@@ -294,6 +315,7 @@ const fetchAllEmployees = () => {
               <th>Status</th> {/* Column header for employee status*/}
               <th>Access</th> {/* Column header for lock/unlock action*/}
               <th>Manage</th> {/* Column header for delete action*/}
+              <th>Edit</th> {/* Column header for Edit action*/}
             </tr>
           </thead>
           <tbody>{renderRows()}</tbody>{" "}

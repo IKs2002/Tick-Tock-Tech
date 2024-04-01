@@ -28,10 +28,14 @@ const WeekPicker = ({ onChange }) => {
   };
 
   const handleNextClick = () => {
-    // Move forward by two weeks
-    const newDate = addWeeks(selectedDate, 2);
-    updateWeeks(newDate);
+    // Move forward by two weeks and also stops at the current pay period.
+    const currentWeekEnd = addDays(startOfWeek(new Date(), { weekStartsOn: 2 }), 6);
+    if (selectedDate < currentWeekEnd) {
+      const newDate = addWeeks(selectedDate, 2);
+      updateWeeks(newDate);
+    }
   };
+
 
   const formatDate = (date) => format(date, 'MM-dd-yy'); // Format the date as month-date-year (last two digits)
 
