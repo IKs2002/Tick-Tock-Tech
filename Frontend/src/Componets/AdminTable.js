@@ -81,6 +81,7 @@ const AdminTable = ({ navigateToTimesheetEdit }) => {
         if (!response.ok) {
           throw new Error("Failed to update lock status for all users");
         }
+        
         return response.json();
       })
       .then(() => {
@@ -130,20 +131,25 @@ const AdminTable = ({ navigateToTimesheetEdit }) => {
   // Modified onClick handler to navigate to another page
   // Function to navigate to the TimesheetEdit page with employee ID
   const navigateToEmployeePage = (empId, empName) => {
+    console.log("Employee ID:", empId); // Log empId to check if it's undefined
+    console.log("Employee Name:", empName); // Log empName for debugging
     navigateToTimesheetEdit(empId, empName);
   };
+  
 
   // Renders the rows of the employee table, filtering based on the search query
   const renderRows = () => {
+    console.log("Employees:", employees); // Log employees array
     return employees
-      .filter((emp) =>
-        emp.name.toLowerCase().includes(searchQuery.toLowerCase())
-      )
+      .filter((emp) => emp.name.toLowerCase().includes(searchQuery.toLowerCase()))
       .map((emp) => (
         <tr key={emp.id}>
-          {/* Employee name and popup trigger */}
+          {/* Other table cells */}
           <td
-            onClick={() => navigateToEmployeePage(emp.id, emp.name)} // Modified onClick handler
+            onClick={() => {
+              console.log("Clicked on employee:", emp.id); // Log emp.id before navigating
+              navigateToEmployeePage(emp.id, emp.name);
+            }} // Modified onClick handler
             style={{
               display: "flex",
               alignItems: "center",
@@ -244,11 +250,12 @@ const fetchAllEmployees = () => {
     })
     .then((data) => {
       const formattedEmployees = data.map((user) => ({
-        id: user.email,
+        id: user.id,
         name: user.name,
         status: user.status || "Clocked Out",
-        locked: user.accessLock,
+        locked: user.locked,
       }));
+      console.log("Response1", formattedEmployees);
       setEmployees(formattedEmployees);
     })
     .catch((error) => console.error("Error:", error));
