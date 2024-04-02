@@ -15,6 +15,7 @@
 
 /* DO NOT CHANGE This will apply to the pdfContent when the SaveAsPDFButton is pressed */
 .print-mode {
-  width: 263mm;
-  height: 360mm;
+  font-size: 15.9px;
+  width: 360mm;
+  height: 300mm;
 }

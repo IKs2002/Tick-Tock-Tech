@@ -40,12 +40,12 @@ const SaveAsPDFButton = forwardRef((props, ref) => {
   
     const canvas = await html2canvas(ref.current, {
  // Set the left margin
-      y: -20,
+      y: -30
     });
   
     const imgData = canvas.toDataURL('image/png');
     const pdf = new jsPDF({
-      orientation: 'portrait',
+      orientation: 'landscape',
       format: 'a4',
     });
   
