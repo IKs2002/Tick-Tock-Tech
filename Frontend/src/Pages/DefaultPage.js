@@ -6,15 +6,13 @@ import "./DefaultPage.css";
 
 const DefaultPage = () => {
   return (
-    <body>
       <div>
         <Header />
-        <body className="App">
+        <div className="App">
           <Tabs Tabprop/>
           <Outlet />
-        </body>
+        </div>
       </div>
-    </body>
   );
 };
 

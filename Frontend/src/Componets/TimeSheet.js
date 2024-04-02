@@ -244,7 +244,7 @@ function TimeSheet({ editable = false, timeData }) {
               <tr key={key}>
                 {/* Displaying each piece of data in its respective column */}
                 <td>{val.day}</td>
-                <td> {moment.utc(val.date).format("MM-DD-YY")}</td> 
+                <td> {moment.utc(val.date).format("MM-DD-YY")}</td>
                 <EditableTimeSheet editable={editable}>
                   {val.clockIn1}
                 </EditableTimeSheet>
@@ -328,7 +328,7 @@ function TimeSheet({ editable = false, timeData }) {
             return (
               <tr key={key}>
                 <td>{val.day}</td>
-                  <td>{moment.utc(val.date).format("MM-DD-YY")}</td>
+                <td>{moment.utc(val.date).format("MM-DD-YY")}</td>
                 <EditableTimeSheet editable={editable}>
                   {val.clockIn1}
                 </EditableTimeSheet>
