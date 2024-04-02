@@ -318,7 +318,7 @@ const fetchAllEmployees = () => {
               <th>Edit</th>{/* Column header for Edit action*/}
             </tr>
           </thead>
-          <tbody>{renderRows()}</tbody>{" "}
+          <tbody>{renderRows()}</tbody>
           {/* Calls renderRows to populate the table body with employee data*/}
           <tfoot>{/* Footer */}</tfoot>
         </table>
