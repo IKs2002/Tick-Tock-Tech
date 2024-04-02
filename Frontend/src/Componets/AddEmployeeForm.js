@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import "./AddEmployeeForm.css";
 import Modal from "react-modal";
 
+
+Modal.setAppElement('#root');
+
 // Component for adding a new employee, receives addEmployee function and initialName as props
 const AddEmployeeForm = ({ addEmployee }) => {
   // Function to generate a random password
@@ -100,7 +103,7 @@ const AddEmployeeForm = ({ addEmployee }) => {
             value={form.name}
             onChange={handleInputChange}
             required
-            autocomplete="off"
+            autoComplete="off"
             className="employee-form-field"
           />
           {/* Input for employee's email */}
@@ -110,7 +113,7 @@ const AddEmployeeForm = ({ addEmployee }) => {
             placeholder="Email"
             value={form.email}
             required
-            autocomplete="off"
+            autoComplete="off"
             onChange={handleInputChange}
             className="employee-form-field"
           />
@@ -122,7 +125,7 @@ const AddEmployeeForm = ({ addEmployee }) => {
             value={form.password}
             required
             onChange={handleInputChange}
-            autocomplete="off"
+            autoComplete="off"
             className="employee-form-field"
           />
           {/* Container for form action buttons */}

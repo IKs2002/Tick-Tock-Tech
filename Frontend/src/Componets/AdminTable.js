@@ -311,11 +311,11 @@ const fetchAllEmployees = () => {
         <table className="table mt-3">
           <thead>
             <tr>
-              <th>Employee Name</th> {/*Column header for employee names */}
-              <th>Status</th> {/* Column header for employee status*/}
-              <th>Access</th> {/* Column header for lock/unlock action*/}
-              <th>Manage</th> {/* Column header for delete action*/}
-              <th>Edit</th> {/* Column header for Edit action*/}
+              <th>Employee Name</th>{/*Column header for employee names */}
+              <th>Status</th>{/* Column header for employee status*/}
+              <th>Access</th>{/* Column header for lock/unlock action*/}
+              <th>Manage</th>{/* Column header for delete action*/}
+              <th>Edit</th>{/* Column header for Edit action*/}
             </tr>
           </thead>
           <tbody>{renderRows()}</tbody>{" "}
