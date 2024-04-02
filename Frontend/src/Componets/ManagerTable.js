@@ -36,7 +36,7 @@ const ManagerTable = () => {
           <td><div className="employee-name">{emp.name}</div></td>
           <td>
             <div
-              className="employee-status-select"
+              className="manager-employee-status-select"
               style={{
                 "--statusColors": statusColors[emp.status],
                 "--statusColorsText": statusColorsText[emp.status],
