@@ -7,6 +7,7 @@ import PersonalTimeSheet from "./TabContent/PersonalTimeSheet";
 import AdminDashboard from "./TabContent/AdminDashboard";
 import TimesheetEdit from "./TabContent/TimesheetEditing";
 import TimesheetViewing from "./TabContent/TimesheetViewing";
+import ManagerDashboard from "./TabContent/ManagerDashboard";
 
 const App = () => {
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ const App = () => {
         />
         <Route path="TimesheetEdit?" element={<TimesheetEdit />} />
         <Route path="TimesheetViewing" element={<TimesheetViewing />} />
+        <Route path="ManagerDashboard" element={<ManagerDashboard />} />
       </Route>
     </Routes>
   );

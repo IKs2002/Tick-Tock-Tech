@@ -10,6 +10,7 @@ const Tabs = () => {
     { label: "Admin Dashboard", path: "AdminDashboard" },
     { label: "Timesheet Viewing", path: "TimesheetViewing" },
     { label: "Timesheet Editing", path: "TimesheetEdit" },
+    { label: "Manager Dashboard", path: "ManagerDashboard"},
   ];
   const [activeTab, setActiveTab] = useState(0);
 
