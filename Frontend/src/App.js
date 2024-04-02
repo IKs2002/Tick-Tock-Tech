@@ -21,14 +21,14 @@ const App = () => {
       <Route path="/" element={<Login />} />
       <Route path="/PasswordRecovery" element={<PasswordRecovery />} />
       <Route path="/Home/*" element={<DefaultPage />}>
+        <Route path="PersonalTimeSheet" element={<PersonalTimeSheet />} />
         <Route
           path="AdminDashboard"
           element={
             <AdminDashboard navigateToTimesheetEdit={navigateToTimesheetEdit} />
           }
         />
-        <Route path="PersonalTimeSheet" element={<PersonalTimeSheet />} />
-        <Route path="TimesheetEdit" element={<TimesheetEdit />} />
+        <Route path="TimesheetEdit?" element={<TimesheetEdit />} />
         <Route path="TimesheetViewing" element={<TimesheetViewing />} />
       </Route>
     </Routes>

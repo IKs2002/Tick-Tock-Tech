@@ -10,7 +10,7 @@ const DefaultPage = () => {
       <div>
         <Header />
         <body className="App">
-          <Tabs />
+          <Tabs Tabprop/>
           <Outlet />
         </body>
       </div>

@@ -3,7 +3,7 @@ import { startOfWeek, addWeeks, subWeeks, format, addDays, parseISO } from 'date
 import styles from './WeekPicker.module.css'; // Import the CSS module
 
 const WeekPicker = ({ onChange }) => {
-  const [selectedDate, setSelectedDate] = useState(parseISO("2024-03-18"));
+  const [selectedDate, setSelectedDate] = useState(parseISO("2024-04-01"));
 
   const updateWeeks = (newDate) => {
     setSelectedDate(newDate);
