@@ -5,13 +5,13 @@ import Logo from "../Photos/HeaderPhotos/dgf.png";
 
 const Login = () => {
   return (
-    <body className="Body">
-      <div class="container">
+    <div className="Body">
+      <div className="container">
         <div>
-          <img src={Logo} alt="Logo" class="logo" />
+          <img src={Logo} alt="Logo" className="logo" />
         </div>
 
-        <label for="uname"></label>
+        <label htmlFor="uname"></label>
         <input
         className="Login_Username"
           type="text"
@@ -20,10 +20,10 @@ const Login = () => {
           required
         />
 
-        <label for="psw"></label>
+        <label htmlFor="psw"></label>
         <input className="Login_Password" type="password" placeholder="Password" name="psw" required />
         <Link to="PasswordRecovery">
-          <text className="PasswordRecovery">Forgot your password?</text>
+          <div className="PasswordRecovery">Forgot your password?</div>
         </Link>
         <Link to="Home/PersonalTimeSheet">
           <button className="loginbutton" type="submit">
@@ -31,7 +31,7 @@ const Login = () => {
           </button>
         </Link>
       </div>
-    </body>
+    </div>
   );
 };
 
