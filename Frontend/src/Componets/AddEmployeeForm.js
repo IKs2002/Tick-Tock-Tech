@@ -114,6 +114,7 @@ const AddEmployeeForm = ({ addEmployee }) => {
             onChange={handleInputChange}
             required
             autoComplete="off"
+            autoComplete="off"
             className="employee-form-field"
           />
           {/* Input for employee's email */}
@@ -123,6 +124,7 @@ const AddEmployeeForm = ({ addEmployee }) => {
             placeholder="Email"
             value={form.email}
             required
+            autoComplete="off"
             autoComplete="off"
             onChange={handleInputChange}
             className="employee-form-field"

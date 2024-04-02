@@ -159,7 +159,7 @@ const AdminTable = ({ navigateToTimesheetEdit }) => {
             style={{
               display: "flex",
               alignItems: "center",
-              marginRight: "-0.745%",
+              marginRight: "-1.5%",
               cursor: "pointer", // Change cursor to pointer when hovering over the cell
             }}
             className="clickable-cell" // Add a class for additional styling
@@ -191,14 +191,14 @@ const AdminTable = ({ navigateToTimesheetEdit }) => {
               className="btn btn-link"
               onClick={() => toggleLock(emp.id)}
               style={{
-                color: emp.locked ? "#ED5E61" : "#1C2D5A",
+                color: emp.locked ? "#ED5E61" : "#708090",
                 border: "0px",
                 width: "6vw",
                 height: "4.3vh",
                 fontSize: "1.2vw",
                 fontWeight: "bold",
                 textAlign: "center",
-                marginLeft: "12%",
+                marginLeft: "7%",
                 background: "none",
               }}
             >
@@ -311,11 +311,11 @@ const fetchAllEmployees = () => {
         <table className="table mt-3">
           <thead>
             <tr>
-              <th>Employee Name</th> {/*Column header for employee names */}
-              <th>Status</th> {/* Column header for employee status*/}
-              <th>Access</th> {/* Column header for lock/unlock action*/}
-              <th>Manage</th> {/* Column header for delete action*/}
-              <th>Edit</th> {/* Column header for Edit action*/}
+              <th>Employee Name</th>{/*Column header for employee names */}
+              <th>Status</th>{/* Column header for employee status*/}
+              <th>Access</th>{/* Column header for lock/unlock action*/}
+              <th>Manage</th>{/* Column header for delete action*/}
+              <th>Edit</th>{/* Column header for Edit action*/}
             </tr>
           </thead>
           <tbody>{renderRows()}</tbody>{" "}

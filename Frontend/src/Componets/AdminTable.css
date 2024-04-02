@@ -88,7 +88,7 @@
   font-size: 1.1vw;
   font-weight: bold;
   text-align: center;
-  margin-left: 6.5%;
+  margin-left: 7.2%;
   border-width: 0vw;
 }
 
@@ -108,7 +108,7 @@
   color: #708090;
   font-size: 0.9vw;
   font-weight: bold;
-  margin-left: 40.75vw;
+  margin-left: 40.78vw;
 }
 
 .popup {
@@ -117,13 +117,14 @@
 }
 
 .popup .btn-link {
-  color: #1C2D5A;
+  color: #1c2d5a;
   border: 0;
   width: 3.5vw;
   height: 4.3vh;
   font-size: 1.2vw;
   font-weight: bold;
-  text-align: center;
+  text-align: left;
+  margin-left: 1.5vw;
 }
 
 .employee-name {
@@ -133,7 +134,7 @@
   border-radius: 0;
   font-size: 1.5vw;
   border: none; 
-  color: #5c5c5c; 
+  color: #708090; 
   text-align: left;
   margin-top: 0.5vh;
 }
@@ -148,12 +149,12 @@
 
 .DeleteButton {
   width: 1.5vw;
-  margin-left: 1.5vw;
+  margin-left: 1.7vw;
 }
 
 .EditButton{
   width: 1.5vw;
-  margin-left: 1vw;
+  margin-left: 0.6vw;
 }
 
 .edit-btn {
@@ -167,10 +168,6 @@
 .employee-status-select{
   text-align: center;
 
-}
-
-.lock-button{
-  text-align: center;
 }
 
 

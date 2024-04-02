@@ -33,7 +33,7 @@ const ManagerTable = () => {
       )
       .map((emp) => (
         <tr key={emp.id}>
-          <td><div className="employee-name">{emp.name}</div></td>
+          <td><div className="employee-name2">{emp.name}</div></td>
           <td>
             <div
               className="manager-employee-status-select"
