@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate} from "react-router-dom";
 import Login from "./Pages/LoginPage";
 import DefaultPage from "./Pages/DefaultPage";
 import PasswordRecovery from "./Pages/PasswordRecoveryPage";
@@ -16,12 +16,12 @@ const App = () => {
   const navigateToTimesheetEdit = (employeeId, employeeName) => {
     navigate(`/Home/TimesheetEdit?email=${employeeId}&name=${employeeName}`);
   };
-
+    
   return (
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/PasswordRecovery" element={<PasswordRecovery />} />
-      <Route path="/Home/*" element={<DefaultPage />}>
+      <Route path="/Home/*" element={<DefaultPage/>}>
         <Route path="PersonalTimeSheet" element={<PersonalTimeSheet />} />
         <Route
           path="AdminDashboard"
