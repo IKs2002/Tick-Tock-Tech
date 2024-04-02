@@ -222,6 +222,7 @@ function TimeSheet({ editable = false, timeData }) {
       <section className="Timesheet-Table">
         <table>
           {/* Table headers */}
+          <thead>
           <tr>
             <th>Day</th>
             <th>Date</th>
@@ -238,7 +239,9 @@ function TimeSheet({ editable = false, timeData }) {
             <th>Regular</th>
             <th>Overtime</th>
           </tr>
+          </thead>
           {/* Mapping data to table rows */}
+          <tbody>
           {firstHalf.map((val, key) => {
             return (
               <tr key={key}>
@@ -278,6 +281,7 @@ function TimeSheet({ editable = false, timeData }) {
               </tr>
             );
           })}
+          </tbody>
         </table>
       </section>
 
@@ -285,12 +289,15 @@ function TimeSheet({ editable = false, timeData }) {
       <section className="Timesheet-TotalHours">
         <table>
           {/* Headers for the total hours table */}
+          <thead>
           <tr>
             <th></th>
             <th>Regular Hours</th>
             <th>Overtime Hours</th>
           </tr>
+          </thead><tbody>
           {/* Mapping weekly totals to table rows */}
+          
           {WeekTotal.map((val, key) => {
             return (
               <tr key={key}>
@@ -301,6 +308,7 @@ function TimeSheet({ editable = false, timeData }) {
               </tr>
             );
           })}
+          </tbody>
         </table>
       </section>
 
@@ -308,6 +316,7 @@ function TimeSheet({ editable = false, timeData }) {
       <section className="Timesheet-Table">
         <table>
           {/* Similar structure to the first timesheet table */}
+          <thead>
           <tr>
             <th>Day</th>
             <th>Date</th>
@@ -324,8 +333,10 @@ function TimeSheet({ editable = false, timeData }) {
             <th>Regular</th>
             <th>Overtime</th>
           </tr>
+          </thead>
           {secondHalf.map((val, key) => {
             return (
+              <tbody>
               <tr key={key}>
                 <td>{val.day}</td>
                   <td>{moment.utc(val.date).format("MM-DD-YY")}</td>
@@ -360,6 +371,7 @@ function TimeSheet({ editable = false, timeData }) {
                   {val.overtime}
                 </EditableTimeSheet>
               </tr>
+              </tbody>
             );
           })}
         </table>
@@ -369,11 +381,12 @@ function TimeSheet({ editable = false, timeData }) {
       <section className="Timesheet-TotalHours">
         <table>
           {/* Headers for the total hours table */}
+          <thead>
           <tr>
             <th></th>
             <th>Regular Hours</th>
             <th>Overtime Hours</th>
-          </tr>
+          </tr></thead><tbody>
           {/* Mapping weekly totals to table rows */}
           {WeekTotal.map((val, key) => {
             return (
@@ -385,6 +398,7 @@ function TimeSheet({ editable = false, timeData }) {
               </tr>
             );
           })}
+          </tbody>
         </table>
       </section>
 
@@ -392,11 +406,14 @@ function TimeSheet({ editable = false, timeData }) {
       <section className="Timesheet-PayPeriod">
         <table>
           {/* Headers for the pay period summary table */}
+          <thead>
           <tr>
             <th></th>
             <th>Regular Hours</th>
             <th>Overtime Hours</th>
           </tr>
+          </thead>
+          <tbody>
           {/* Mapping pay period data to table rows */}
           {Paydata.map((val, key) => {
             return (
@@ -408,6 +425,7 @@ function TimeSheet({ editable = false, timeData }) {
               </tr>
             );
           })}
+          </tbody>
         </table>
       </section>
     </div>
