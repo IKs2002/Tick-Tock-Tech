@@ -7,10 +7,10 @@ const Tabs = () => {
   const location = useLocation();
   const tabs = [
     { label: "Personal Timesheet", path: "PersonalTimeSheet" },
+    { label: "Manager Dashboard", path: "ManagerDashboard"},
     { label: "Admin Dashboard", path: "AdminDashboard" },
     { label: "Timesheet Viewing", path: "TimesheetViewing" },
     { label: "Timesheet Editing", path: "TimesheetEdit" },
-    { label: "Manager Dashboard", path: "ManagerDashboard"},
   ];
   const [activeTab, setActiveTab] = useState(0);
 
