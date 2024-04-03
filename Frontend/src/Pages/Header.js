@@ -9,7 +9,7 @@ const Header = () => {
     <div className="MainHeaders">
       <img src={Logo} alt=" not found" className="Logos" />
       <nav className="temp">
-        <div className="header-buttons">Welcome, User</div>
+        <label className="header-buttons">Welcome, User</label>
         <Link to="/">
           <button className="header-buttons">
             <img src={logout} alt="not found" className="buttonImage" />
