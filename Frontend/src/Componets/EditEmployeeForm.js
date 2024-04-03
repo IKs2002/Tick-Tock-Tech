@@ -2,15 +2,25 @@ import React, { useState } from "react";
 import "./EditEmployeeForm.css";
 import Modal from "react-modal";
 import EditButton from "../Photos/AdminDashboardButtons/pencil.png";
-
+import eye_open from "../Photos/AddEmployeePhotos/eye_open.png";
+import eye_close from "../Photos/AddEmployeePhotos/eye_close.png";
 
 const EditEmployeeForm = ({ employee }) => {
   const [form, setForm] = useState(employee || { name: "", email: "", password: "" });
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
+  // State for toggling password visibility
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
   const handleInputChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
+  // Function to toggle password visibility
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -81,16 +91,32 @@ const EditEmployeeForm = ({ employee }) => {
             className="employee-form-field"
           />
           {/* Input for employee's password, visibility toggles based on if a password is present */}
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={form.password}
-            required
+          <div style={{ display: "flex", alignItems: "center", position: "relative" }}>
+            <input
+              type={passwordVisible ? "text" : "password"}
+              name="password"
+              placeholder="Password"
+              value={form.password}
+              required
+              onChange={handleInputChange}
+              autoComplete="off"
+              className="employee-form-field"
+            />
+              <span onClick={togglePasswordVisibility} style={{ cursor: "pointer", position: "absolute", right: "10px", top: "50%", transform: "translateY(-50%)", display: "flex", alignItems: "center" }}>
+                {passwordVisible ? <img src={eye_close} alt="Hide Password" style={{ width: "20px" }}/> : <img src={eye_open} alt="Show Password" style={{ width: "20px" }}/>}
+              </span>
+          </div>
+          {/* select for employee's permission level */}
+          <select
+            name="permission"
+            value={form.permission}
             onChange={handleInputChange}
-            autoComplete="off"
             className="employee-form-field"
-          />
+          >
+            <option value="employee">Employee</option>
+            <option value="manager">Manager</option>
+            <option value="admin">Admin</option>
+          </select>
           {/* Container for form action buttons */}
           <div className="form-buttons">
             {/* Button to submit the form, updating the existing employee*/}
