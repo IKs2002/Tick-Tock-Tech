@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   password:{type: String, required: true,},
-  // role: String,
+  role: String,
   // employeeID: Number,
   status:{type: String, default:'',},
   accessLock:{type: Boolean, default: false},

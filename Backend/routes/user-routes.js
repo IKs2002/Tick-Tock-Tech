@@ -13,6 +13,8 @@ router.patch("/toggleLock/:email", usercontroller.toggleUserLock); // lock/unloc
 
 router.patch("/toggleAllLocks", usercontroller.toggleAllUserLocks); // lock/unlock all users
 
+router.patch("/patchuser/:email, usercontroller.editUserData")
+
 router.delete("/delete", usercontroller.deleteUserData); // Delete user
 
 module.exports = router;[[]]
