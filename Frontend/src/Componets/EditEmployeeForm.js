@@ -119,8 +119,12 @@ const EditEmployeeForm = ({ employee }) => {
           </select>
           {/* Container for form action buttons */}
           <div className="form-buttons">
+            {/* Button to submit the form, adding a new employee*/}
+            <button type="ResetPassword" className="ResetPasswordButton">
+              Reset Password
+            </button>
             {/* Button to submit the form, updating the existing employee*/}
-            <button type="submit" className="ConfirmButton">
+            <button type="Update" className="UpdateButton">
               Update
             </button>
             {/* Button to cancel and close the modal without updating the employee*/}

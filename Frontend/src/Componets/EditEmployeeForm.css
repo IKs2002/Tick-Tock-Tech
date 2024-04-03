@@ -42,8 +42,8 @@
   
   /* Cancel button styling within the Add Employee form, including color and border */
   .CancelButton {
-    width: 5vw;
-    height: 4vh;
+    width: 100%;
+    height: auto;
     margin-bottom: 1vh;
     margin-top: 1vh;
     font-size: 0.9vw;
@@ -56,9 +56,9 @@
   }
   
   /* Confirm button styling within the Add Employee form, similar to Cancel but with margin adjustments */
-  .ConfirmButton {
-    width: 5vw;
-    height: 4vh;
+  .UpdateButton {
+    width: 100%;    
+    height: auto;
     margin-bottom: 1vh;
     margin-right: 1.5vw;
     margin-top: 1vh;
@@ -71,6 +71,23 @@
     border-radius: 0.2vw;
   }
   
+    /* Confirm button styling within the Add Employee form, similar to Cancel but with margin adjustments */
+    .ResetPasswordButton {
+      width: 100%;
+      height: auto;
+      margin-bottom: 1vh;
+      margin-right: 1.5vw;
+      margin-top: 1vh;
+      font-size: 0.9vw;
+      background-color: #708090;
+      border: 0.1vw solid #333;
+      border-radius: 0.1vw;
+      color: #FFFFFF;
+      font-weight: bold;
+      border-radius: 0.2vw;
+      padding: 2%
+    }
+
   .EditButton{
     width: 1.5vw;
     margin-left: 0.6vw;
