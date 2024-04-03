@@ -15,21 +15,6 @@
     color: #708090;
   }
   
-  /* Button styling used in the Admin Dashboard to trigger the Add Employee modal it is called in AdminTable.js*/
-  .AdminDashboard_EnterNewEmployee {
-    width: 10vw;
-    height: 4vh;
-    margin-left: 14.2%;
-    margin-bottom: 1vh;
-    margin-top: 1vh;
-    font-size: 0.9vw;
-    background-color: #ededed;
-    border: 0.2vw solid #708090;
-    border-radius: 0.1vw;
-    color: #708090;
-    font-weight: bold;
-  }
-  
   /* Layout styling for the Add Employee form, arranging fields in a column */
   .employee-form {
     display: flex;
@@ -86,5 +71,17 @@
     border-radius: 0.2vw;
   }
   
+  .EditButton{
+    width: 1.5vw;
+    margin-left: 0.6vw;
+  }
+  
+  .edit-btn {
+    border: 0;
+    font-weight: bold;
+    text-align: center;
+    background: none; 
+    cursor: pointer;
+  }
   /* Metadata comment indicating the creator and last edit date of the file */
   /*Created and last edited by Seif Ikbarieh on 2/25/2024.*/

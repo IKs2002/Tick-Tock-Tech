@@ -4,6 +4,7 @@ import "./AdminTable.css";
 import AddEmployeeForm from "./AddEmployeeForm";
 import DeleteButton from "../Photos/AdminDashboardButtons/DeleteButton.png";
 import EditButton from "../Photos/AdminDashboardButtons/pencil.png";
+import EditEmployeeForm from "./EditEmployeeForm"
 
 // Defines the AdminTable component responsible for displaying and managing employees in the admin dashboard
 const AdminTable = ({ navigateToTimesheetEdit }) => {
@@ -119,11 +120,6 @@ const AdminTable = ({ navigateToTimesheetEdit }) => {
     }
   };
 
-  //Function to Edit an employee
-  const EditEmployee = (email) => {
-
-  }
-
   // Function to toggle the visibility of a popup associated with an employee
   const myFunction = (empId) => {
     var popup = document.getElementById(`myPopup-${empId}`);
@@ -223,22 +219,30 @@ const AdminTable = ({ navigateToTimesheetEdit }) => {
           </td>
           <td>
             {/* Edit Button */}
-            <button
-              className="btn btn-link edit-btn"
-              onClick={(e) => {
-                EditEmployee(emp.id);
-              }}
-            >
-              <img
+            {/* <button> */}
+              <EditEmployeeForm EditEmployeeForm={EditEmployee} /> 
+            
+              {/* <img
                 src={EditButton}
                 alt="not found"
                 className="EditButton"
-              />
-            </button>
+              /> */}
+            {/* </button> */}
           </td>
         </tr>
       ));
   };
+
+// Call the EditEmployee function with the updated employee object
+const EditEmployee = (updatedEmployee) => {
+  setEmployees((prevEmployees) =>
+    prevEmployees.map((emp) =>
+      emp.id === updatedEmployee.id ? { ...emp, ...updatedEmployee } : emp
+    )
+  );
+
+  console.log("Employee edited successfully:", updatedEmployee);
+};
 
   // Add new employees
   const addEmployee = (newEmployee) => {

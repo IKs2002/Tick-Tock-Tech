@@ -24,7 +24,7 @@
 
 .AdminDashboard_SearchEmployee {
   width: 20vw;
-  height: 4vh;
+  height: 5vh;
   margin-left: 33.8%;
   margin-bottom: 1vh;
   margin-top: 1vh;
@@ -150,19 +150,6 @@
 .DeleteButton {
   width: 1.5vw;
   margin-left: 1.7vw;
-}
-
-.EditButton{
-  width: 1.5vw;
-  margin-left: 0.6vw;
-}
-
-.edit-btn {
-  border: 0;
-  font-weight: bold;
-  text-align: center;
-  background: none; 
-  cursor: pointer;
 }
 
 .employee-status-select{
