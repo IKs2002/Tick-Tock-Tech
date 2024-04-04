@@ -1,12 +1,12 @@
 import React from "react";
 import ManagerTable from "../Componets/ManagerTable.js";
 
-const ManagerDashboard= () => {
+const ManagerDashboard= ({navigateToTimesheetViewing}) => {
   // Define the handleWeekChange function
 
   return (
     <div> 
-      <ManagerTable />
+      <ManagerTable navigateToTimesheetViewing = {navigateToTimesheetViewing}/>
       {/* */}
     </div>
   );

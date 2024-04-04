@@ -89,7 +89,9 @@
     color: #708090; 
     text-align: left;
   }
-  
+  .ManagerDashboard_clickable-cell:hover {
+    background-color: #f5f5f5;
+  }
   .employee-status-select{
     text-align: center;
   

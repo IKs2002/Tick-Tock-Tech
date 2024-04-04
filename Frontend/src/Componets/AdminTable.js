@@ -157,7 +157,7 @@ const AdminTable = ({ navigateToTimesheetEdit }) => {
               marginRight: "-1.5%",
               cursor: "pointer", // Change cursor to pointer when hovering over the cell
             }}
-            className="clickable-cell" // Add a class for additional styling
+            className="AdminDashboard_clickable-cell" // Add a class for additional styling
           >
             <div className="employee-name">{emp.name}</div>
             <div

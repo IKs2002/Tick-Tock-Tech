@@ -17,15 +17,16 @@ const createTimesheet = async (req, res, next) => {
 };
 
 const getTimeData = async (req, res, next) => {
-    const uid = req.params.uid.split('=')[1];
-  const startDate = req.params.startDate;
-  const endDate = req.params.endDate;
-  //Assuming these are passed as query parameters
-
-  //Convert startDate and endDate to Date objects to ensure proper querying
-  //const start = new Date(startDate);
-  //const end = new Date(endDate);
-  //end.setHours(23, 59, 59, 999); // Adjust to the end of the endDate to include all entries of that day
+  const uid = req.params.uid.split('=')[1];
+  let startDate = new Date(req.params.startDate); // Convert startDate to Date object
+  let endDate = new Date(req.params.endDate); // Convert endDate to Date object
+  
+  // Set time to 00:00:00 UTC for both startDate and endDate
+  startDate.setUTCHours(0, 0, 0, 0);
+  endDate.setUTCHours(0, 0, 0, 0);
+  
+  // Ensure endDate includes all entries of that day by setting it to the end of the day
+  endDate.setUTCHours(23, 59, 59, 999);
 
   let timesheets;
   try {
@@ -58,6 +59,8 @@ const getTimeData = async (req, res, next) => {
       ),
     });
 };
+
+
 
 const updateTimeData = async (req, res, next) => {
   //Editing Timesheet

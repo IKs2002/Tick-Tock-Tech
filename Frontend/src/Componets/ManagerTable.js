@@ -2,7 +2,16 @@ import React, { useState, useEffect } from "react";
 import "./ManagerTable.css";
 
 
-const ManagerTable = () => {
+const ManagerTable = ({ navigateToTimesheetViewing }) => {
+
+  const navigateToEmployeeViewing = (empId, empName) => {
+    console.log("Employee ID:", empId); // Log empId to check if it's undefined
+    console.log("Employee Name:", empName); // Log empName for debugging
+    navigateToTimesheetViewing(empId, empName);
+  };
+
+
+
   // State to store and manage the list of employees
   const [employees, setEmployees] = useState([]);
 
@@ -77,7 +86,10 @@ const ManagerTable = () => {
       )
       .map((emp) => (
         <tr key={emp.id}>
-          <td><div className="employee-name2">{emp.name}</div></td>
+          <td  onClick={() => {
+              console.log("Clicked on employee:", emp.id); // Log emp.id before navigating
+              navigateToEmployeeViewing(emp.id, emp.name);
+            }} className="ManagerDashboard_clickable-cell" ><div className="employee-name2">{emp.name}</div></td>
           <td>
             <div
               className="manager-employee-status-select"

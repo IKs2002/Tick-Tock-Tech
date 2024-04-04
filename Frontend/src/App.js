@@ -16,7 +16,12 @@ const App = () => {
   const navigateToTimesheetEdit = (employeeId, employeeName) => {
     navigate(`/Home/TimesheetEdit?email=${employeeId}&name=${employeeName}`);
   };
-    
+  
+  const navigateToTimesheetViewing = (employeeId, employeeName) => {
+    navigate(`/Home/TimesheetViewing?email=${employeeId}&name=${employeeName}`);
+  };
+
+
   return (
     <Routes>
       <Route path="/" element={<Login />} />
@@ -29,9 +34,14 @@ const App = () => {
             <AdminDashboard navigateToTimesheetEdit={navigateToTimesheetEdit} />
           }
         />
+        <Route
+          path="ManagerDashboard"
+          element={
+            <ManagerDashboard navigateToTimesheetViewing = {navigateToTimesheetViewing} />
+          }
+        />
         <Route path="TimesheetEdit?" element={<TimesheetEdit />} />
-        <Route path="TimesheetViewing" element={<TimesheetViewing />} />
-        <Route path="ManagerDashboard" element={<ManagerDashboard />} />
+        <Route path="TimesheetViewing" element={<TimesheetViewing/>}/>
       </Route>
     </Routes>
   );
