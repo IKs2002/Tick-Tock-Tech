@@ -33,6 +33,7 @@ const getUserData = async (req, res, next) => {
       id: user.email,
       name: user.name,
       status: "Clocked Out",
+      role: user.role,
       locked: false,
     },
   });
@@ -46,6 +47,7 @@ const getAllUsers = async (req, res, next) => {
       id: user.email,
       name: user.name,
       status: "Clocked Out",
+      role: user.role,
       locked: user.accessLock,
     }));
 
@@ -95,9 +97,11 @@ const deleteUserData = async (req, res, next) => {
       return res.status(404).json({ message: "No user found with the provided email." });
     }
   
+    const currentDateAndTime = new Date().toISOString().replace('T', '_').substring(0, 19);
+
     const inactiveUser = new InactiveUser({
       ...user.toObject(),
-      email: `${email}_inactive`,
+      email: `${email}_inactive_${currentDateAndTime}`,
       accessLock: true,
     });
     await inactiveUser.save();
@@ -125,6 +129,7 @@ const editUserData = async (req, res, next) => {
     user.name = updatedData.name || user.name;
     user.email = updatedData.email || user.email;
     user.password = updatedData.password || user.password;
+    user.role = updatedData.role || user.role;
     user.permission = updatedData.permission || user.permission;
 
     await user.save();
@@ -146,4 +151,5 @@ exports.getUserData = getUserData;
 exports.getAllUsers = getAllUsers;
 exports.toggleUserLock = toggleUserLock;
 exports.toggleAllUserLocks = toggleAllUserLocks;
+exports.editUserData = editUserData;
 exports.deleteUserData = deleteUserData;

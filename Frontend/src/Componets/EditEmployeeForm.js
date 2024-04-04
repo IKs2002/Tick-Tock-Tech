@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./EditEmployeeForm.css";
 import Modal from "react-modal";
 import EditButton from "../Photos/AdminDashboardButtons/pencil.png";
@@ -6,11 +6,28 @@ import eye_open from "../Photos/AddEmployeePhotos/eye_open.png";
 import eye_close from "../Photos/AddEmployeePhotos/eye_close.png";
 
 const EditEmployeeForm = ({ employee }) => {
-  const [form, setForm] = useState(employee || { name: "", email: "", password: "" });
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  // Initialize form state with empty values or with values from the employee prop
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "", // Consider security implications of handling passwords
+    // Add other fields as necessary
+  });
 
-  // State for toggling password visibility
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
+
+  // Update form state when employee prop changes
+  useEffect(() => {
+    if (employee) {
+      setForm({
+        name: employee.name,
+        email: employee.email,
+        password: "", // Consider how you handle passwords
+        // Populate other fields as necessary
+      });
+    }
+  }, [employee]);
 
   const handleInputChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -106,10 +123,10 @@ const EditEmployeeForm = ({ employee }) => {
                 {passwordVisible ? <img src={eye_close} alt="Hide Password" style={{ width: "20px" }}/> : <img src={eye_open} alt="Show Password" style={{ width: "20px" }}/>}
               </span>
           </div>
-          {/* select for employee's permission level */}
+          {/* select for employee's role level */}
           <select
-            name="permission"
-            value={form.permission}
+            name="role"
+            value={form.role}
             onChange={handleInputChange}
             className="employee-form-field"
           >

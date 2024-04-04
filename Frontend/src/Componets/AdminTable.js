@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import "./AdminTable.css";
 import AddEmployeeForm from "./AddEmployeeForm";
 import DeleteButton from "../Photos/AdminDashboardButtons/DeleteButton.png";
-import EditButton from "../Photos/AdminDashboardButtons/pencil.png";
 import EditEmployeeForm from "./EditEmployeeForm"
 
 // Defines the AdminTable component responsible for displaying and managing employees in the admin dashboard
@@ -263,6 +262,7 @@ const EditEmployee = (updatedEmployee) => {
     ]);
 
     console.log("Employee added successfully:", newEmployee);
+    fetchAllEmployees();
   };
 
 const fetchAllEmployees = () => {
@@ -297,7 +297,7 @@ const fetchAllEmployees = () => {
       <div className="AdminDashboardTable">
         {/*Search input for adding a new employee */}
         <div className="AdminDashboardInputs">
-          <AddEmployeeForm addEmployee={addEmployee} />
+          <AddEmployeeForm addEmployee={addEmployee}/>
           {/* Search table */}
           <input
             className="AdminDashboard_SearchEmployee"
@@ -344,5 +344,3 @@ const fetchAllEmployees = () => {
 };
 
 export default AdminTable; // export admintable component
-
-//last updated 2/25 -Sierra

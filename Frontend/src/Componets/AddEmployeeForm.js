@@ -25,7 +25,7 @@ const AddEmployeeForm = ({ addEmployee }) => {
     name: "",
     email: "",
     password: generateRandomPassword(), // Update password with a random password
-    permission: "employee", // Default value set to "employee"
+    role: "employee", // Default value set to "employee"
   });
 
   // State for controlling the visibility of the modal
@@ -68,8 +68,8 @@ const AddEmployeeForm = ({ addEmployee }) => {
           id: data.user._id,
           name: data.user.name,
           status: "Clocked Out",
+          role: data.user.role,
           locked: false,
-          permission: form.permission, // Include the permission field
         };
         addEmployee(newEmployee);
 
@@ -78,7 +78,7 @@ const AddEmployeeForm = ({ addEmployee }) => {
           name: "",
           email: "",
           password: generateRandomPassword(),
-          permission: "employee", //set to employee by default
+          role: "employee", //set to employee by default
         });
         setModalIsOpen(false);
       })
@@ -143,10 +143,10 @@ const AddEmployeeForm = ({ addEmployee }) => {
               {passwordVisible ? <img src={eye_close} alt="Hide Password" style={{ width: "20px" }}/> : <img src={eye_open} alt="Show Password" style={{ width: "20px" }}/>}
             </span>
           </div>
-          {/* select for employee's permission level */}
+          {/* select for employee's role level */}
           <select
-            name="permission"
-            value={form.permission}
+            name="role"
+            value={form.role}
             onChange={handleInputChange}
             className="employee-form-field"
           >
@@ -176,11 +176,6 @@ const AddEmployeeForm = ({ addEmployee }) => {
 };
 
 export default AddEmployeeForm;
-
-
-// Metadata comment indicating the creator and last edit date of the file
-//Created and last edited by Seif Ikbarieh on 2/25/2024.
-//updated sierra 4/2/2024
 
 /*Credit for free graphic:
 <a href="https://www.freepik.com/icon/low-vision_7485164#fromView=resource_detail&position=0">Icon by Ivan Abirawa</a>*/

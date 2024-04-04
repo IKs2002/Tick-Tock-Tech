@@ -1,7 +1,7 @@
 /* Modal styling for the Add Employee form, setting dimensions and centering it on the screen */
 .modal {
     width: 45%;
-    height: 50%;
+    height: 60%;
     background-color: #ededed;
     margin-left: auto;
     margin-right: auto;
@@ -100,5 +100,3 @@
     background: none; 
     cursor: pointer;
   }
-  /* Metadata comment indicating the creator and last edit date of the file */
-  /*Created and last edited by Seif Ikbarieh on 2/25/2024.*/
