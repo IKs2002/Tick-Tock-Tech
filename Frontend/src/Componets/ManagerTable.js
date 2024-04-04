@@ -1,14 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ManagerTable.css";
 
 
 const ManagerTable = () => {
-  const [employees] = useState([
-    { id: 1, name: "John Smith", status: "Clocked Out" },
-    { id: 2, name: "Jane Doe", status: "Clocked In" },
-    { id: 3, name: "Emily Johnson", status: "Meal" },
-    { id: 4, name: "Mark Rodgers", status: "Break" },
-  ]);
+  // State to store and manage the list of employees
+  const [employees, setEmployees] = useState([]);
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -25,6 +21,54 @@ const ManagerTable = () => {
     Break: "#7EB6FF", // blue
     Meal: "#FFA114", // yellow
   };
+
+  // Add new employees
+  const addEmployee = (newEmployee) => {
+    console.log("Added employee:");
+    console.log("- ID:", newEmployee.id);
+    console.log("- Name:", newEmployee.name);
+    console.log("- Email:", newEmployee.email);
+    console.log("- Password:", newEmployee.password);
+
+    setEmployees((prevEmployees) => [
+      ...prevEmployees,
+      {
+        id: prevEmployees.length + 1,
+        name: newEmployee.name,
+        status: "Clocked Out",
+        locked: false,
+      },
+    ]);
+
+    console.log("Employee added successfully:", newEmployee);
+    fetchAllEmployees();
+  };
+
+  const fetchAllEmployees = () => {
+    fetch("http://localhost:5000/api/userData/getAll")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        const formattedEmployees = data.map((user) => ({
+          id: user.id,
+          name: user.name,
+          status: user.status || "Clocked Out",
+          locked: user.locked,
+        }));
+        console.log("Response1", formattedEmployees);
+        setEmployees(formattedEmployees);
+      })
+      .catch((error) => console.error("Error:", error));
+  };
+  
+  
+    useEffect(() => {
+      fetchAllEmployees();
+    }, []);
 
   const renderRows = () => {
     return employees
