@@ -31,28 +31,6 @@ const ManagerTable = ({ navigateToTimesheetViewing }) => {
     Meal: "#FFA114", // yellow
   };
 
-  // Add new employees
-  const addEmployee = (newEmployee) => {
-    console.log("Added employee:");
-    console.log("- ID:", newEmployee.id);
-    console.log("- Name:", newEmployee.name);
-    console.log("- Email:", newEmployee.email);
-    console.log("- Password:", newEmployee.password);
-
-    setEmployees((prevEmployees) => [
-      ...prevEmployees,
-      {
-        id: prevEmployees.length + 1,
-        name: newEmployee.name,
-        status: "Clocked Out",
-        locked: false,
-      },
-    ]);
-
-    console.log("Employee added successfully:", newEmployee);
-    fetchAllEmployees();
-  };
-
   const fetchAllEmployees = () => {
     fetch("http://localhost:5000/api/userData/getAll")
       .then((response) => {
