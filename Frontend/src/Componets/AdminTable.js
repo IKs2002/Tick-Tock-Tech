@@ -219,7 +219,7 @@ const AdminTable = ({ navigateToTimesheetEdit }) => {
           <td>
             {/* Edit Button */}
             {/* <button> */}
-              <EditEmployeeForm EditEmployeeForm={EditEmployee} /> 
+              <EditEmployeeForm employee={emp} EditEmployeeForm={EditEmployee} />
             
               {/* <img
                 src={EditButton}
@@ -277,8 +277,10 @@ const fetchAllEmployees = () => {
       const formattedEmployees = data.map((user) => ({
         id: user.id,
         name: user.name,
+        password: user.password,
         status: user.status || "Clocked Out",
         locked: user.locked,
+        role: user.role,
       }));
       console.log("Response1", formattedEmployees);
       setEmployees(formattedEmployees);

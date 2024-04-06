@@ -46,6 +46,7 @@ const getAllUsers = async (req, res, next) => {
     const mapUsers = users.map((user) => ({
       id: user.email,
       name: user.name,
+      password: user.password,
       status: "Clocked Out",
       role: user.role,
       locked: user.accessLock,
@@ -136,7 +137,8 @@ const editUserData = async (req, res, next) => {
 
     // Assuming you have a Timesheet model and want to update the user's info in related timesheets
     // This is a simplistic approach; adjust according to your actual timesheet schema and requirements
-    await Timesheet.updateMany({ "user.id": id }, { "user.name": updatedData.name, "user.email": updatedData.email });
+    await User.updateOne({ email: updatedData.email }, { name: updatedData.name, 
+      password: updatedData.password, role: updatedData.role});
 
     res.status(200).json({ user: user.toObject({ getters: true }) });
   } catch (err) {

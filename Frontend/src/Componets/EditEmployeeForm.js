@@ -4,9 +4,11 @@ import Modal from "react-modal";
 import EditButton from "../Photos/AdminDashboardButtons/pencil.png";
 import eye_open from "../Photos/AddEmployeePhotos/eye_open.png";
 import eye_close from "../Photos/AddEmployeePhotos/eye_close.png";
+Modal.setAppElement('#root');
 
 const EditEmployeeForm = ({ employee }) => {
   // Initialize form state with empty values or with values from the employee prop
+  
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -22,8 +24,9 @@ const EditEmployeeForm = ({ employee }) => {
     if (employee) {
       setForm({
         name: employee.name,
-        email: employee.email,
-        password: "", // Consider how you handle passwords
+        email: employee.id,
+        password: employee.password, // No current password attached to employee object, will wait until further security work
+        role: employee.role
         // Populate other fields as necessary
       });
     }
@@ -42,8 +45,9 @@ const EditEmployeeForm = ({ employee }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Update the employee details on the server
-    fetch(`http://localhost:5000/api/userData/${form.id}`, {
-      method: "PUT",
+    console.log(form);
+    fetch(`http://localhost:5000/api/userData/patchuser/${encodeURIComponent(form.email)}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
@@ -55,9 +59,9 @@ const EditEmployeeForm = ({ employee }) => {
         }
         return response.json();
       })
-      .then((data) => {
+      /*.then((data) => {
         setForm(data); // Update the employee object directly in the UI
-      })
+      })*/
       .catch((error) => {
         console.error("Error:", error);
       });
@@ -90,7 +94,7 @@ const EditEmployeeForm = ({ employee }) => {
             type="text"
             name="name"
             placeholder="Name"
-            value={form.name}
+            value={form.name || ''}
             onChange={handleInputChange}
             required
             autoComplete="off"
@@ -101,7 +105,7 @@ const EditEmployeeForm = ({ employee }) => {
             type="email"
             name="email"
             placeholder="Email"
-            value={form.email}
+            value={form.email || ''}
             required
             autoComplete="off"
             onChange={handleInputChange}
@@ -113,7 +117,7 @@ const EditEmployeeForm = ({ employee }) => {
               type={passwordVisible ? "text" : "password"}
               name="password"
               placeholder="Password"
-              value={form.password}
+              value={form.password || ''}
               required
               onChange={handleInputChange}
               autoComplete="off"
@@ -126,7 +130,7 @@ const EditEmployeeForm = ({ employee }) => {
           {/* select for employee's role level */}
           <select
             name="role"
-            value={form.role}
+            value={form.role || ''}
             onChange={handleInputChange}
             className="employee-form-field"
           >

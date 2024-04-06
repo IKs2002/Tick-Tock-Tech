@@ -123,7 +123,7 @@ const AddEmployeeForm = ({ addEmployee }) => {
             placeholder="Email"
             value={form.email}
             required
-            autocomplete="off"
+            autoComplete="off"
             onChange={handleInputChange}
             className="employee-form-field"
           />
