@@ -18,9 +18,10 @@ const createUser = async (req, res, next) => {
 };
 
 const getUserData = async (req, res, next) => {
+  const email = req.params.uid.split('=')[1];
   let user;
   try {
-    user = await User.findOne({ employeeID: email });
+    user = await User.findOne({ email: email }); // Use findOne instead of find
   } catch (err) {
     return next(err);
   }
@@ -28,16 +29,17 @@ const getUserData = async (req, res, next) => {
   if (!user) {
     return res.status(404).json({ message: "No user found for this ID" });
   }
+
   res.status(200).json({
-    user: {
-      id: user.email,
+      email: user.email,
       name: user.name,
       status: "Clocked Out",
       role: user.role,
       locked: false,
-    },
+    
   });
 };
+
 
 const getAllUsers = async (req, res, next) => {
   try {

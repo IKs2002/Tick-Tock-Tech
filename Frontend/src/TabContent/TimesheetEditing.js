@@ -9,7 +9,7 @@ import moment from "moment";
 const TimesheetEdit = () => {
   const initialWeekStart = startOfWeek(new Date(), { weekStartsOn: 1 });
   const initialWeekEnd = addDays(initialWeekStart, 13);
-
+  
   const initialFirstWeekStart = moment(initialWeekStart).startOf("day");
   const initialSecondWeekEnd = moment(initialWeekEnd).endOf("day");
 
@@ -20,8 +20,8 @@ const TimesheetEdit = () => {
   const [employeeEmail, setEmployeeEmail] = useState("");
 
   const handleWeekChange = (weeks) => {
-    const newFirstWeekStart = moment.utc(weeks.beginning.firstWeekStart).startOf("day").toDate();
-    const newSecondWeekEnd = moment.utc(weeks.ending.secondWeekEnd).endOf("day").toDate();
+    const newFirstWeekStart = moment.utc(weeks.beginning.firstWeekStart).toDate();
+    const newSecondWeekEnd = moment.utc(weeks.ending.secondWeekEnd).toDate();
   
     setFirstWeekStart(newFirstWeekStart);
     setSecondWeekEnd(newSecondWeekEnd);
@@ -55,7 +55,7 @@ const TimesheetEdit = () => {
       const uid = employeeEmail; // Assuming email is the user ID
       const formattedFirstWeekStart = firstWeekStart ? formatDate(firstWeekStart, "MM-dd-yy") : null;
       const formattedSecondWeekEnd = secondWeekEnd ? formatDate(secondWeekEnd, "MM-dd-yy") : null;
-  
+      
       const fetchTimesheetData = async (uid, firstWeekStart, secondWeekEnd) => {
         const url = `http://localhost:5000/api/timeData/get/uid=${uid}&startDate=${firstWeekStart}&endDate=${secondWeekEnd}`;
   

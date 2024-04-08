@@ -15,9 +15,9 @@ const checkURLPatternView = (location) => {
   return pattern.test(pathname + search);
 };
 
-const DefaultPage = () => {
+const DefaultPage = ({user}) => {
   const location = useLocation();
-  
+  console.log(user)
   let Tabprop
   // Set Tabprop based on whether the URL matches the pattern
   Tabprop = checkURLPatternEdit(location) ? "Edit" : "";
@@ -29,9 +29,9 @@ const DefaultPage = () => {
 
   return (
       <div>
-        <Header />
+        <Header name={user.name}/>
         <div className="App">
-          <Tabs prop={Tabprop} />
+          <Tabs prop={Tabprop}  role={user.role} />
           <main>
             <Outlet />
           </main>
