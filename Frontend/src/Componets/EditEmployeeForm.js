@@ -6,6 +6,19 @@ import eye_open from "../Photos/AddEmployeePhotos/eye_open.png";
 import eye_close from "../Photos/AddEmployeePhotos/eye_close.png";
 Modal.setAppElement('#root');
 
+const generateRandomPassword = () => {
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+  let password = "";
+  for (let i = 0; i < 18; i++) {
+    password += characters.charAt(
+      Math.floor(Math.random() * characters.length)
+    );
+  }
+  return password;
+};
+
+
 const EditEmployeeForm = ({ employee }) => {
   // Initialize form state with empty values or with values from the employee prop
   
@@ -41,12 +54,12 @@ const EditEmployeeForm = ({ employee }) => {
     setPasswordVisible(!passwordVisible);
   };
 
-
+  const originalEmail = employee.id;
   const handleSubmit = (e) => {
     e.preventDefault();
     // Update the employee details on the server
     console.log(form);
-    fetch(`http://localhost:5000/api/userData/patchuser/${encodeURIComponent(form.email)}`, {
+    fetch(`http://localhost:5000/api/userData/patchuser/${encodeURIComponent(originalEmail)}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -141,7 +154,10 @@ const EditEmployeeForm = ({ employee }) => {
           {/* Container for form action buttons */}
           <div className="form-buttons">
             {/* Button to submit the form, adding a new employee*/}
-            <button type="ResetPassword" className="ResetPasswordButton">
+            <button type="button" className="ResetPasswordButton" onClick={() =>{
+              const newPassword = generateRandomPassword();
+              setForm({...form, password:newPassword})
+            }}>
               Reset Password
             </button>
             {/* Button to submit the form, updating the existing employee*/}
