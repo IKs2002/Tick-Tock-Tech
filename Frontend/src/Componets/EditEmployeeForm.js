@@ -57,6 +57,7 @@ const EditEmployeeForm = ({ employee }) => {
         if (!response.ok) {
           throw new Error("Failed to update employee details");
         }
+        setModalIsOpen(false);
         return response.json();
       })
       /*.then((data) => {
