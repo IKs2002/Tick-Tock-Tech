@@ -1,9 +1,25 @@
-import React, { useState } from 'react';
-import { startOfWeek, addWeeks, subWeeks, format, addDays, parseISO } from 'date-fns';
-import styles from './WeekPicker.module.css'; // Import the CSS module
+import React, { useState, useEffect } from 'react';
+import { startOfWeek, addWeeks, subWeeks, format, addDays, parseISO, differenceInCalendarWeeks } from 'date-fns';
+import styles from './WeekPicker.module.css';
 
 const WeekPicker = ({ onChange }) => {
-  const [selectedDate, setSelectedDate] = useState(parseISO("2024-04-01"));
+  // Define the start date of the pay periods
+  const payPeriodStartDate = parseISO("2023-01-01"); // Adjust this date to your needs
+
+  // Function to calculate the start of the current pay period
+  const calculateCurrentPayPeriodStart = () => {
+    const today = new Date();
+    const weeksSinceStart = differenceInCalendarWeeks(today, payPeriodStartDate, { weekStartsOn: 1 });
+    const payPeriodsSinceStart = Math.floor(weeksSinceStart / 2); // Assuming each pay period is 2 weeks
+    return addWeeks(payPeriodStartDate, payPeriodsSinceStart * 2);
+  };
+
+  const [selectedDate, setSelectedDate] = useState(calculateCurrentPayPeriodStart());
+
+  useEffect(() => {
+    // Update the pay period on component mount to ensure it's set to the current period
+    updateWeeks(selectedDate);
+  }, [selectedDate]);
 
   const updateWeeks = (newDate) => {
     setSelectedDate(newDate);
@@ -22,22 +38,19 @@ const WeekPicker = ({ onChange }) => {
   };
 
   const handlePrevClick = () => {
-    // Move back by two weeks
     const newDate = subWeeks(selectedDate, 2);
     updateWeeks(newDate);
   };
 
   const handleNextClick = () => {
-    // Move forward by two weeks and also stops at the current pay period.
-    const currentWeekEnd = addDays(startOfWeek(new Date(), { weekStartsOn: 2 }), 6);
-    if (selectedDate < currentWeekEnd) {
+    const currentPayPeriodStart = calculateCurrentPayPeriodStart();
+    if (selectedDate < currentPayPeriodStart) {
       const newDate = addWeeks(selectedDate, 2);
       updateWeeks(newDate);
     }
   };
 
-
-  const formatDate = (date) => format(date, 'MM-dd-yy'); // Format the date as month-date-year (last two digits)
+  const formatDate = (date) => format(date, 'MM-dd-yy');
 
   return (
     <div className={styles.weekPicker}>
