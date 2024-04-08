@@ -6,12 +6,12 @@ import WeekPicker from "../Componets/WeekPicker.js";
 import moment from "moment";
 
 const TimesheetViewing = () => {
-  const initialWeekStart = startOfWeek(new Date(), { weekStartsOn: 1 });
+  const initialWeekStart = startOfWeek(new Date(), { weekStartsOn:  2});
   const initialWeekEnd = addDays(initialWeekStart, 13);
 
   const initialFirstWeekStart = moment(initialWeekStart).startOf("day");
   const initialSecondWeekEnd = moment(initialWeekEnd).endOf("day");
-
+  
   const [firstWeekStart, setFirstWeekStart] = useState(initialFirstWeekStart.toDate());
   const [secondWeekEnd, setSecondWeekEnd] = useState(initialSecondWeekEnd.toDate());
   const [timeSheetData, setTimeSheetData] = useState([]);
@@ -19,14 +19,14 @@ const TimesheetViewing = () => {
   const [employeeEmail, setEmployeeEmail] = useState("");
 
   const handleWeekChange = (weeks) => {
-    const newFirstWeekStart = moment.utc(weeks.beginning.firstWeekStart).startOf("day").toDate();
-    const newSecondWeekEnd = moment.utc(weeks.ending.secondWeekEnd).endOf("day").toDate();
+    const newFirstWeekStart = moment.utc(weeks.beginning.firstWeekStart).toDate();
+    const newSecondWeekEnd = moment.utc(weeks.ending.secondWeekEnd).toDate();
   
     setFirstWeekStart(newFirstWeekStart);
     setSecondWeekEnd(newSecondWeekEnd);
   };
 
-
+  console.log(firstWeekStart, secondWeekEnd)
   useEffect(() => {
     // Parse name and email from URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -43,7 +43,7 @@ const TimesheetViewing = () => {
       const uid = employeeEmail; // Assuming email is the user ID
       const formattedFirstWeekStart = firstWeekStart ? formatDate(firstWeekStart, "MM-dd-yy") : null;
       const formattedSecondWeekEnd = secondWeekEnd ? formatDate(secondWeekEnd, "MM-dd-yy") : null;
-  
+      console.log(formattedFirstWeekStart, formattedSecondWeekEnd)
       const fetchTimesheetData = async (uid, firstWeekStart, secondWeekEnd) => {
         const url = `http://localhost:5000/api/timeData/get/uid=${uid}&startDate=${firstWeekStart}&endDate=${secondWeekEnd}`;
   

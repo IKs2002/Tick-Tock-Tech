@@ -4,12 +4,13 @@ import logout from "../Photos/HeaderPhotos/Logout.png";
 import "./Header.css";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({name}) => {
+  console.log(name)
   return (
     <div className="MainHeaders">
       <img src={Logo} alt=" not found" className="Logos" />
       <nav className="temp">
-        <label className="header-buttons">Welcome, User</label>
+        <label className="header-buttons">Welcome, {name} </label>
         <Link to="/">
           <button className="header-buttons">
             <img src={logout} alt="not found" className="buttonImage" />

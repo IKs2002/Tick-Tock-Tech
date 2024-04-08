@@ -5,7 +5,7 @@ import TimeSheet from "../Componets/TimeSheet.js";
 import { startOfWeek, addDays, startOfDay, format as formatDate } from "date-fns";
 import moment from "moment";
 
-const PersonalTimeSheet = () => {
+const PersonalTimeSheet = ({userName, userEmail}) => {
   // Initialize initial dates in local time zone
   const initialWeekStart = startOfDay(startOfWeek(new Date(), { weekStartsOn: 1 }));
   const initialWeekEnd = startOfDay(addDays(initialWeekStart, 13));
@@ -26,7 +26,7 @@ const PersonalTimeSheet = () => {
     setSecondWeekEnd(newSecondWeekEnd);
   };
 
-  const uid = 'test@ddf.com';
+  const uid = userEmail;
   
   const fetchTimesheetData = async (uid, firstWeekStart, secondWeekEnd) => {
     console.log(firstWeekStart, secondWeekEnd)
@@ -47,7 +47,7 @@ const PersonalTimeSheet = () => {
       return await response.json();
     }
   };
-
+  console.log(firstWeekStart, secondWeekEnd)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -76,14 +76,14 @@ const PersonalTimeSheet = () => {
         ref={docToPrint}
         start={formattedFirstWeekStart}
         end={formattedSecondWeekEnd}
-        name={name}
+        name={userName}
       />
       <div ref={docToPrint}>
         <div>
           <WeekPicker onChange={handleWeekChange} />
         </div>
         <div>
-          <label className="EmpName">Employee Name</label>
+          <label className="EmpName">{userName}</label>
         </div>
         <div>
           <TimeSheet timeData={timeSheetData} />

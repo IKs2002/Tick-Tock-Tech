@@ -18,9 +18,10 @@ const createUser = async (req, res, next) => {
 };
 
 const getUserData = async (req, res, next) => {
+  const email = req.params.uid.split('=')[1];
   let user;
   try {
-    user = await User.findOne({ employeeID: email });
+    user = await User.findOne({ email: email }); // Use findOne instead of find
   } catch (err) {
     return next(err);
   }
@@ -28,16 +29,17 @@ const getUserData = async (req, res, next) => {
   if (!user) {
     return res.status(404).json({ message: "No user found for this ID" });
   }
+
   res.status(200).json({
-    user: {
-      id: user.email,
+      email: user.email,
       name: user.name,
       status: "Clocked Out",
       role: user.role,
       locked: false,
-    },
+    
   });
 };
+
 
 const getAllUsers = async (req, res, next) => {
   try {
@@ -120,26 +122,31 @@ const editUserData = async (req, res, next) => {
   const email = req.params.email; // Assuming you're using the user's ID in the URL
   const updatedData = req.body;
 
+  // Check for blank values in updatedData
+  const hasBlankValues = Object.values(updatedData).some(value => value === '');
+  if (hasBlankValues) {
+    return res.status(400).json({ message: "Blank values are not allowed." });
+  }
+
   try {
     const user = await User.findOne({ email: email });
     if (!user) {
       return res.status(404).json({ message: "User not found." });
     }
-
+  
     // Update user fields
+  
+    
     user.name = updatedData.name || user.name;
     user.email = updatedData.email || user.email;
     user.password = updatedData.password || user.password;
     user.role = updatedData.role || user.role;
     user.permission = updatedData.permission || user.permission;
-
     await user.save();
 
-    // Assuming you have a Timesheet model and want to update the user's info in related timesheets
-    // This is a simplistic approach; adjust according to your actual timesheet schema and requirements
     await User.updateOne({ email: updatedData.email }, { name: updatedData.name, 
       password: updatedData.password, role: updatedData.role});
-
+    
     res.status(200).json({ user: user.toObject({ getters: true }) });
   } catch (err) {
     console.error(err);
