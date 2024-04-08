@@ -40,7 +40,7 @@ const PersonalTimeSheet = ({userName, userEmail}) => {
         "Access-Control-Allow-Origin": "*",
       },
     });
-
+    console.log(response)
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     } else {
@@ -54,6 +54,7 @@ const PersonalTimeSheet = ({userName, userEmail}) => {
         const data = await fetchTimesheetData(uid, firstWeekStart, secondWeekEnd);
         if (data && data.timesheets) {
           setTimeSheetData(data.timesheets);
+          console.log(data.timesheets)
         }
       } catch (error) {
         console.error("Failed to fetch timesheet data:", error);
@@ -64,7 +65,7 @@ const PersonalTimeSheet = ({userName, userEmail}) => {
   }, [uid, firstWeekStart, secondWeekEnd]);
 
  
-  const name = "Employee Name";
+
   const formattedFirstWeekStart = firstWeekStart ? formatDate(firstWeekStart, "MM-dd-yy") : null;
   const formattedSecondWeekEnd = secondWeekEnd ? formatDate(secondWeekEnd, "MM-dd-yy") : null;
 

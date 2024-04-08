@@ -1,5 +1,5 @@
 // Import the necessary dependencies
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Login from "./Pages/LoginPage";
 import DefaultPage from "./Pages/DefaultPage";
@@ -16,9 +16,19 @@ const App = () => {
   // State to hold user properties
   const [user, setUser] = useState(null);
 
+  // Check for user data in local storage on component mount
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
   // Function to set user properties after login
   const handleLogin = (userData) => {
     setUser(userData);
+    // Store user data in local storage
+    localStorage.setItem('user', JSON.stringify(userData));
     navigate("/Home/PersonalTimeSheet"); // Redirect to Home after login
   };
 

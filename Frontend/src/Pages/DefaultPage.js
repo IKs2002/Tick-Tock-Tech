@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "./Header";
 import Tabs from "../Componets/Tabs";
@@ -15,28 +15,34 @@ const checkURLPatternView = (location) => {
   return pattern.test(pathname + search);
 };
 
-const DefaultPage = ({user}) => {
+const DefaultPage = ({ user: initialUser }) => {
   const location = useLocation();
-  console.log(user)
-  let Tabprop
+  const [user, setUser] = useState(initialUser); // State to store the user data
+
+  // Update user state when initialUser prop changes
+  useEffect(() => {
+    setUser(initialUser);
+  }, [initialUser]);
+
+  let Tabprop;
   // Set Tabprop based on whether the URL matches the pattern
   Tabprop = checkURLPatternEdit(location) ? "Edit" : "";
-  if(Tabprop === "")
-  {
+  if (Tabprop === "") {
     Tabprop = checkURLPatternView(location) ? "View" : "";
   }
-  console.log(Tabprop);
 
   return (
-      <div>
-        <Header name={user.name}/>
-        <div className="App">
-          <Tabs prop={Tabprop}  role={user.role} />
-          <main>
-            <Outlet />
-          </main>
-        </div>
+    <div>
+      {/* Pass the user name to the Header component */}
+      <Header name={user.name} />
+      <div className="App">
+        {/* Pass the user role to the Tabs component */}
+        <Tabs prop={Tabprop} role={user.role} />
+        <main>
+          <Outlet />
+        </main>
       </div>
+    </div>
   );
 };
 

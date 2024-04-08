@@ -154,6 +154,34 @@ const editUserData = async (req, res, next) => {
   }
 };
 
+const login = async (req, res, next) => {
+  const { email, password } = req.body;
+  try {
+    // Find the user by email
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: "User does not exist" });
+    }
+
+    // Check if the provided password matches the user's password
+    if (user.password !== password) {
+      return res.status(401).json({ message: "Incorrect Password" });
+    }
+
+    // Return the user data upon successful authentication
+    res.status(200).json({
+      email: user.email,
+      name: user.name,
+      status: user.status || "Clocked Out",
+      locked: user.locked,
+      role: user.role,
+    });
+  } catch (err) {
+    return next(err);
+  }
+};
+
 
 exports.createUser = createUser;
 exports.getUserData = getUserData;
@@ -162,3 +190,4 @@ exports.toggleUserLock = toggleUserLock;
 exports.toggleAllUserLocks = toggleAllUserLocks;
 exports.editUserData = editUserData;
 exports.deleteUserData = deleteUserData;
+exports.login = login
