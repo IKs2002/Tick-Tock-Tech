@@ -204,7 +204,7 @@ const WeekTotal = [{ Regular: "000", Overtime: "000" }];
 
 // Main component function
 const EditableTimeSheet = ({ children, editable = true }) => (
-  <td contentEditable={editable}>{children}</td>
+  <td contentEditable={editable} suppressContentEditableWarning>{children}</td>
 );
 
 function TimeSheet({ editable = false, timeData }) {
