@@ -15,7 +15,7 @@ const Login = ({ handleLogin }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: username, // Assuming the API expects 'email' instead of 'username'
+          email: username,
           password: password,
         }),
       });
@@ -28,7 +28,6 @@ const Login = ({ handleLogin }) => {
       console.log("Response Data:", data);
 
       if (typeof data === "object" && data !== null) {
-        // Assuming the response contains user data if authentication is successful
         const formattedEmployee = {
           email: data.email,
           name: data.name,
@@ -45,18 +44,22 @@ const Login = ({ handleLogin }) => {
     } catch (error) {
       console.error("Error:", error);
       alert("Username or Password was incorrect!")
-      // Handle network error or other exceptions here
     }
   };
 
   const handleLoginClick = () => {
-    // Check if both username and password are filled
     if (username.trim() === "" || password.trim() === "") {
       alert("Please fill in both username and password.");
       return;
     }
-    // Perform login process
     fetchUserData();
+  };
+
+  // Function to handle key press event
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleLoginClick(); // Call handleLoginClick when Enter key is pressed
+    }
   };
 
   return (
@@ -85,11 +88,11 @@ const Login = ({ handleLogin }) => {
           required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          onKeyPress={handleKeyPress} // Call handleKeyPress on key press
         />
         <Link to="PasswordRecovery">
           <div className="PasswordRecovery">Forgot your password?</div>
         </Link>
-        {/* Call handleLoginClick when the button is clicked */}
         <button
           className="loginbutton"
           type="button"
