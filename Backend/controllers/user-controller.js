@@ -122,12 +122,6 @@ const editUserData = async (req, res, next) => {
   const email = req.params.email; // Assuming you're using the user's ID in the URL
   const updatedData = req.body;
 
-  // Check for blank values in updatedData
-  const hasBlankValues = Object.values(updatedData).some(value => value === '');
-  if (hasBlankValues) {
-    return res.status(400).json({ message: "Blank values are not allowed." });
-  }
-
   try {
     const user = await User.findOne({ email: email });
     if (!user) {
@@ -144,8 +138,8 @@ const editUserData = async (req, res, next) => {
     user.permission = updatedData.permission || user.permission;
     await user.save();
 
-    await User.updateOne({ email: updatedData.email }, { name: updatedData.name, 
-      password: updatedData.password, role: updatedData.role});
+    await User.updateOne({ email: user.email }, { name: user.name, 
+      password: user.password, role: user.role});
     
     res.status(200).json({ user: user.toObject({ getters: true }) });
   } catch (err) {

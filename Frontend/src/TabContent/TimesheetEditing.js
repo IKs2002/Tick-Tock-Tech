@@ -33,7 +33,27 @@ const TimesheetEdit = () => {
     const isConfirmed = window.confirm("Are you sure you want to save changes?");
     if (isConfirmed) {
       // Implement the save logic here
-      console.log("Changes saved");
+    timeSheetData.forEach((timesheet) => {
+      fetch(`http://localhost:5000/api/timeData/put/${timesheet.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(timesheet),
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to update timesheet data');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Timesheet updated successfully', data);
+      })
+      .catch(error => {
+        console.error('Error updating timesheet:', error);
+      });
+    });
     } else {
       console.log("Save cancelled");
     }
@@ -97,11 +117,11 @@ const TimesheetEdit = () => {
       <div>
         <label className="EmpName">{employeeName}</label>
       </div>
-      <container className="tableArea">
+      <div className="tableArea">
         <div className="TimesheetArea">
           <TimeSheet editable={true} timeData={timeSheetData}/>
         </div>
-      </container>
+      </div>
     </div>
   );
 };
