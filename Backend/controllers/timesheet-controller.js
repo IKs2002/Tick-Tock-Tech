@@ -111,6 +111,55 @@ const updateTimeData = async (req, res, next) => {
     .json({ timesheet: existingTimesheet.toObject({ getters: true }) });
 };
 
+const updateTimesheetFromChatbot = async (req, res) => {
+
+  /*
+    Path used to find the timesheet for a specific user and date and update a specific field:
+    http://localhost:5000/api/timeData/updateTimesheetFromChatbot/test@ddf.com&2024-03-04
+
+    Example body in raw JSON format:
+    {
+        "fieldToUpdate": "clockIn", // Example field to update
+        "newValue": 8:00 AM // Example new value
+    }
+ */
+
+  
+  const email = req.params.email;
+  const date = req.params.date;
+  const fieldToUpdate = req.body.fieldToUpdate;
+  const newValue = req.body.newValue;
+
+  try {
+      // Ensure the date is parsed correctly
+      const targetDate = new Date(date);
+
+      console.log('Updating timesheet for:', email, 'on date:', targetDate);
+
+      const timesheet = await Timesheet.findOne({
+          employeeID: email,
+          date: targetDate 
+      });
+
+      if (!timesheet) {
+          return res.status(404).json({ message: 'Timesheet not found for the specified user and date.' });
+      }
+
+      // Update the specific field of the timesheet
+      timesheet[fieldToUpdate] = newValue;
+
+      // Save the updated timesheet
+      await timesheet.save();
+
+      res.status(200).json({ message: 'Timesheet updated successfully.', timesheet });
+  } catch (err) {
+      console.error('Failed to update timesheet:', err);
+      res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+
+
 // const deleteTimeData = async (req, res, next) => {
 //     const timesheetId = req.params.tid;
 
@@ -131,4 +180,5 @@ const updateTimeData = async (req, res, next) => {
 exports.getTimeData = getTimeData;
 exports.createTimesheet = createTimesheet;
 exports.updateTimeData = updateTimeData;
+exports.updateTimesheetFromChatbot = updateTimesheetFromChatbot;
 // exports.deleteTimeData = deleteTimeData;
