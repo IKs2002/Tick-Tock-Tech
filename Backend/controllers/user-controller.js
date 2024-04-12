@@ -13,7 +13,7 @@ const createUser = async (req, res, next) => {
   } catch (err) {
     return next(err);
   }
-
+  
   res.status(201).json({ user: newUser.toObject({ getters: true }) });
 };
 
