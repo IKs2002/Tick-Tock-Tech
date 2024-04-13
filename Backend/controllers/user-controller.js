@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const User = require("../models/User");
 const InactiveUser = require("../models/InactiveUser");
+const {createNewUserPayPeriod } = require("./payperiods-controller");
+
 
 const createUser = async (req, res, next) => {
   const userData = req.body;
@@ -13,7 +15,7 @@ const createUser = async (req, res, next) => {
   } catch (err) {
     return next(err);
   }
-  
+  createNewUserPayPeriod(newUser.email);
   res.status(201).json({ user: newUser.toObject({ getters: true }) });
 };
 

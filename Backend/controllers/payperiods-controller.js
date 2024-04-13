@@ -4,7 +4,51 @@ const User = require("../models/User");
 const PayPeriod = require("../models/PayPeriod");
 
 
-async function createTimesheetPayPeriod() {
+async function createNewUserPayPeriod(user_email) {
+    const lastPayPeriod = await PayPeriod.findOne().sort({ endDate: -1 }).exec();
+
+
+    const startDate = new Date(lastPayPeriod.startDate);
+    
+
+    // Calculate the end date of the new pay period (14 days after the start date)
+    const endDate = new Date(lastPayPeriod.endDate);
+    
+
+
+
+    const users = await User.findOne({email : user_email});
+    for (let currentDateIterator = new Date(startDate); currentDateIterator <= endDate; currentDateIterator.setDate(currentDateIterator.getDate() + 1)) {
+        const currentDate = new Date(currentDateIterator); // Create a new Date object for each iteration
+        currentDate.setUTCHours(0, 0, 0, 0);
+        const dayOfWeek = currentDate.toLocaleDateString('en-US', { weekday: 'long' }); // Get the day of the week
+
+        // Create a new timesheet entry for each date
+        const newTimesheet = new Timesheet({
+            day: dayOfWeek,
+            date: currentDate,
+            project: "",
+            regular: "",
+            overtime: "",
+            employeeID: users.email,
+            clockIn1: "",
+            clockOut1: "",
+            clockIn2: "",
+            clockOut2: "",
+            clockIn3: "",
+            clockOut3: ""
+        });
+    
+        await newTimesheet.save();
+        console.log(`Timesheet created for user ${users.email}:`, newTimesheet);
+    }
+
+}
+
+
+
+
+async function createTimesheetPayPeriod(user_email) {
     try {
         // Find the last end date of the previous pay period
         let lastEndDate = new Date('2024-3-03');
@@ -76,7 +120,7 @@ async function createTimesheetPayPeriod() {
 }
 
 exports.createTimesheetPayPeriod = createTimesheetPayPeriod;
-
+exports.createNewUserPayPeriod = createNewUserPayPeriod;
 
 
 
