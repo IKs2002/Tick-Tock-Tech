@@ -123,12 +123,11 @@ const updateTimesheetFromChatbot = async (req, res) => {
         "newValue": 8:00 AM // Example new value
     }
  */
-
+  
   
   const email = req.params.email;
-  const date = req.params.date;
-  const fieldToUpdate = req.body.fieldToUpdate;
-  const newValue = req.body.newValue;
+  const status = req.params.status;
+  const clockin = req.params.clockin;
 
   try {
       // Ensure the date is parsed correctly
