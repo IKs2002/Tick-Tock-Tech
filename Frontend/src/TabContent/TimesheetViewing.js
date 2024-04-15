@@ -82,13 +82,13 @@ const TimesheetViewing = () => {
         </div>
       </div>
       <div>
-        <label class="EmpName">{employeeName}</label>
+        <label className="EmpName">{employeeName}</label>
       </div>
-      <container class="tableArea">
-        <div class="TimesheetArea">
+      <div className="tableArea">
+        <div className="TimesheetArea">
           <TimeSheet timeData={timeSheetData}/>
         </div>
-      </container>
+      </div>
     </div>
   );
 };

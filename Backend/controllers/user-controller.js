@@ -159,20 +159,24 @@ const login = async (req, res, next) => {
     if (!user) {
       return res.status(404).json({ message: "User does not exist" });
     }
-
+    if(user.accessLock === true) {
+      res.status(401).json({message: "Account is Locked. Contact Admin"});
+    }
     // Check if the provided password matches the user's password
-    if (user.password !== password) {
-      return res.status(401).json({ message: "Incorrect Password" });
+    if (user.password === password) {
+      res.status(200).json({
+        email: user.email,
+        name: user.name,
+        status: user.status || "Clocked Out",
+        locked: user.locked,
+        role: user.role,
+      });
+      ;
     }
 
+    return res.status(401).json({ message: "Incorrect Password" })
     // Return the user data upon successful authentication
-    res.status(200).json({
-      email: user.email,
-      name: user.name,
-      status: user.status || "Clocked Out",
-      locked: user.locked,
-      role: user.role,
-    });
+   
   } catch (err) {
     return next(err);
   }
