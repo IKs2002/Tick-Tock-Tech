@@ -4,8 +4,6 @@ const timesheetSchema = new mongoose.Schema({
     day: String,
     date: Date,
     project: String,
-    regular: Number,
-    overtime: Number, 
     employeeID: String,
     clockIn1: String, 
     clockOut1: String, 

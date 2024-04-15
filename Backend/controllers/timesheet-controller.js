@@ -76,8 +76,6 @@ const updateTimeData = async (req, res, next) => {
 
     timeSheet = updatedData.project || timeSheet.project;
     timeSheet.project = updatedData.project || timeSheet.project;
-    timeSheet.regular = updatedData.regular || timeSheet.regular;
-    timeSheet.overtime = updatedData.overtime || timeSheet.overtime;
     timeSheet.employeeID = updatedData.employeeID || timeSheet.employeeID;
     timeSheet.clockIn1 = updatedData.clockIn1 || timeSheet.clockIn1;
     timeSheet.clockOut1 = updatedData.clockOut1 || timeSheet.clockOut1;
@@ -89,8 +87,6 @@ const updateTimeData = async (req, res, next) => {
 
     await Timesheet.updateOne({_id:ObjectID(timesheetID)}, {
       project: timeSheet.project, 
-      regular: timeSheet.regular, 
-      overtime: timeSheet.overtime, 
       employeeID: timeSheet.employeeID, 
       clockIn1: timeSheet.clockIn1, 
       clockOut1: timeSheet.clockOut1, 

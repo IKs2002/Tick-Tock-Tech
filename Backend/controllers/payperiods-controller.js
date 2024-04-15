@@ -28,8 +28,6 @@ async function createNewUserPayPeriod(user_email) {
             day: dayOfWeek,
             date: currentDate,
             project: "",
-            regular: "",
-            overtime: "",
             employeeID: users.email,
             clockIn1: "",
             clockOut1: "",
@@ -62,9 +60,9 @@ async function createTimesheetPayPeriod(user_email) {
 
         // Check if the current date is greater than the end date of the last pay period
         if (currentDate > lastEndDate) {
-            // Calculate the start date of the new pay period (1 day after the end date of the last one)
-            const startDate = new Date(lastEndDate);
-            startDate.setDate(startDate.getDate() + 1);
+            // Calculate the start date of the new pay period (next Monday)
+            const startDate = new Date();
+            startDate.setDate(startDate.getDate() + (1 + 7 - startDate.getDay()) % 7); // Find the next Monday
 
             // Calculate the end date of the new pay period (14 days after the start date)
             const endDate = new Date(startDate);
@@ -121,7 +119,3 @@ async function createTimesheetPayPeriod(user_email) {
 
 exports.createTimesheetPayPeriod = createTimesheetPayPeriod;
 exports.createNewUserPayPeriod = createNewUserPayPeriod;
-
-
-
-

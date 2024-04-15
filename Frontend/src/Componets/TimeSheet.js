@@ -5,195 +5,6 @@ import moment from "moment";
 //import moment from 'moment' //we will need this to switch between 24 horu and AM/PM
 //import DataTable from "react-data-table-component";
 
-// Sample data for timesheet entries
-// const data = [
-//   {
-//     Day: "Monday",
-//     Date: "## XXX ####",
-//     Clockin1: "##:## AM",
-//     Clockout1: "##:## AM",
-//     Clockin2: "##:## AM",
-//     Clockout2: "##:## AM",
-//     Clockin3: "##:## AM",
-//     Clockout3: "##:## AM",
-//     Project: "XXXXXXXXXXXXXX",
-//     Regular: "XX hrs",
-//     Overtime: "XX hrs",
-//   },
-//   {
-//     Day: "Tuesday",
-//     Date: "## XXX ####",
-//     Clockin1: "##:## AM",
-//     Clockout1: "##:## AM",
-//     Clockin2: "##:## AM",
-//     Clockout2: "##:## AM",
-//     Clockin3: "##:## AM",
-//     Clockout3: "##:## AM",
-//     Project: "XXXXXXXXXXXXXX",
-//     Regular: "XX hrs",
-//     Overtime: "XX hrs",
-//   },
-//   {
-//     Day: "Wednesday",
-//     Date: "## XXX ####",
-//     Clockin1: "##:## AM",
-//     Clockout1: "##:## AM",
-//     Clockin2: "##:## AM",
-//     Clockout2: "##:## AM",
-//     Clockin3: "##:## AM",
-//     Clockout3: "##:## AM",
-//     Project: "XXXXXXXXXXXXXX",
-//     Regular: "XX hrs",
-//     Overtime: "XX hrs",
-//   },
-//   {
-//     Day: "Thursday",
-//     Date: "## XXX ####",
-//     Clockin1: "##:## AM",
-//     Clockout1: "##:## AM",
-//     Clockin2: "##:## AM",
-//     Clockout2: "##:## AM",
-//     Clockin3: "##:## AM",
-//     Clockout3: "##:## AM",
-//     Project: "XXXXXXXXXXXXXX",
-//     Regular: "XX hrs",
-//     Overtime: "XX hrs",
-//   },
-//   {
-//     Day: "Friday",
-//     Date: "## XXX ####",
-//     Clockin1: "##:## AM",
-//     Clockout1: "##:## AM",
-//     Clockin2: "##:## AM",
-//     Clockout2: "##:## AM",
-//     Clockin3: "##:## AM",
-//     Clockout3: "##:## AM",
-//     Project: "XXXXXXXXXXXXXX",
-//     Regular: "XX hrs",
-//     Overtime: "XX hrs",
-//   },
-//   {
-//     Day: "Saturday",
-//     Date: "## XXX ####",
-//     Clockin1: "##:## AM",
-//     Clockout1: "##:## AM",
-//     Clockin2: "##:## AM",
-//     Clockout2: "##:## AM",
-//     Clockin3: "##:## AM",
-//     Clockout3: "##:## AM",
-//     Project: "XXXXXXXXXXXXXX",
-//     Regular: "XX hrs",
-//     Overtime: "XX hrs",
-//   },
-//   {
-//     Day: "Sunday",
-//     Date: "## XXX ####",
-//     Clockin1: "##:## AM",
-//     Clockout1: "##:## AM",
-//     Clockin2: "##:## AM",
-//     Clockout2: "##:## AM",
-//     Clockin3: "##:## AM",
-//     Clockout3: "##:## AM",
-//     Project: "XXXXXXXXXXXXXX",
-//     Regular: "XX hrs",
-//     Overtime: "XX hrs",
-//   },
-// ];
-
-// Duplicate of the above data
-// const data1 = [
-//   {
-//     Day: "Monday",
-//     Date: "## XXX ####",
-//     Clockin1: "##:## AM",
-//     Clockout1: "##:## AM",
-//     Clockin2: "##:## AM",
-//     Clockout2: "##:## AM",
-//     Clockin3: "##:## AM",
-//     Clockout3: "##:## AM",
-//     Project: "XXXXXXXXXXXXXX",
-//     Regular: "XX hrs",
-//     Overtime: "XX hrs",
-//   },
-//   {
-//     Day: "Tuesday",
-//     Date: "## XXX ####",
-//     Clockin1: "##:## AM",
-//     Clockout1: "##:## AM",
-//     Clockin2: "##:## AM",
-//     Clockout2: "##:## AM",
-//     Clockin3: "##:## AM",
-//     Clockout3: "##:## AM",
-//     Project: "XXXXXXXXXXXXXX",
-//     Regular: "XX hrs",
-//     Overtime: "XX hrs",
-//   },
-//   {
-//     Day: "Wednesday",
-//     Date: "## XXX ####",
-//     Clockin1: "##:## AM",
-//     Clockout1: "##:## AM",
-//     Clockin2: "##:## AM",
-//     Clockout2: "##:## AM",
-//     Clockin3: "##:## AM",
-//     Clockout3: "##:## AM",
-//     Project: "XXXXXXXXXXXXXX",
-//     Regular: "XX hrs",
-//     Overtime: "XX hrs",
-//   },
-//   {
-//     Day: "Thursday",
-//     Date: "## XXX ####",
-//     Clockin1: "##:## AM",
-//     Clockout1: "##:## AM",
-//     Clockin2: "##:## AM",
-//     Clockout2: "##:## AM",
-//     Clockin3: "##:## AM",
-//     Clockout3: "##:## AM",
-//     Project: "XXXXXXXXXXXXXX",
-//     Regular: "XX hrs",
-//     Overtime: "XX hrs",
-//   },
-//   {
-//     Day: "Friday",
-//     Date: "## XXX ####",
-//     Clockin1: "##:## AM",
-//     Clockout1: "##:## AM",
-//     Clockin2: "##:## AM",
-//     Clockout2: "##:## AM",
-//     Clockin3: "##:## AM",
-//     Clockout3: "##:## AM",
-//     Project: "XXXXXXXXXXXXXX",
-//     Regular: "XX hrs",
-//     Overtime: "XX hrs",
-//   },
-//   {
-//     Day: "Saturday",
-//     Date: "## XXX ####",
-//     Clockin1: "##:## AM",
-//     Clockout1: "##:## AM",
-//     Clockin2: "##:## AM",
-//     Clockout2: "##:## AM",
-//     Clockin3: "##:## AM",
-//     Clockout3: "##:## AM",
-//     Project: "XXXXXXXXXXXXXX",
-//     Regular: "XX hrs",
-//     Overtime: "XX hrs",
-//   },
-//   {
-//     Day: "Sunday",
-//     Date: "## XXX ####",
-//     Clockin1: "##:## AM",
-//     Clockout1: "##:## AM",
-//     Clockin2: "##:## AM",
-//     Clockout2: "##:## AM",
-//     Clockin3: "##:## AM",
-//     Clockout3: "##:## AM",
-//     Project: "XXXXXXXXXXXXXX",
-//     Regular: "XX hrs",
-//     Overtime: "XX hrs",
-//   },
-// ];
 
 // Pay period data, likely intended for summary information
 const Paydata = [{ PeriodRegular: "000", PeriodOvertime: "000" }];
@@ -242,6 +53,42 @@ function TimeSheet({ editable = false, timeData }) {
           {/* Mapping data to table rows */}
           <tbody>
           {firstHalf.map((val, key) => {
+            // Calculate the time difference in hours and minutes for each period
+            let hoursWorked1 = 0;
+            if (val.clockIn1 && val.clockOut1) {
+                const clockIn1 = moment(val.clockIn1, 'h:mm A');
+                const clockOut1 = moment(val.clockOut1, 'h:mm A');
+                hoursWorked1 = clockOut1.diff(clockIn1, 'minutes') / 60;
+            }
+
+            let hoursWorked2 = 0;
+            if (val.clockIn2 && val.clockOut2) {
+                const clockIn2 = moment(val.clockIn2, 'h:mm A');
+                const clockOut2 = moment(val.clockOut2, 'h:mm A');
+                hoursWorked2 = clockOut2.diff(clockIn2, 'minutes') / 60;
+            }
+
+            let hoursWorked3 = 0;
+            if (val.clockIn3 && val.clockOut3) {
+                const clockIn3 = moment(val.clockIn3, 'h:mm A');
+                const clockOut3 = moment(val.clockOut3, 'h:mm A');
+                hoursWorked3 = clockOut3.diff(clockIn3, 'minutes') / 60;
+            }
+
+            let totalHoursWorked = hoursWorked1 + hoursWorked2 + hoursWorked3;
+
+            let overtimeHours = 0;
+            if (totalHoursWorked > 8) {
+              overtimeHours = totalHoursWorked - 8;
+              totalHoursWorked = 8;
+            }
+
+            const hours = Math.floor(totalHoursWorked);
+            const minutes = Math.round((totalHoursWorked - hours) * 60);
+
+            const overtimeHoursDisplay = Math.floor(overtimeHours);
+            const overtimeMinutes = Math.round((overtimeHours - overtimeHoursDisplay) * 60);
+
             return (
               <tr key={key}>
                 {/* Displaying each piece of data in its respective column */}
@@ -272,10 +119,10 @@ function TimeSheet({ editable = false, timeData }) {
                   {val.project}
                 </EditableTimeSheet>
                 <EditableTimeSheet editable={editable} name="regular">
-                  {val.regular}
+                  {totalHoursWorked ? `${hours}.${minutes}` : '0.0'} {/* Display calculated total hours worked in decimal form or '0.0' if no entry */}
                 </EditableTimeSheet>
                 <EditableTimeSheet editable={editable} name="overtime">
-                  {val.overtime}
+                  {overtimeHours ? `${overtimeHoursDisplay}.${overtimeMinutes}` : '0.0'} {/* Display overtime hours in decimal form or '0.0' if no overtime */}
                 </EditableTimeSheet>
               </tr>
             );
@@ -335,40 +182,76 @@ function TimeSheet({ editable = false, timeData }) {
           </thead>
           <tbody>
           {secondHalf.map((val, key) => {
+            // Calculate the time difference in hours and minutes for each period in the second half
+            let hoursWorked1 = 0;
+            if (val.clockIn1 && val.clockOut1) {
+                const clockIn1 = moment(val.clockIn1, 'h:mm A');
+                const clockOut1 = moment(val.clockOut1, 'h:mm A');
+                hoursWorked1 = clockOut1.diff(clockIn1, 'minutes') / 60;
+            }
+
+            let hoursWorked2 = 0;
+            if (val.clockIn2 && val.clockOut2) {
+                const clockIn2 = moment(val.clockIn2, 'h:mm A');
+                const clockOut2 = moment(val.clockOut2, 'h:mm A');
+                hoursWorked2 = clockOut2.diff(clockIn2, 'minutes') / 60;
+            }
+
+            let hoursWorked3 = 0;
+            if (val.clockIn3 && val.clockOut3) {
+                const clockIn3 = moment(val.clockIn3, 'h:mm A');
+                const clockOut3 = moment(val.clockOut3, 'h:mm A');
+                hoursWorked3 = clockOut3.diff(clockIn3, 'minutes') / 60;
+            }
+
+            let totalHoursWorked = hoursWorked1 + hoursWorked2 + hoursWorked3;
+
+            let overtimeHours = 0;
+            if (totalHoursWorked > 8) {
+              overtimeHours = totalHoursWorked - 8;
+              totalHoursWorked = 8;
+            }
+
+            const hours = Math.floor(totalHoursWorked);
+            const minutes = Math.round((totalHoursWorked - hours) * 60);
+
+            const overtimeHoursDisplay = Math.floor(overtimeHours);
+            const overtimeMinutes = Math.round((overtimeHours - overtimeHoursDisplay) * 60);
+
             return (
               
               <tr key={key}>
                 <td>{val.day}</td>
                 <td>{moment.utc(val.date).format("MM-DD-YY")}</td>
-                <EditableTimeSheet editable={editable}>
+                <EditableTimeSheet editable={editable} name="clockIn1">
                   {val.clockIn1}
                 </EditableTimeSheet>
-                <EditableTimeSheet editable={editable}>
+                <EditableTimeSheet editable={editable} name="clockOut1">
                   {val.clockOut1}
                 </EditableTimeSheet>
                 <td></td>
-                <EditableTimeSheet editable={editable}>
+                <EditableTimeSheet editable={editable} name="clockIn2">
                   {val.clockIn2}
                 </EditableTimeSheet>
-                <EditableTimeSheet editable={editable}>
+                <EditableTimeSheet editable={editable} name="clockOut2">
                   {val.clockOut2}
                 </EditableTimeSheet>
                 <td></td>
-                <EditableTimeSheet editable={editable}>
+                <EditableTimeSheet editable={editable} name="clockIn3">
                   {val.clockIn3}
                 </EditableTimeSheet>
-                <EditableTimeSheet editable={editable}>
+                <EditableTimeSheet editable={editable} name="clockOut3">
                   {val.clockOut3}
                 </EditableTimeSheet>
                 <td></td>
-                <EditableTimeSheet editable={editable}>
+                <EditableTimeSheet editable={editable} name="project">
                   {val.project}
                 </EditableTimeSheet>
-                <EditableTimeSheet editable={editable}>
-                  {val.regular}
+                <EditableTimeSheet editable={editable} name="regular">
+                  {totalHoursWorked ? `${hours}.${minutes}` : '0.0'} {/* Display calculated total hours worked for the second half in decimal form or '0.0' if no entry */}
                 </EditableTimeSheet>
-                <EditableTimeSheet editable={editable}>
-                  {val.overtime}
+                <EditableTimeSheet editable={editable} name="overtime">
+                  {overtimeHours ? `${overtimeHoursDisplay}.${overtimeMinutes}` : '0.0'} {/* Display overtime hours in decimal form or '0.0' if no overtime */}
                 </EditableTimeSheet>
               </tr>
               
