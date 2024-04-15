@@ -21,7 +21,8 @@ async function createNewUserPayPeriod(user_email) {
     for (let currentDateIterator = new Date(startDate); currentDateIterator <= endDate; currentDateIterator.setDate(currentDateIterator.getDate() + 1)) {
         const currentDate = new Date(currentDateIterator); // Create a new Date object for each iteration
         currentDate.setUTCHours(0, 0, 0, 0);
-        const dayOfWeek = currentDate.toLocaleDateString('en-US', { weekday: 'long' }); // Get the day of the week
+        const dayOfWeek = currentDate.toLocaleDateString('en-US', { weekday: 'long', weekday: 'long', timeZone: 'UTC' });
+
 
         // Create a new timesheet entry for each date
         const newTimesheet = new Timesheet({
@@ -85,7 +86,8 @@ async function createTimesheetPayPeriod(user_email) {
                 for (let currentDateIterator = new Date(startDate); currentDateIterator <= endDate; currentDateIterator.setDate(currentDateIterator.getDate() + 1)) {
                     const currentDate = new Date(currentDateIterator); // Create a new Date object for each iteration
                     currentDate.setUTCHours(0, 0, 0, 0);
-                    const dayOfWeek = currentDate.toLocaleDateString('en-US', { weekday: 'long' }); // Get the day of the week
+                    const dayOfWeek = currentDate.toLocaleDateString('en-US', { weekday: 'long', weekday: 'long', timeZone: 'UTC' });
+
 
                     // Create a new timesheet entry for each date
                     const newTimesheet = new Timesheet({

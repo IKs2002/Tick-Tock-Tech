@@ -11,7 +11,7 @@ router.get("/get/:uid&:startDate&:endDate", timesheetcontroller.getTimeData);
 
 router.put("put/:tid", timesheetcontroller.updateTimeData);
 
-router.patch('/updateTimesheetFromChatbot/:email&:date', timesheetcontroller.updateTimesheetFromChatbot);
+router.patch('/updateTimesheetFromChatbot/:email&:status&:clockin', timesheetcontroller.updateTimesheetFromChatbot);
 
 // router.delete("/delete/:tid", timesheetcontroller.deleteTimeData);
 

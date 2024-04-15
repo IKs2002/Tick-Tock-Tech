@@ -29,7 +29,7 @@ app.post('/pay-periods', async (req, res) => {
 });
 
 //scheduling every 1st and 3rd monday 
-cron.schedule('0 0 * * 1', async () => {
+cron.schedule('0 1 * * 1', async () => {
   //first 0 is mins
   //second 0 is hours (0=midnight)
   //1 = monday 

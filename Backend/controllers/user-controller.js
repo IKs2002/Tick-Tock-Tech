@@ -71,7 +71,7 @@ const getAllUsers = async (req, res, next) => {
       id: user.email,
       name: user.name,
       password: user.password,
-      status: "Clocked Out",
+      status: user.status,
       role: user.role,
       locked: user.accessLock,
     }));
