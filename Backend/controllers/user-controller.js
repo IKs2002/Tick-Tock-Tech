@@ -191,7 +191,7 @@ const login = async (req, res, next) => {
     const isMatch =  await bcrypt.compare(password, user.password);
     console
     if (!isMatch) {
-      return res.status(401).json({ message: "Incorrect Password" });
+      return res.status(401).json({ message: "Incorrect Username or Password" });
     }
     else{
       res.status(200).json({
@@ -201,10 +201,6 @@ const login = async (req, res, next) => {
       locked: user.locked,
       role: user.role})
     };
-
-    return res.status(401).json({ message: "Incorrect Password" })
-    // Return the user data upon successful authentication
-   
   } catch (err) {
     return next(err);
   }
