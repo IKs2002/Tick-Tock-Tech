@@ -159,7 +159,7 @@ const login = async (req, res, next) => {
     if (!user) {
       return res.status(404).json({ message: "User does not exist" });
     }
-    if(user.accessLock === true) {
+    if(user.accessLock === true && user.role !== "admin") {
       res.status(401).json({message: "Account is Locked. Contact Admin"});
     }
     // Check if the provided password matches the user's password
