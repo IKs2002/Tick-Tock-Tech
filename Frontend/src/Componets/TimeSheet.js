@@ -202,8 +202,8 @@ const Paydata = [{ PeriodRegular: "000", PeriodOvertime: "000" }];
 const WeekTotal = [{ Regular: "000", Overtime: "000" }];
 
 // Main component function
-const EditableTimeSheet = ({ children, editable = true, name='',id=''}) => (
-  <td contentEditable={editable} suppressContentEditableWarning className="timeSheetData" name={name} id={id}>{children}</td>
+const EditableTimeSheet = ({ children, editable = true, name='', row}) => (
+  <td contentEditable={editable} suppressContentEditableWarning className={"timeSheetData " + row} name={name}>{children}</td>
 );
 
 function TimeSheet({ editable = false, timeData }) {
@@ -245,36 +245,36 @@ function TimeSheet({ editable = false, timeData }) {
             return (
               <tr key={key}>
                 {/* Displaying each piece of data in its respective column */}
-                <td>{val.day}</td>
-                <td> {moment.utc(val.date).format("MM-DD-YY")}</td>
-                <EditableTimeSheet editable={editable} name="clockIn1">
+                <td className={"timeSheetData Row" + key} name="day">{val.day}</td>
+                <td className={"timeSheetData Row" + key} name="date"> {moment.utc(val.date).format("MM-DD-YY")}</td>
+                <EditableTimeSheet editable={editable} name="clockIn1" row={"Row" + key }>
                   {val.clockIn1}
                 </EditableTimeSheet>
-                <EditableTimeSheet editable={editable} name="clockOut1">
+                <EditableTimeSheet editable={editable} name="clockOut1" row={"Row" + key }>
                   {val.clockOut1}
                 </EditableTimeSheet>
                 <td></td>
-                <EditableTimeSheet editable={editable} name="clockIn2">
+                <EditableTimeSheet editable={editable} name="clockIn2" row={"Row" + key }>
                   {val.clockIn2}
                 </EditableTimeSheet>
-                <EditableTimeSheet editable={editable} name="clockOut2">
+                <EditableTimeSheet editable={editable} name="clockOut2" row={"Row" + key }>
                   {val.clockOut2}
                 </EditableTimeSheet>
                 <td></td>
-                <EditableTimeSheet editable={editable} name="clockIn3">
+                <EditableTimeSheet editable={editable} name="clockIn3" row={"Row" + key }>
                   {val.clockIn3}
                 </EditableTimeSheet>
-                <EditableTimeSheet editable={editable} name="clockOut3">
+                <EditableTimeSheet editable={editable} name="clockOut3" row={"Row" + key }>
                   {val.clockOut3}
                 </EditableTimeSheet>
                 <td></td>
-                <EditableTimeSheet editable={editable} name="project">
+                <EditableTimeSheet editable={editable} name="project" row={"Row" + key }>
                   {val.project}
                 </EditableTimeSheet>
-                <EditableTimeSheet editable={editable} name="regular">
+                <EditableTimeSheet editable={editable} name="regular" row={"Row" + key }>
                   {val.regular}
                 </EditableTimeSheet>
-                <EditableTimeSheet editable={editable} name="overtime">
+                <EditableTimeSheet editable={editable} name="overtime" row={"Row" + key }>
                   {val.overtime}
                 </EditableTimeSheet>
               </tr>
@@ -335,39 +335,41 @@ function TimeSheet({ editable = false, timeData }) {
           </thead>
           <tbody>
           {secondHalf.map((val, key) => {
+            let prevRows = 7;
             return (
               
               <tr key={key}>
-                <td>{val.day}</td>
-                <td>{moment.utc(val.date).format("MM-DD-YY")}</td>
-                <EditableTimeSheet editable={editable}>
+                {/* Displaying each piece of data in its respective column */}
+                <td className={"timeSheetData Row" + key} name="day">{val.day}</td>
+                <td className={"timeSheetData Row" + key} name="date"> {moment.utc(val.date).format("MM-DD-YY")}</td>
+                <EditableTimeSheet editable={editable} name="clockIn1" row={"Row" + (prevRows+key) }>
                   {val.clockIn1}
                 </EditableTimeSheet>
-                <EditableTimeSheet editable={editable}>
+                <EditableTimeSheet editable={editable} name="clockOut1" row={"Row" + (prevRows+key) }>
                   {val.clockOut1}
                 </EditableTimeSheet>
                 <td></td>
-                <EditableTimeSheet editable={editable}>
+                <EditableTimeSheet editable={editable} name="clockIn2" row={"Row" + (prevRows+key) }>
                   {val.clockIn2}
                 </EditableTimeSheet>
-                <EditableTimeSheet editable={editable}>
+                <EditableTimeSheet editable={editable} name="clockOut2" row={"Row" + (prevRows+key) }>
                   {val.clockOut2}
                 </EditableTimeSheet>
                 <td></td>
-                <EditableTimeSheet editable={editable}>
+                <EditableTimeSheet editable={editable} name="clockIn3" row={"Row" + (prevRows+key) }>
                   {val.clockIn3}
                 </EditableTimeSheet>
-                <EditableTimeSheet editable={editable}>
+                <EditableTimeSheet editable={editable} name="clockOut3" row={"Row" + (prevRows+key) }>
                   {val.clockOut3}
                 </EditableTimeSheet>
                 <td></td>
-                <EditableTimeSheet editable={editable}>
+                <EditableTimeSheet editable={editable} name="project" row={"Row" + (prevRows+key) }>
                   {val.project}
                 </EditableTimeSheet>
-                <EditableTimeSheet editable={editable}>
+                <EditableTimeSheet editable={editable} name="regular" row={"Row" + (prevRows+key) }>
                   {val.regular}
                 </EditableTimeSheet>
-                <EditableTimeSheet editable={editable}>
+                <EditableTimeSheet editable={editable} name="overtime" row={"Row" + (prevRows+key) }>
                   {val.overtime}
                 </EditableTimeSheet>
               </tr>

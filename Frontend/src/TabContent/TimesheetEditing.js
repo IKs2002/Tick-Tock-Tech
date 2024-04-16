@@ -5,7 +5,6 @@ import TimeSheet from "../Componets/TimeSheet.js";
 import WeekPicker from "../Componets/WeekPicker.js";
 import moment from "moment";
 
-
 const TimesheetEdit = () => {
   const initialWeekStart = startOfWeek(new Date(), { weekStartsOn: 1 });
   const initialWeekEnd = addDays(initialWeekStart, 13);
@@ -33,13 +32,24 @@ const TimesheetEdit = () => {
     const isConfirmed = window.confirm("Are you sure you want to save changes?");
     if (isConfirmed) {
       // Implement the save logic here
-    timeSheetData.forEach((timesheet) => {
-      fetch(`http://localhost:5000/api/timeData/put/${timesheet.id}`, {
+      let timeSheetTableData = [];
+      for(let i = 0; i<14; i++){
+      let elementList = document.getElementsByClassName("timeSheetData Row" + i);
+      let elementObject = {};
+      for(let element of elementList){
+        elementObject[element.getAttribute("name")] = element.innerText;
+      }
+      timeSheetTableData[i] = elementObject;
+      
+    }
+    console.log(timeSheetTableData);
+    timeSheetTableData.forEach((timesheet) => {
+      fetch(`http://localhost:5000/api/timeData/put/`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(timesheet),
+        body: JSON.stringify(timeSheetTableData),
       })
       .then(response => {
         if (!response.ok) {
