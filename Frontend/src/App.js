@@ -1,4 +1,3 @@
-// Import the necessary dependencies
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Login from "./Pages/LoginPage";
@@ -13,6 +12,28 @@ import ManagerDashboard from "./TabContent/ManagerDashboard";
 const App = () => {
   const navigate = useNavigate();
 
+  const encryptData = (data) => {
+    // Convert data to string
+    const dataString = JSON.stringify(data);
+    // Encrypt the data using Web Crypto API or other encryption mechanism
+    // For demonstration, we'll just encode the string
+    return btoa(dataString);
+  };
+  
+  const decryptData = (encryptedData) => {
+    try {
+      // Decode the data using Web Crypto API or other decryption mechanism
+      // For demonstration, we'll just decode the string
+      const decryptedString = atob(encryptedData);
+      // Parse the decrypted string to JSON
+      return JSON.parse(decryptedString);
+    } catch (error) {
+      console.error("Error decrypting data:", error);
+      return null;
+    }
+  };
+  
+
   // State to hold user properties
   const [user, setUser] = useState(null);
 
@@ -20,15 +41,18 @@ const App = () => {
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      // Decrypt the stored user data
+      const decryptedUser = decryptData(storedUser);
+      setUser(decryptedUser);
     }
   }, []);
 
   // Function to set user properties after login
   const handleLogin = (userData) => {
     setUser(userData);
-    // Store user data in local storage
-    localStorage.setItem('user', JSON.stringify(userData));
+    // Encrypt and store user data in local storage
+    const encryptedUser = encryptData(userData);
+    localStorage.setItem('user', encryptedUser);
     navigate("/Home/PersonalTimeSheet"); // Redirect to Home after login
   };
 

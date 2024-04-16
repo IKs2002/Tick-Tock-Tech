@@ -1,19 +1,41 @@
 const mongoose = require("mongoose");
 const User = require("../models/User");
 const InactiveUser = require("../models/InactiveUser");
+const {createNewUserPayPeriod } = require("./payperiods-controller");
+const bcrypt = require("bcrypt")
+
 
 const createUser = async (req, res, next) => {
+
   const userData = req.body;
+  console.log(userData.password)
   console.log(userData);
+  
+  
+  //FUNCTION TO HANDLE HASHING USING BCRYPT
+  const hashPassword = async (password) => {
+    try {
+      // Generate a salt
+      const salt = await bcrypt.genSalt(10); // The number 10 here is the cost factor that determines how much time is needed to calculate a single bcrypt hash. 
+      // Hash the password using the salt
+      const hashedPassword = await bcrypt.hash(password, salt);
+      return hashedPassword;
+    } catch (error) {
+      console.error('Error hashing password:', error);
+      throw error; // Rethrow or handle error appropriately
+    }
+  };
+  
   let newUser;
   try {
     newUser = new User(userData);
+    newUser.password = await hashPassword(newUser.password)
     console.log(newUser);
     await newUser.save();
   } catch (err) {
     return next(err);
   }
-
+  createNewUserPayPeriod(newUser.email);
   res.status(201).json({ user: newUser.toObject({ getters: true }) });
 };
 
@@ -49,7 +71,7 @@ const getAllUsers = async (req, res, next) => {
       id: user.email,
       name: user.name,
       password: user.password,
-      status: "Clocked Out",
+      status: user.status,
       role: user.role,
       locked: user.accessLock,
     }));
@@ -129,7 +151,11 @@ const editUserData = async (req, res, next) => {
     }
   
     // Update user fields
-  
+
+    //Check if password was updated, if updated, HASH IT. 
+    if (updatedData.password) {
+      updatedData.password = await bcrypt.hash(updatedData.password, 10);
+    }
     
     user.name = updatedData.name || user.name;
     user.email = updatedData.email || user.email;
@@ -157,20 +183,24 @@ const login = async (req, res, next) => {
     if (!user) {
       return res.status(404).json({ message: "User does not exist" });
     }
-
-    // Check if the provided password matches the user's password
-    if (user.password !== password) {
-      return res.status(401).json({ message: "Incorrect Password" });
+    if(user.accessLock === true && user.role !== "admin") {
+      res.status(401).json({message: "Account is Locked. Contact Admin"});
     }
-
-    // Return the user data upon successful authentication
-    res.status(200).json({
+    // Check if the provided password matches the user's password
+  
+    const isMatch =  await bcrypt.compare(password, user.password);
+    console
+    if (!isMatch) {
+      return res.status(401).json({ message: "Incorrect Username or Password" });
+    }
+    else{
+      res.status(200).json({
       email: user.email,
       name: user.name,
       status: user.status || "Clocked Out",
       locked: user.locked,
-      role: user.role,
-    });
+      role: user.role})
+    };
   } catch (err) {
     return next(err);
   }

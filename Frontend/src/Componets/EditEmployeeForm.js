@@ -38,7 +38,6 @@ const EditEmployeeForm = ({ employee }) => {
       setForm({
         name: employee.name,
         email: employee.id,
-        password: employee.password, // No current password attached to employee object, will wait until further security work
         role: employee.role
         // Populate other fields as necessary
       });
@@ -57,14 +56,26 @@ const EditEmployeeForm = ({ employee }) => {
   const originalEmail = employee.id;
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Update the employee details on the server
-    console.log(form);
+  
+    const submissionData = {
+      name: form.name,
+      email: form.email,
+      role: form.role
+    };
+  
+    // Only add password to submissionData if it has been filled out
+    if (form.password && form.password.trim() !== '') {
+      submissionData.password = form.password;
+    }
+  
+    console.log("Submitting:", submissionData); // For debugging, you can see what is being submitted
+  
     fetch(`http://localhost:5000/api/userData/patchuser/${encodeURIComponent(originalEmail)}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(form),
+      body: JSON.stringify(submissionData),
     })
       .then((response) => {
         if (!response.ok) {
@@ -73,9 +84,6 @@ const EditEmployeeForm = ({ employee }) => {
         setModalIsOpen(false);
         return response.json();
       })
-      /*.then((data) => {
-        setForm(data); // Update the employee object directly in the UI
-      })*/
       .catch((error) => {
         console.error("Error:", error);
       });
@@ -132,7 +140,6 @@ const EditEmployeeForm = ({ employee }) => {
               name="password"
               placeholder="Password"
               value={form.password || ''}
-              required
               onChange={handleInputChange}
               autoComplete="off"
               className="employee-form-field"

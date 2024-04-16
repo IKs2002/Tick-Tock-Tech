@@ -3,7 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require('cors');
-const { createBiWeeklyPayPeriod } = require("./models/payPeriod.js");
+const { createTimesheetPayPeriod } = require("./controllers/payperiods-controller.js");
 const cron = require('node-cron');
 
 const timesheetroutes = require("./routes/timesheet-routes.js");
@@ -20,7 +20,7 @@ app.use("/api/timeData", timesheetroutes);
 app.post('/pay-periods', async (req, res) => {
   
   try {
-    const newPayPeriod = await createBiWeeklyPayPeriod();
+    const newPayPeriod = await createTimesheetPayPeriod();
     res.status(201).json(newPayPeriod);
   } catch (error) {
     console.error('Error creating the bi-weekly pay period:', error);
@@ -29,17 +29,14 @@ app.post('/pay-periods', async (req, res) => {
 });
 
 //scheduling every 1st and 3rd monday 
-cron.schedule('0 0 * * 1', async () => {
+cron.schedule('0 1 * * 1', async () => {
   //first 0 is mins
   //second 0 is hours (0=midnight)
   //1 = monday 
-  try {
-      const today = new Date();
-      const weekOfMonth = Math.floor((today.getDate() - 1) / 7) + 1;
-      if (weekOfMonth === 1 || weekOfMonth === 3) {
-          const newPayPeriod = await createBiWeeklyPayPeriod();
-          console.log('pay period created:', newPayPeriod);
-      }
+  try
+  {
+    const newPayPeriod = await createTimesheetPayPeriod();
+    console.log('pay period created:', newPayPeriod);
   } catch (error) {
       console.error('error creating pay period:', error);
   }

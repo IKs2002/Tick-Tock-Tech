@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Timesheet = require("../models/timeSheet");
+const User = require("../models/User");
 
 const createTimesheet = async (req, res, next) => {
   const timeData = req.body;
@@ -73,6 +74,7 @@ const updateTimeData = async (req, res, next) => {
     index++;
   
   try{
+<<<<<<< HEAD
     
     await Timesheet.updateOne(dayDate, {
       project: updatedData.project, 
@@ -85,6 +87,33 @@ const updateTimeData = async (req, res, next) => {
       clockOut2: updatedData.clockOut2, 
       clockIn3: updatedData.clockIn3, 
       clockOut3: updatedData.clockOut3
+=======
+    const timeSheet = await Timesheet.findOne({_id:ObjectID(timeSheetId)})
+    if(!timeSheet){
+      return res.status(404).json({message: "Time sheet not found."});
+    }
+
+    timeSheet = updatedData.project || timeSheet.project;
+    timeSheet.project = updatedData.project || timeSheet.project;
+    timeSheet.employeeID = updatedData.employeeID || timeSheet.employeeID;
+    timeSheet.clockIn1 = updatedData.clockIn1 || timeSheet.clockIn1;
+    timeSheet.clockOut1 = updatedData.clockOut1 || timeSheet.clockOut1;
+    timeSheet.clockIn2 = updatedData.clockIn2 || timeSheet.clockIn2;
+    timeSheet.clockOut2 = updatedData.clockOut2 || timeSheet.clockOut2;
+    timeSheet.clockIn3 = updatedData.clockIn3 || timeSheet.clockIn3;
+    timeSheet.clockOut3 = updatedData.clockOut3 || timeSheet.clockOut3;
+    await timeSheet.save();
+
+    await Timesheet.updateOne({_id:ObjectID(timesheetID)}, {
+      project: timeSheet.project, 
+      employeeID: timeSheet.employeeID, 
+      clockIn1: timeSheet.clockIn1, 
+      clockOut1: timeSheet.clockOut1, 
+      clockIn2: timeSheet.clockIn2, 
+      clockOut2: timeSheet.clockOut2, 
+      clockIn3: timeSheet.clockIn3, 
+      clockOut3: timeSheet.clockOut3
+>>>>>>> a3f8ca7bb050998280693e26efb59740bb0ac414
     })
      res.status(200).json({TimeSheet:Timesheet.toObject({getters:true})});
 
@@ -97,6 +126,70 @@ const updateTimeData = async (req, res, next) => {
     .status(200)
     .json({ timesheet: existingTimesheet.toObject({ getters: true }) });
 };
+
+const updateTimesheetFromChatbot = async (req, res) => {
+  try {
+    const email = req.params.email;
+    const status = req.params.status;
+    const clockin = req.params.clockin;
+
+    // Ensure the date is parsed correctly
+    const targetDate = new Date();
+    targetDate.setUTCHours(0, 0, 0, 0);
+    console.log('Updating timesheet for:', email, 'on date:', targetDate);
+
+    // Find the timesheet for the specified user and date
+    console.log('Searching for timesheet with date:', targetDate);
+    const timesheet = await Timesheet.findOne({
+      employeeID: email,
+      date: targetDate 
+    });
+
+    console.log('Found timesheet:', timesheet);
+    if (!timesheet) {
+      return res.status(404).json({ message: 'Timesheet not found for the specified user and date.' });
+    }
+
+    // Define an array of properties to check for emptiness
+    const propertiesToCheck = ['clockIn1', 'clockOut1', 'clockIn2', 'clockOut2', 'clockIn3', 'clockOut3'];
+
+    // If clockIn time is provided and status is not "Break", find the first empty property and update it
+    if (clockin && status !== "Break") {
+      let emptyProperty;
+      for (const prop of propertiesToCheck) {
+        if (!timesheet[prop]) {
+          emptyProperty = prop;
+          break; // Stop iterating once we find an empty property
+        }
+      }
+      
+      if (emptyProperty) {
+        // Construct an update object
+        const update = { [emptyProperty]: clockin };
+        // Update the timesheet
+        await Timesheet.updateOne({ _id: timesheet._id }, { $set: update });
+      }
+    }
+
+    // Update user status regardless of the timesheet update
+    if (status) {
+      const user = await User.findOne({ email });
+      if (user) {
+        user.status = status;
+        await user.save();
+      }
+    }
+
+    res.status(200).json({ message: 'Timesheet updated successfully.', timesheet });
+  } catch (err) {
+    console.error('Failed to update timesheet:', err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+
+
+
 
 // const deleteTimeData = async (req, res, next) => {
 //     const timesheetId = req.params.tid;
@@ -118,4 +211,5 @@ const updateTimeData = async (req, res, next) => {
 exports.getTimeData = getTimeData;
 exports.createTimesheet = createTimesheet;
 exports.updateTimeData = updateTimeData;
+exports.updateTimesheetFromChatbot = updateTimesheetFromChatbot;
 // exports.deleteTimeData = deleteTimeData;

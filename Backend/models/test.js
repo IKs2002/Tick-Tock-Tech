@@ -1,5 +1,5 @@
 //NOT IMPORTANT - test to see if it works in postman --as of now (4/9) yes
-const { createBiWeeklyPayPeriod } = require('./payPeriod.js');
+const { createBiWeeklyPayPeriod } = require('../controllers/payperiods-controller');
 
 async function testCreateBiWeeklyPayPeriod() {
     try {
