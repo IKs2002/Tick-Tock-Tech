@@ -13,6 +13,8 @@ let WeekRegular = 0.00;
 let WeekOvertime = 0.00;
 let DayRegular = 0.00;
 let DayOvertime = 0.00;
+let firstHalfOvertime = 0.0;
+let secondHalfOvertime = 0.0;
 
 // Main component function
 const EditableTimeSheet = ({ children, editable = true, name='',id=''}) => (
@@ -80,16 +82,26 @@ function TimeSheet({ editable = false, timeData }) {
   }, 0);
 
   // Convert firstHalfRegular to time format
-  const firstHalfRegularTimeFormat = convertToTimeFormat(firstHalfRegular);
+  const firstWeekRegular = convertToTimeFormat(firstHalfRegular);
 
   // Convert secondHalfRegular to time format
-  const secondHalfRegularTimeFormat = convertToTimeFormat(secondHalfRegular);
+  const secondWeekRegular = convertToTimeFormat(secondHalfRegular);
 
   // Calculate total weekly regular hours
   WeekRegular = firstHalfRegular + secondHalfRegular;
 
   // Convert WeekRegular to time format
-  const WeekRegularTimeFormat = convertToTimeFormat(WeekRegular);
+  const PayPeriodRegular = convertToTimeFormat(WeekRegular);
+
+  // Calculate total weekly overtime hours
+  WeekOvertime = firstHalfOvertime + secondHalfOvertime;
+
+  // Convert WeekOvertime to time format
+  const firstWeekOvertime = convertToTimeFormat(firstHalfOvertime);
+  const secondWeekOvertime = convertToTimeFormat(secondHalfOvertime);
+
+    // Convert PayperiodOvertime to time format
+  const PayPeriodOvertime = convertToTimeFormat(WeekOvertime);
 
   console.log(timeData);
   return (
@@ -182,8 +194,8 @@ function TimeSheet({ editable = false, timeData }) {
               <tr>
                 <th>Total this Week</th>
                 {/* Displaying total regular and overtime hours */}
-                <th>{firstHalfRegularTimeFormat}</th>
-                <th>{WeekOvertime}</th>
+                <th>{firstWeekRegular}</th>
+                <th>{firstWeekOvertime}</th>
               </tr>
           </tbody>
         </table>
@@ -276,8 +288,8 @@ function TimeSheet({ editable = false, timeData }) {
               <tr>
                 <th>Total this Week</th>
                 {/* Displaying total regular and overtime hours */}
-                <th>{secondHalfRegularTimeFormat}</th>
-                <th>{WeekOvertime}</th>
+                <th>{secondWeekRegular}</th>
+                <th>{secondWeekOvertime}</th>
               </tr>
           </tbody>
         </table>
@@ -298,8 +310,8 @@ function TimeSheet({ editable = false, timeData }) {
               <tr>
                 <td>Total Per Period</td>
                 {/* Displaying total regular and overtime hours for the pay period */}
-                <td>{WeekRegularTimeFormat}</td>
-                <td>{WeekOvertime}</td>
+                <td>{PayPeriodRegular}</td>
+                <td>{PayPeriodOvertime}</td>
               </tr>
           </tbody>
         </table>
