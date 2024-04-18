@@ -39,7 +39,13 @@ const WeekPicker = ({ onChange }) => {
 
   const handlePrevClick = () => {
     const newDate = subWeeks(selectedDate, 2);
-    updateWeeks(newDate);
+    const marchFourthDate = parseISO("2024-03-04");
+    
+    if (newDate >= marchFourthDate) {
+      updateWeeks(newDate);
+    } else {
+      updateWeeks(marchFourthDate);
+    }
   };
 
   const handleNextClick = () => {

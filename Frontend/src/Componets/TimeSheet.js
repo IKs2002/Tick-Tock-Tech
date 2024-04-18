@@ -9,13 +9,38 @@ import moment from "moment";
 // Pay period data, likely intended for summary information
 const Paydata = [{ PeriodRegular: "000", PeriodOvertime: "000" }];
 
-// Weekly total hours, for summarizing at the end of a week
-const WeekTotal = [{ Regular: "000", Overtime: "000" }];
+let WeekRegular = 0.00;
+let WeekOvertime = 0.00;
+let DayRegular = 0.00;
+let DayOvertime = 0.00;
+let firstHalfOvertime = 0.00;
+let secondHalfOvertime = 0.00;
 
 // Main component function
 const EditableTimeSheet = ({ children, editable = true, name='', row}) => (
   <td contentEditable={editable} suppressContentEditableWarning className={"timeSheetData " + row} name={name}>{children}</td>
 );
+
+function roundUpToNearestHalfHour(hours) {
+    // Calculate full hours and leftover minutes
+    const fullHours = Math.floor(hours);
+    const minutes = (hours - fullHours) * 60;
+
+    // Determine the next nearest half hour
+    let roundedHours;
+    if (minutes === 0) {
+        // If exactly on the hour, no rounding needed
+        roundedHours = hours;
+    } else if (minutes <= 30) {
+        // If minutes are less than or equal to 30, round up to the next half hour
+        roundedHours = fullHours + 0.5;
+    } else {
+        // Otherwise, round up to the next full hour
+        roundedHours = fullHours + 1;
+    }
+
+    return roundedHours;
+}
 
 function TimeSheet({ editable = false, timeData }) {
   // Calculate the midpoint of the timeData array
@@ -24,6 +49,71 @@ function TimeSheet({ editable = false, timeData }) {
   // Split the timeData array into two halves
   const firstHalf = timeData.slice(0, midpoint);
   const secondHalf = timeData.slice(midpoint);
+
+  // Function to calculate hours between two time strings in AM/PM format
+  const calculateHours = (clockIn, clockOut) => {
+    if (!clockIn || !clockOut) {
+      return 0; // Treat missing entries as 0 hours
+    }
+    const format = "h:mm A";
+    const diff = moment(clockOut, format).diff(moment(clockIn, format), 'hours', true);
+    return diff;
+  };
+
+  // Convert decimal hours to time format (hours and minutes)
+  const convertToTimeFormat = (hours) => {
+    const totalHours = Math.floor(hours);
+    const totalMinutes = Math.round((hours - totalHours) * 60);
+    return `${totalHours}h ${totalMinutes}m`;
+  };
+
+  // Calculate and accumulate daily regular hours for the first half
+  let firstHalfRegular = firstHalf.reduce((total, val) => {
+    const hours = calculateHours(val.clockIn1, val.clockOut1) + calculateHours(val.clockIn2, val.clockOut2) + calculateHours(val.clockIn3, val.clockOut3);
+    const roundedHours = roundUpToNearestHalfHour(hours); // Round up to nearest half hour
+    return total + roundedHours;
+  }, 0);
+
+  // Calculate and accumulate daily regular hours for the second half
+  let secondHalfRegular = secondHalf.reduce((total, val) => {
+    const hours = calculateHours(val.clockIn1, val.clockOut1) + calculateHours(val.clockIn2, val.clockOut2) + calculateHours(val.clockIn3, val.clockOut3);
+    const roundedHours = roundUpToNearestHalfHour(hours); // Round up to nearest half hour
+    return total + roundedHours;
+  }, 0);
+
+  // Distribute overtime hours if regular hours exceed 40 for the first half
+  if (firstHalfRegular > 40) {
+    firstHalfOvertime = firstHalfRegular - 40;
+    firstHalfRegular = 40;
+  }
+
+  // Distribute overtime hours if regular hours exceed 40 for the second half
+  if (secondHalfRegular > 40) {
+    secondHalfOvertime = secondHalfRegular - 40;
+    secondHalfRegular = 40;
+  }
+  
+  // Convert firstHalfRegular to time format
+  const firstWeekRegular = convertToTimeFormat(firstHalfRegular);
+
+  // Convert secondHalfRegular to time format
+  const secondWeekRegular = convertToTimeFormat(secondHalfRegular);
+
+  // Calculate total weekly regular hours
+  WeekRegular = firstHalfRegular + secondHalfRegular;
+
+  // Convert WeekRegular to time format
+  const PayPeriodRegular = convertToTimeFormat(WeekRegular);
+
+  // Calculate total weekly overtime hours
+  WeekOvertime = firstHalfOvertime + secondHalfOvertime;
+
+  // Convert WeekOvertime to time format
+  const firstWeekOvertime = convertToTimeFormat(firstHalfOvertime);
+  const secondWeekOvertime = convertToTimeFormat(secondHalfOvertime);
+
+    // Convert PayperiodOvertime to time format
+  const PayPeriodOvertime = convertToTimeFormat(WeekOvertime);
 
   console.log(timeData);
   return (
@@ -53,41 +143,12 @@ function TimeSheet({ editable = false, timeData }) {
           {/* Mapping data to table rows */}
           <tbody>
           {firstHalf.map((val, key) => {
-            // Calculate the time difference in hours and minutes for each period
-            let hoursWorked1 = 0;
-            if (val.clockIn1 && val.clockOut1) {
-                const clockIn1 = moment(val.clockIn1, 'h:mm A');
-                const clockOut1 = moment(val.clockOut1, 'h:mm A');
-                hoursWorked1 = clockOut1.diff(clockIn1, 'minutes') / 60;
-            }
 
-            let hoursWorked2 = 0;
-            if (val.clockIn2 && val.clockOut2) {
-                const clockIn2 = moment(val.clockIn2, 'h:mm A');
-                const clockOut2 = moment(val.clockOut2, 'h:mm A');
-                hoursWorked2 = clockOut2.diff(clockIn2, 'minutes') / 60;
-            }
+            DayRegular = calculateHours(val.clockIn1, val.clockOut1) + calculateHours(val.clockIn2, val.clockOut2) + calculateHours(val.clockIn3, val.clockOut3);
+            DayRegular = roundUpToNearestHalfHour(DayRegular); // Round up to nearest half hour
+            const hours = Math.floor(DayRegular);
+            const minutes = Math.round((DayRegular - hours) * 60);
 
-            let hoursWorked3 = 0;
-            if (val.clockIn3 && val.clockOut3) {
-                const clockIn3 = moment(val.clockIn3, 'h:mm A');
-                const clockOut3 = moment(val.clockOut3, 'h:mm A');
-                hoursWorked3 = clockOut3.diff(clockIn3, 'minutes') / 60;
-            }
-
-            let totalHoursWorked = hoursWorked1 + hoursWorked2 + hoursWorked3;
-
-            let overtimeHours = 0;
-            if (totalHoursWorked > 8) {
-              overtimeHours = totalHoursWorked - 8;
-              totalHoursWorked = 8;
-            }
-
-            const hours = Math.floor(totalHoursWorked);
-            const minutes = Math.round((totalHoursWorked - hours) * 60);
-
-            const overtimeHoursDisplay = Math.floor(overtimeHours);
-            const overtimeMinutes = Math.round((overtimeHours - overtimeHoursDisplay) * 60);
 
             return (
               <tr key={key}>
@@ -119,10 +180,10 @@ function TimeSheet({ editable = false, timeData }) {
                   {val.project}
                 </EditableTimeSheet>
                 <td>
-                  {totalHoursWorked ? `${hours}.${minutes}` : '0.0'} {/* Display calculated total hours worked in decimal form or '0.0' if no entry */}
+                  {DayRegular ? `${hours}.${minutes}` : '0.0'} {/* Display calculated total hours worked in decimal form or '0.0' if no entry */}
                 </td>
                 <td>
-                  {overtimeHours ? `${overtimeHoursDisplay}.${overtimeMinutes}` : '0.0'} {/* Display overtime hours in decimal form or '0.0' if no overtime */}
+                  {DayOvertime} {/* Display overtime hours in decimal form or '0.0' if no overtime */}
                 </td>
               </tr>
             );
@@ -143,17 +204,12 @@ function TimeSheet({ editable = false, timeData }) {
           </tr>
           </thead><tbody>
           {/* Mapping weekly totals to table rows */}
-          
-          {WeekTotal.map((val, key) => {
-            return (
-              <tr key={key}>
+              <tr>
                 <th>Total this Week</th>
                 {/* Displaying total regular and overtime hours */}
-                <th>{val.Regular}</th>
-                <th>{val.Overtime}</th>
+                <th>{firstWeekRegular}</th>
+                <th>{firstWeekOvertime}</th>
               </tr>
-            );
-          })}
           </tbody>
         </table>
       </section>
@@ -182,41 +238,11 @@ function TimeSheet({ editable = false, timeData }) {
           </thead>
           <tbody>
           {secondHalf.map((val, key) => {
-            // Calculate the time difference in hours and minutes for each period in the second half
-            let hoursWorked1 = 0;
-            if (val.clockIn1 && val.clockOut1) {
-                const clockIn1 = moment(val.clockIn1, 'h:mm A');
-                const clockOut1 = moment(val.clockOut1, 'h:mm A');
-                hoursWorked1 = clockOut1.diff(clockIn1, 'minutes') / 60;
-            }
-
-            let hoursWorked2 = 0;
-            if (val.clockIn2 && val.clockOut2) {
-                const clockIn2 = moment(val.clockIn2, 'h:mm A');
-                const clockOut2 = moment(val.clockOut2, 'h:mm A');
-                hoursWorked2 = clockOut2.diff(clockIn2, 'minutes') / 60;
-            }
-
-            let hoursWorked3 = 0;
-            if (val.clockIn3 && val.clockOut3) {
-                const clockIn3 = moment(val.clockIn3, 'h:mm A');
-                const clockOut3 = moment(val.clockOut3, 'h:mm A');
-                hoursWorked3 = clockOut3.diff(clockIn3, 'minutes') / 60;
-            }
-
-            let totalHoursWorked = hoursWorked1 + hoursWorked2 + hoursWorked3;
-
-            let overtimeHours = 0;
-            if (totalHoursWorked > 8) {
-              overtimeHours = totalHoursWorked - 8;
-              totalHoursWorked = 8;
-            }
-
-            const hours = Math.floor(totalHoursWorked);
-            const minutes = Math.round((totalHoursWorked - hours) * 60);
-
-            const overtimeHoursDisplay = Math.floor(overtimeHours);
-            const overtimeMinutes = Math.round((overtimeHours - overtimeHoursDisplay) * 60);
+            
+            DayRegular = calculateHours(val.clockIn1, val.clockOut1) + calculateHours(val.clockIn2, val.clockOut2) + calculateHours(val.clockIn3, val.clockOut3);
+            DayRegular = roundUpToNearestHalfHour(DayRegular); // Round up to nearest half hour
+            const hours = Math.floor(DayRegular);
+            const minutes = Math.round((DayRegular - hours) * 60);
 
             let prevRows = 7;
             return (
@@ -249,12 +275,12 @@ function TimeSheet({ editable = false, timeData }) {
                 <EditableTimeSheet editable={editable} name="project" row={"Row" + (prevRows+key) }>
                   {val.project}
                 </EditableTimeSheet>
-                <td>
+                <EditableTimeSheet editable={editable} name="regular">
                   {totalHoursWorked ? `${hours}.${minutes}` : '0.0'} {/* Display calculated total hours worked for the second half in decimal form or '0.0' if no entry */}
-                </td>
-                <td>
+                </EditableTimeSheet>
+                <EditableTimeSheet editable={editable} name="overtime">
                   {overtimeHours ? `${overtimeHoursDisplay}.${overtimeMinutes}` : '0.0'} {/* Display overtime hours in decimal form or '0.0' if no overtime */}
-                </td>
+                </EditableTimeSheet>
               </tr>
               
             );
@@ -274,16 +300,12 @@ function TimeSheet({ editable = false, timeData }) {
             <th>Overtime Hours</th>
           </tr></thead><tbody>
           {/* Mapping weekly totals to table rows */}
-          {WeekTotal.map((val, key) => {
-            return (
-              <tr key={key}>
+              <tr>
                 <th>Total this Week</th>
                 {/* Displaying total regular and overtime hours */}
-                <th>{val.Regular}</th>
-                <th>{val.Overtime}</th>
+                <th>{secondWeekRegular}</th>
+                <th>{secondWeekOvertime}</th>
               </tr>
-            );
-          })}
           </tbody>
         </table>
       </section>
@@ -300,17 +322,12 @@ function TimeSheet({ editable = false, timeData }) {
           </tr>
           </thead>
           <tbody>
-          {/* Mapping pay period data to table rows */}
-          {Paydata.map((val, key) => {
-            return (
-              <tr key={key}>
+              <tr>
                 <td>Total Per Period</td>
                 {/* Displaying total regular and overtime hours for the pay period */}
-                <td>{val.PeriodRegular}</td>
-                <td>{val.PeriodOvertime}</td>
+                <td>{PayPeriodRegular}</td>
+                <td>{PayPeriodOvertime}</td>
               </tr>
-            );
-          })}
           </tbody>
         </table>
       </section>

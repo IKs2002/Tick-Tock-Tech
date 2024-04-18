@@ -3,6 +3,8 @@ const User = require("../models/User");
 const InactiveUser = require("../models/InactiveUser");
 const {createNewUserPayPeriod } = require("./payperiods-controller");
 const bcrypt = require("bcrypt")
+const Timesheet = require("../models/timeSheet");
+const InactiveUserTimesheets = require("../models/InactiveUserTimesheets");
 
 
 const createUser = async (req, res, next) => {
@@ -121,24 +123,38 @@ const deleteUserData = async (req, res, next) => {
     if (!user) {
       return res.status(404).json({ message: "No user found with the provided email." });
     }
-  
-    const currentDateAndTime = new Date().toISOString().replace('T', '_').substring(0, 19);
 
+    // Generate inactive email
+    const currentDateAndTime = new Date().toISOString().replace('T', '_').substring(0, 19);
+    const inactiveEmail = `${email}_inactive_${currentDateAndTime}`;
+
+    // Create an InactiveUser entry
     const inactiveUser = new InactiveUser({
       ...user.toObject(),
-      email: `${email}_inactive_${currentDateAndTime}`,
+      email: inactiveEmail,
       accessLock: true,
     });
     await inactiveUser.save();
-    
+
+    // Update timesheets with the new inactive email
+    await Timesheet.updateMany({ employeeID: email }, { employeeID: inactiveEmail });
+
+    // Find the timesheets for the inactive user in timesheets collection and move them to the InactiveUserTimesheets collection
+    await InactiveUserTimesheets.insertMany(await Timesheet.find({ employeeID: inactiveEmail }));
+
+    // Delete the timesheets for the inactive user from the timesheets collection
+    await Timesheet.deleteMany({ employeeID: inactiveEmail });
+
+    // Delete the active user
     await User.deleteOne({ email: email });
 
-    res.status(200).json({ message: "User marked as inactive successfully." });
+    res.status(200).json({ message: "User and timesheets updated successfully." });
   } catch (err) {
     console.error(err);
-    return next(new Error("Failed to mark the user as inactive."));
+    return next(new Error("Failed to mark the user as inactive and update timesheets."));
   }
 };
+
 
 const editUserData = async (req, res, next) => {
   const email = req.params.email; // Assuming you're using the user's ID in the URL
