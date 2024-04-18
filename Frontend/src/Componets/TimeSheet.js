@@ -118,12 +118,12 @@ function TimeSheet({ editable = false, timeData }) {
                 <EditableTimeSheet editable={editable} name="project" row={"Row" + key }>
                   {val.project}
                 </EditableTimeSheet>
-                <EditableTimeSheet editable={editable} name="regular" row={"Row" + key }>
+                <td>
                   {totalHoursWorked ? `${hours}.${minutes}` : '0.0'} {/* Display calculated total hours worked in decimal form or '0.0' if no entry */}
-                </EditableTimeSheet>
-                <EditableTimeSheet editable={editable} name="overtime" row={"Row" + key }>
+                </td>
+                <td>
                   {overtimeHours ? `${overtimeHoursDisplay}.${overtimeMinutes}` : '0.0'} {/* Display overtime hours in decimal form or '0.0' if no overtime */}
-                </EditableTimeSheet>
+                </td>
               </tr>
             );
           })}
@@ -223,38 +223,38 @@ function TimeSheet({ editable = false, timeData }) {
               
               <tr key={key}>
                 {/* Displaying each piece of data in its respective column */}
-                <td className={"timeSheetData Row" + key} name="day">{val.day}</td>
-                <td className={"timeSheetData Row" + key} name="date"> {moment.utc(val.date).format("MM-DD-YY")}</td>
-                <EditableTimeSheet editable={editable} name="clockIn1" row={"Row" + (prevRows+key) } name="clockIn1">
+                <td className={"timeSheetData Row" + (prevRows + key)} name="day">{val.day}</td>
+                <td className={"timeSheetData Row" + (prevRows + key)} name="date"> {moment.utc(val.date).format("MM-DD-YY")}</td>
+                <EditableTimeSheet editable={editable} name="clockIn1" row={"Row" + (prevRows+key) }>
                   {val.clockIn1}
                 </EditableTimeSheet>
-                <EditableTimeSheet editable={editable} name="clockOut1" row={"Row" + (prevRows+key) } name="clockOut1">
+                <EditableTimeSheet editable={editable} name="clockOut1" row={"Row" + (prevRows+key) }>
                   {val.clockOut1}
                 </EditableTimeSheet>
                 <td></td>
-                <EditableTimeSheet editable={editable} name="clockIn2" row={"Row" + (prevRows+key) } name="clockIn2">
+                <EditableTimeSheet editable={editable} name="clockIn2" row={"Row" + (prevRows+key) }>
                   {val.clockIn2}
                 </EditableTimeSheet>
-                <EditableTimeSheet editable={editable} name="clockOut2" row={"Row" + (prevRows+key) } name="clockOut2">
+                <EditableTimeSheet editable={editable} name="clockOut2" row={"Row" + (prevRows+key) }>
                   {val.clockOut2}
                 </EditableTimeSheet>
                 <td></td>
-                <EditableTimeSheet editable={editable} name="clockIn3" row={"Row" + (prevRows+key) } name="clockIn3">
+                <EditableTimeSheet editable={editable} name="clockIn3" row={"Row" + (prevRows+key) }>
                   {val.clockIn3}
                 </EditableTimeSheet>
-                <EditableTimeSheet editable={editable} name="clockOut3" row={"Row" + (prevRows+key) } name="clockOut3">
+                <EditableTimeSheet editable={editable} name="clockOut3" row={"Row" + (prevRows+key) }>
                   {val.clockOut3}
                 </EditableTimeSheet>
                 <td></td>
-                <EditableTimeSheet editable={editable} name="project" row={"Row" + (prevRows+key) } name="project">
+                <EditableTimeSheet editable={editable} name="project" row={"Row" + (prevRows+key) }>
                   {val.project}
                 </EditableTimeSheet>
-                <EditableTimeSheet editable={editable} name="regular" row={"Row" + (prevRows+key) } name="regular">
+                <td>
                   {totalHoursWorked ? `${hours}.${minutes}` : '0.0'} {/* Display calculated total hours worked for the second half in decimal form or '0.0' if no entry */}
-                </EditableTimeSheet>
-                <EditableTimeSheet editable={editable} name="overtime" row={"Row" + (prevRows+key) } name="overtime">
+                </td>
+                <td>
                   {overtimeHours ? `${overtimeHoursDisplay}.${overtimeMinutes}` : '0.0'} {/* Display overtime hours in decimal form or '0.0' if no overtime */}
-                </EditableTimeSheet>
+                </td>
               </tr>
               
             );

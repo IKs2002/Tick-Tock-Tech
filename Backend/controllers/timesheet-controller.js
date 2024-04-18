@@ -64,67 +64,23 @@ const getTimeData = async (req, res, next) => {
 
 
 const updateTimeData = async (req, res, next) => {
-  //Editing Timesheet
-  //const uid = req.params.uid;
-  let index = 0;
-  const dayDate = [];
-  const updatedData = req.body;
-  updatedData.array.forEach(element => {
-    dayDate[index] = {day:updatedData.day, date:updatedData.date};
-    index++;
-  
-  try{
-<<<<<<< HEAD
-    
-    await Timesheet.updateOne(dayDate, {
-      project: updatedData.project, 
-      regular: updatedData.regular, 
-      overtime: updatedData.overtime, 
-      employeeID: updatedData.employeeID, 
-      clockIn1: updatedData.clockIn1, 
-      clockOut1: updatedData.clockOut1, 
-      clockIn2: updatedData.clockIn2, 
-      clockOut2: updatedData.clockOut2, 
-      clockIn3: updatedData.clockIn3, 
-      clockOut3: updatedData.clockOut3
-=======
-    const timeSheet = await Timesheet.findOne({_id:ObjectID(timeSheetId)})
-    if(!timeSheet){
-      return res.status(404).json({message: "Time sheet not found."});
+  const updatedData = req.body; // Assuming this contains all necessary fields including a unique identifier
+  try {
+    // Assuming 'day' and 'date' can uniquely identify a document to update
+    const filter = { day: updatedData.day, date: new Date(updatedData.date), employeeID:updatedData.employeeID};
+    const update = { $set: updatedData }; // Directly use the updatedData object for updating
+
+    const result = await Timesheet.updateOne(filter, update);
+
+    if (result.modifiedCount === 0) {
+      return res.status(404).json({ message: "No matching timesheet found to update." });
     }
 
-    timeSheet = updatedData.project || timeSheet.project;
-    timeSheet.project = updatedData.project || timeSheet.project;
-    timeSheet.employeeID = updatedData.employeeID || timeSheet.employeeID;
-    timeSheet.clockIn1 = updatedData.clockIn1 || timeSheet.clockIn1;
-    timeSheet.clockOut1 = updatedData.clockOut1 || timeSheet.clockOut1;
-    timeSheet.clockIn2 = updatedData.clockIn2 || timeSheet.clockIn2;
-    timeSheet.clockOut2 = updatedData.clockOut2 || timeSheet.clockOut2;
-    timeSheet.clockIn3 = updatedData.clockIn3 || timeSheet.clockIn3;
-    timeSheet.clockOut3 = updatedData.clockOut3 || timeSheet.clockOut3;
-    await timeSheet.save();
-
-    await Timesheet.updateOne({_id:ObjectID(timesheetID)}, {
-      project: timeSheet.project, 
-      employeeID: timeSheet.employeeID, 
-      clockIn1: timeSheet.clockIn1, 
-      clockOut1: timeSheet.clockOut1, 
-      clockIn2: timeSheet.clockIn2, 
-      clockOut2: timeSheet.clockOut2, 
-      clockIn3: timeSheet.clockIn3, 
-      clockOut3: timeSheet.clockOut3
->>>>>>> a3f8ca7bb050998280693e26efb59740bb0ac414
-    })
-     res.status(200).json({TimeSheet:Timesheet.toObject({getters:true})});
-
-  } catch (err){
+    res.status(200).json({ message: "Timesheet updated successfully." });
+  } catch (err) {
     console.log(err);
     return next(new Error("Failed to update time sheet data."));
   }
-});
-  res
-    .status(200)
-    .json({ timesheet: existingTimesheet.toObject({ getters: true }) });
 };
 
 const updateTimesheetFromChatbot = async (req, res) => {

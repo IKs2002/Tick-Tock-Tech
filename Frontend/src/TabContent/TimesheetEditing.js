@@ -39,17 +39,19 @@ const TimesheetEdit = () => {
       for(let element of elementList){
         elementObject[element.getAttribute("name")] = element.innerText;
       }
+      elementObject.employeeID = employeeEmail;
+      elementObject.date = new Date (elementObject.date);
+      elementObject.date.setUTCHours(0,0,0,0)
       timeSheetTableData[i] = elementObject;
-      
     }
     console.log(timeSheetTableData);
     timeSheetTableData.forEach((timesheet) => {
-      fetch(`http://localhost:5000/api/timeData/put/`, {
+      fetch(`http://localhost:5000/api/timeData/patch/`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(timeSheetTableData),
+        body: JSON.stringify(timesheet),
       })
       .then(response => {
         if (!response.ok) {
