@@ -249,6 +249,7 @@ function TimeSheet({ editable = false, timeData }) {
             const Overtimehours = Math.floor(DayRegular);
             const Overtimeminutes = Math.round((DayRegular - Regularhours) * 60);
 
+            let prevRows = 0;
             return (
               
               <tr key={key}>
