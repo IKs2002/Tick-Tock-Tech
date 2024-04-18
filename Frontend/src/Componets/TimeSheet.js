@@ -19,6 +19,27 @@ const EditableTimeSheet = ({ children, editable = true, name='',id=''}) => (
   <td contentEditable={editable} suppressContentEditableWarning className="timeSheetData" name={name} id={id}>{children}</td>
 );
 
+function roundUpToNearestHalfHour(hours) {
+    // Calculate full hours and leftover minutes
+    const fullHours = Math.floor(hours);
+    const minutes = (hours - fullHours) * 60;
+
+    // Determine the next nearest half hour
+    let roundedHours;
+    if (minutes === 0) {
+        // If exactly on the hour, no rounding needed
+        roundedHours = hours;
+    } else if (minutes <= 30) {
+        // If minutes are less than or equal to 30, round up to the next half hour
+        roundedHours = fullHours + 0.5;
+    } else {
+        // Otherwise, round up to the next full hour
+        roundedHours = fullHours + 1;
+    }
+
+    return roundedHours;
+}
+
 function TimeSheet({ editable = false, timeData }) {
   // Calculate the midpoint of the timeData array
   const midpoint = Math.ceil(timeData.length / 2);
@@ -47,17 +68,19 @@ function TimeSheet({ editable = false, timeData }) {
   // Calculate and accumulate daily regular hours for the first half
   let firstHalfRegular = firstHalf.reduce((total, val) => {
     const hours = calculateHours(val.clockIn1, val.clockOut1) + calculateHours(val.clockIn2, val.clockOut2) + calculateHours(val.clockIn3, val.clockOut3);
-    return total + hours;
+    const roundedHours = roundUpToNearestHalfHour(hours); // Round up to nearest half hour
+    return total + roundedHours;
   }, 0);
-
-  // Convert firstHalfRegular to time format
-  const firstHalfRegularTimeFormat = convertToTimeFormat(firstHalfRegular);
 
   // Calculate and accumulate daily regular hours for the second half
   let secondHalfRegular = secondHalf.reduce((total, val) => {
     const hours = calculateHours(val.clockIn1, val.clockOut1) + calculateHours(val.clockIn2, val.clockOut2) + calculateHours(val.clockIn3, val.clockOut3);
-    return total + hours;
+    const roundedHours = roundUpToNearestHalfHour(hours); // Round up to nearest half hour
+    return total + roundedHours;
   }, 0);
+
+  // Convert firstHalfRegular to time format
+  const firstHalfRegularTimeFormat = convertToTimeFormat(firstHalfRegular);
 
   // Convert secondHalfRegular to time format
   const secondHalfRegularTimeFormat = convertToTimeFormat(secondHalfRegular);
@@ -98,6 +121,7 @@ function TimeSheet({ editable = false, timeData }) {
           {firstHalf.map((val, key) => {
 
             DayRegular = calculateHours(val.clockIn1, val.clockOut1) + calculateHours(val.clockIn2, val.clockOut2) + calculateHours(val.clockIn3, val.clockOut3);
+            DayRegular = roundUpToNearestHalfHour(DayRegular); // Round up to nearest half hour
             const hours = Math.floor(DayRegular);
             const minutes = Math.round((DayRegular - hours) * 60);
 
@@ -191,6 +215,7 @@ function TimeSheet({ editable = false, timeData }) {
           {secondHalf.map((val, key) => {
             
             DayRegular = calculateHours(val.clockIn1, val.clockOut1) + calculateHours(val.clockIn2, val.clockOut2) + calculateHours(val.clockIn3, val.clockOut3);
+            DayRegular = roundUpToNearestHalfHour(DayRegular); // Round up to nearest half hour
             const hours = Math.floor(DayRegular);
             const minutes = Math.round((DayRegular - hours) * 60);
 
