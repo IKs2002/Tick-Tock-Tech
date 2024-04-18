@@ -13,8 +13,8 @@ let WeekRegular = 0.00;
 let WeekOvertime = 0.00;
 let DayRegular = 0.00;
 let DayOvertime = 0.00;
-let firstHalfOvertime = 0.0;
-let secondHalfOvertime = 0.0;
+let firstHalfOvertime = 0.00;
+let secondHalfOvertime = 0.00;
 
 // Main component function
 const EditableTimeSheet = ({ children, editable = true, name='',id=''}) => (
@@ -81,6 +81,18 @@ function TimeSheet({ editable = false, timeData }) {
     return total + roundedHours;
   }, 0);
 
+  // Distribute overtime hours if regular hours exceed 40 for the first half
+  if (firstHalfRegular > 40) {
+    firstHalfOvertime = firstHalfRegular - 40;
+    firstHalfRegular = 40;
+  }
+
+  // Distribute overtime hours if regular hours exceed 40 for the second half
+  if (secondHalfRegular > 40) {
+    secondHalfOvertime = secondHalfRegular - 40;
+    secondHalfRegular = 40;
+  }
+  
   // Convert firstHalfRegular to time format
   const firstWeekRegular = convertToTimeFormat(firstHalfRegular);
 
@@ -136,6 +148,7 @@ function TimeSheet({ editable = false, timeData }) {
             DayRegular = roundUpToNearestHalfHour(DayRegular); // Round up to nearest half hour
             const hours = Math.floor(DayRegular);
             const minutes = Math.round((DayRegular - hours) * 60);
+
 
             return (
               <tr key={key}>
