@@ -48,7 +48,6 @@ const TimesheetEdit = () => {
       elementObject.date.toISOString()
       timeSheetTableData[i] = elementObject;
     }
-    console.log(timeSheetTableData);
     timeSheetTableData.forEach((timesheet) => {
       fetch(`http://localhost:5000/api/timeData/patch/`, {
         method: "PATCH",
@@ -64,7 +63,7 @@ const TimesheetEdit = () => {
         return response.json();
       })
       .then(data => {
-        console.log('Timesheet updated successfully', data);
+        //console.log('Timesheet updated successfully', data);
       })
       .catch(error => {
         console.error('Error updating timesheet:', error);

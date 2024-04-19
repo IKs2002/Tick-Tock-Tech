@@ -78,7 +78,6 @@ const updateTimeData = async (req, res, next) => {
     }
 
     res.status(200).json({ message: "Timesheet updated successfully." });
-    console.log(updatedData);
   } catch (err) {
     return next(new Error("Failed to update time sheet data."));
   }
