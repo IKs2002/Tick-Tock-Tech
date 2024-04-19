@@ -9,7 +9,7 @@ router.get("/get/:uid&:startDate&:endDate", timesheetcontroller.getTimeData);
 
 //router.get("/get/:uid", timesheetcontroller.getTimeData);
 
-router.patch("/patch/", timesheetcontroller.updateTimeData);
+router.patch("/patch", timesheetcontroller.updateTimeData);
 
 router.patch('/updateTimesheetFromChatbot/:email&:status&:clockin', timesheetcontroller.updateTimesheetFromChatbot);
 

@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Timesheet = require("../models/timeSheet");
 const User = require("../models/User");
-
 const createTimesheet = async (req, res, next) => {
   const timeData = req.body;
   console.log(timeData);
@@ -66,19 +65,21 @@ const getTimeData = async (req, res, next) => {
 const updateTimeData = async (req, res, next) => {
   const updatedData = req.body; // Assuming this contains all necessary fields including a unique identifier
   try {
-    // Assuming 'day' and 'date' can uniquely identify a document to update
-    const filter = { day: updatedData.day, date: new Date(updatedData.date), employeeID:updatedData.employeeID};
-    const update = { $set: updatedData }; // Directly use the updatedData object for updating
+    // Assuming 'day' and 'date' can uniquely identify a document to update 
+    const filter = { day: updatedData.day, date: updatedData.date, employeeID:updatedData.employeeID};
+    const update = { $set: {
+      clockIn1:updatedData.clockIn1, clockIn2:updatedData.clockIn2, clockIn3:updatedData.clockIn3,
+      clockOut1:updatedData.clockOut1, clockOut2:updatedData.clockOut2, clockOut3:updatedData.clockOut3,
+      project:updatedData.project}}; // Directly use the updatedData object for updating
+    const result = await Timesheet.updateOne(filter,update); 
 
-    const result = await Timesheet.updateOne(filter, update);
-
-    if (result.modifiedCount === 0) {
+    if (result.matchedCount === 0) {
       return res.status(404).json({ message: "No matching timesheet found to update." });
     }
 
     res.status(200).json({ message: "Timesheet updated successfully." });
+    console.log(updatedData);
   } catch (err) {
-    console.log(err);
     return next(new Error("Failed to update time sheet data."));
   }
 };

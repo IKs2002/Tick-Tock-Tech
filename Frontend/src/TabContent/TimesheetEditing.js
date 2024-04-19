@@ -40,8 +40,12 @@ const TimesheetEdit = () => {
         elementObject[element.getAttribute("name")] = element.innerText;
       }
       elementObject.employeeID = employeeEmail;
-      elementObject.date = new Date (elementObject.date);
-      elementObject.date.setUTCHours(0,0,0,0)
+      let dateMMDDYY = elementObject.date.split('-');
+      dateMMDDYY[2] = "20" + dateMMDDYY[2]; //Adds a "20" before the year, else it will assume 1924
+      dateMMDDYY[0] = "0" + String(Number(dateMMDDYY[0])-1);
+      elementObject.date = new Date(dateMMDDYY[2],dateMMDDYY[0],dateMMDDYY[1]);
+      elementObject.date.setUTCHours(0, 0, 0, 0);
+      elementObject.date.toISOString()
       timeSheetTableData[i] = elementObject;
     }
     console.log(timeSheetTableData);

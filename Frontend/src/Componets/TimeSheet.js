@@ -17,8 +17,8 @@ let firstHalfOvertime = 0.00;
 let secondHalfOvertime = 0.00;
 
 // Main component function
-const EditableTimeSheet = ({ children, editable = true, name='',id=''}) => (
-  <td contentEditable={editable} suppressContentEditableWarning className="timeSheetData" name={name} id={id}>{children}</td>
+const EditableTimeSheet = ({ children, editable = true, name='',row=''}) => (
+  <td contentEditable={editable} suppressContentEditableWarning className={"timeSheetData " + row} name={name}>{children}</td>
 );
 
 function roundUpToNearestHalfHour(hours) {
@@ -154,30 +154,30 @@ function TimeSheet({ editable = false, timeData }) {
             return (
               <tr key={key}>
                 {/* Displaying each piece of data in its respective column */}
-                <td>{val.day}</td>
-                <td> {moment.utc(val.date).format("MM-DD-YY")}</td>
-                <EditableTimeSheet editable={editable} name="clockIn1">
+                <td className={"timeSheetData Row" + ( key)} name="day">{val.day}</td>
+                <td className={"timeSheetData Row" + ( key)} name="date"> {moment.utc(val.date).format("MM-DD-YY")}</td>
+                <EditableTimeSheet editable={editable} row={"Row"+key} name="clockIn1">
                   {val.clockIn1}
                 </EditableTimeSheet>
-                <EditableTimeSheet editable={editable} name="clockOut1">
+                <EditableTimeSheet editable={editable} row={"Row"+key} name="clockOut1">
                   {val.clockOut1}
                 </EditableTimeSheet>
                 <td></td>
-                <EditableTimeSheet editable={editable} name="clockIn2">
+                <EditableTimeSheet editable={editable} row={"Row"+key} name="clockIn2">
                   {val.clockIn2}
                 </EditableTimeSheet>
-                <EditableTimeSheet editable={editable} name="clockOut2">
+                <EditableTimeSheet editable={editable} row={"Row"+key} name="clockOut2">
                   {val.clockOut2}
                 </EditableTimeSheet>
                 <td></td>
-                <EditableTimeSheet editable={editable} name="clockIn3">
+                <EditableTimeSheet editable={editable} row={"Row"+key} name="clockIn3">
                   {val.clockIn3}
                 </EditableTimeSheet>
-                <EditableTimeSheet editable={editable} name="clockOut3">
+                <EditableTimeSheet editable={editable} row={"Row"+key} name="clockOut3">
                   {val.clockOut3}
                 </EditableTimeSheet>
                 <td></td>
-                <EditableTimeSheet editable={editable} name="project">
+                <EditableTimeSheet editable={editable} row={"Row"+key} name="project">
                   {val.project}
                 </EditableTimeSheet>
                 <td>
@@ -249,7 +249,7 @@ function TimeSheet({ editable = false, timeData }) {
             const Overtimehours = Math.floor(DayRegular);
             const Overtimeminutes = Math.round((DayRegular - Regularhours) * 60);
 
-            let prevRows = 0;
+            let prevRows = 7;
             return (
               
               <tr key={key}>
