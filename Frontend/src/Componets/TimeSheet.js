@@ -6,13 +6,9 @@ import moment from "moment";
 //import DataTable from "react-data-table-component";
 
 
-// Pay period data, likely intended for summary information
-const Paydata = [{ PeriodRegular: "000", PeriodOvertime: "000" }];
-
 let WeekRegular = 0.00;
 let WeekOvertime = 0.00;
 let DayRegular = 0.00;
-let DayOvertime = 0.00;
 let firstHalfOvertime = 0.00;
 let secondHalfOvertime = 0.00;
 
@@ -43,6 +39,10 @@ function roundUpToNearestHalfHour(hours) {
 }
 
 function TimeSheet({ editable = false, timeData }) {
+  // Reset overtime hours at the beginning of each week calculation
+  firstHalfOvertime = 0.00;
+  secondHalfOvertime = 0.00;
+
   // Initialize variables to track total regular and overtime hours for the first week
   let totalRegularHoursFirstWeek = 0;
   let totalOvertimeHoursFirstWeek = 0;
