@@ -6,7 +6,6 @@ import Tab from "./Tab";
 const Tabs = ({ prop, role }) => {
   const location = useLocation();
 
-  // Define tabs based on user's role
   const tabs = [
     { label: "Personal Timesheet", path: "PersonalTimeSheet" },
     ...(role === "manager" ? [{ label: "Manager Dashboard", path: "ManagerDashboard" }] : []),
@@ -15,21 +14,18 @@ const Tabs = ({ prop, role }) => {
     { label: "Timesheet Editing", path: "None" },
   ];
 
-  // Initialize activeTab from localStorage if available
   const [activeTab, setActiveTab] = useState(
     prop === "View" ? tabs.findIndex((tab) => tab.label === "Timesheet Viewing") : parseInt(localStorage.getItem("activeTab")) || 0
   );
 
   useEffect(() => {
-    // Set tab based on prop changes
     const tabIndices = { Edit: 3, View: 4 };
     const newActiveTab = prop in tabIndices ? tabIndices[prop] : activeTab;
     setActiveTab(newActiveTab);
-    localStorage.setItem("activeTab", newActiveTab); // Save to localStorage
-  }, [prop]);
+    localStorage.setItem("activeTab", newActiveTab);
+  }, [prop, activeTab]);
 
   useEffect(() => {
-    // Listen to changes in activeTab and update localStorage
     localStorage.setItem("activeTab", activeTab);
   }, [activeTab]);
 
@@ -56,7 +52,7 @@ const Tabs = ({ prop, role }) => {
                 label={tab.label}
                 path={tab.path !== "None" ? `/Home/${tab.path}` : undefined}
                 onClick={() => handleTabClick(index)}
-                isActive={index === activeTab || (prop === "View" && tab.label === "Timesheet Viewing")} 
+                isActive={index === activeTab || (prop === "View" && tab.label === "Timesheet Viewing")}
                 selectable={tab.path !== "None"}
               />
             );

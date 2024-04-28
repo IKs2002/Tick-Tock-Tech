@@ -1,160 +1,175 @@
+/* Style for hover effect on clickable cells in the admin dashboard */
 .AdminDashboard_clickable-cell:hover {
-  background-color: #f5f5f5; /* Change to your preferred color */
+  background-color: #f5f5f5; /* Light grey background color on hover */
 }
 
+/* Container styling for the parent element of the admin dashboard */
 .AdminDashboard_ParentBorder {
-  margin-top: 1vh;
-  width: 100%;
-  height: 100%;
+  margin-top: 1vh; /* Top margin of 1% of the viewport height */
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
 }
 
+/* Flex container for the admin dashboard table, centers content in column direction */
 .AdminDashboardTable {
-  width: 50%;
+  width: 50%; /* Table takes up half the width of its container */
   display: flex;
-  flex-direction: column;
-  background-color: #ededed;
+  flex-direction: column; /* Children are stacked vertically */
+  background-color: #ededed; /* Light grey background color */
 }
 
+/* Flex container for inputs in the admin dashboard */
 .AdminDashboardInputs {
   display: flex;
-  flex-direction: row;
-  margin-top: 1vh;
-  margin-left: 1vw;
+  flex-direction: row; /* Children are laid out horizontally */
+  margin-top: 1vh; /* Top margin of 1% of the viewport height */
+  margin-left: 1vw; /* Left margin of 1% of the viewport width */
 }
 
+/* Style for the search input field in the admin dashboard */
 .AdminDashboard_SearchEmployee {
-  width: 20vw;
-  height: 5vh;
-  margin-left: 33.6%;
-  margin-bottom: 1vh;
-  margin-top: 1vh;
-  font-size: 0.9vw;
-  border: 0.2vw solid #708090;
-  border-radius: 0.1vw;
-  background-color: #FFFFFF;
+  width: 20vw; /* Width of 20% of the viewport width */
+  height: 5vh; /* Height of 5% of the viewport height */
+  margin-left: 33.6%; /* Centered by a left margin */
+  margin-bottom: 1vh; /* Bottom margin of 1% of the viewport height */
+  margin-top: 1vh; /* Top margin of 1% of the viewport height */
+  font-size: 0.9vw; /* Font size relative to the width of the viewport */
+  border: 0.2vw solid #708090; /* Solid border with a color of slate grey */
+  border-radius: 0.1vw; /* Slightly rounded corners */
+  background-color: #FFFFFF; /* White background color */
 }
 
-/* whole table  */
+/* Styles applied to the entire table within admin dashboard */
 .table {
-  width: 45.1vw;
-  margin: auto;
-  border-bottom: 0.4vw solid #ddd;
-  border-collapse: collapse;
+  width: 45.1vw; /* Width of 45.1% of the viewport width */
+  margin: auto; /* Center the table horizontally */
+  border-bottom: 0.4vw solid #ddd; /* Bottom border with solid grey */
+  border-collapse: collapse; /* Ensures borders between cells are merged */
 }
 
-/* table header (blue row) */
+/* Styles for table headers */
 .table th {
-  background-color: #708090;
-  padding: 0.65vw;
-  text-align: center;
-  font-weight: normal;
-  color: white;
-  font-size: 1.3vw;
-  border: 0.4vw solid #ddd;
-  overflow:hidden;
+  background-color: #708090; /* Slate grey background */
+  padding: 0.65vw; /* Padding around text */
+  text-align: center; /* Center text alignment */
+  font-weight: normal; /* Normal font weight */
+  color: white; /* Text color white */
+  font-size: 1.3vw; /* Font size relative to viewport width */
+  border: 0.4vw solid #ddd; /* Grey border */
+  overflow: hidden; /* Hides any overflow */
 }
 
-/* table rows and boxes */
+/* Styles for table rows */
 .table tr {
-  border-bottom: 0.4vw solid #ddd;
-  border-left: 0.4vw solid #ddd;
+  border-bottom: 0.4vw solid #ddd; /* Bottom border for each row */
+  border-left: 0.4vw solid #ddd; /* Left border for each row */
 }
 
-/* table border */
+/* Styles for table data cells */
 .table td {
-  padding: 0.65vw;
-  border-right: 0.4vw solid #ddd;
+  padding: 0.65vw; /* Padding around cell content */
+  border-right: 0.4vw solid #ddd; /* Right border for each cell */
 }
 
-/* alternating row colors */
+/* Background color for even rows of the table */
 .table tr:nth-child(even) {
-  background-color: #f5f5f5;
+  background-color: #f5f5f5; /* Light grey background for even rows */
 }
 
-/* style for alternating rows */
+/* Styles for text input within even rows to maintain consistent background */
 .table tr:nth-child(even) input[type="text"] {
-  background-color: #f5f5f5;
+  background-color: #f5f5f5; /* Ensures text input background matches row color */
 }
 
+/* Styling for dropdowns used to select employee status */
 .employee-status-select {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--statusColors);
-  color: var(--statusColorsText);
-  outline: none;
-  width: 8vw;
-  height: 4.3vh;
-  font-size: 1.1vw;
-  font-weight: bold;
-  text-align: center;
-  margin-left: 7.2%;
-  border-width: 0vw;
+  align-items: center; /* Vertically center content within dropdown */
+  justify-content: center; /* Horizontally center content */
+  background-color: var(--statusColors); /* Background color based on a variable */
+  color: var(--statusColorsText); /* Text color based on a variable */
+  outline: none; /* Removes outline to clean up appearance */
+  width: 8vw; /* Width relative to the viewport */
+  height: 4.3vh; /* Height relative to the viewport */
+  font-size: 1.1vw; /* Font size relative to the viewport width */
+  font-weight: bold; /* Bold font weight for emphasis */
+  text-align: center; /* Centers text horizontally */
+  margin-left: 7.2%; /* Left margin for positioning */
+  border-width: 0vw; /* No visible border */
 }
 
+
+/* Styles for container that holds buttons at the bottom of the Admin Dashboard */
 .AdminDashboard_BottomButtons {
-  display: flex;
-  margin-top: 2vh;
-  width: 47.25vw;
-  margin-bottom: 1vh;
-  margin-left: 0.8vw;
+  display: flex; /* Align child elements in a row */
+  margin-top: 2vh; /* Top margin relative to the height of the viewport */
+  width: 47.25vw; /* Width relative to the width of the viewport */
+  margin-bottom: 1vh; /* Bottom margin relative to the height of the viewport */
+  margin-left: 0.8vw; /* Left margin relative to the width of the viewport */
 }
 
+/* Styling for a specific button that locks all user accounts in the Admin Dashboard */
 .AdminDashboard_LockAllButton {
-  width: 6vw;
-  height: 4vh;
-  border: 0.2vw solid #708090;
-  border-radius: 0.1vw;
-  color: #708090;
-  font-size: 0.9vw;
-  font-weight: bold;
-  margin-left: 40.55vw;
+  width: 6vw; /* Width of the button relative to the viewport width */
+  height: 4vh; /* Height of the button relative to the viewport height */
+  border: 0.2vw solid #708090; /* Solid border with a slate gray color */
+  border-radius: 0.1vw; /* Slight rounding of the corners */
+  color: #708090; /* Text color in slate gray */
+  font-size: 0.9vw; /* Font size relative to the viewport width */
+  font-weight: bold; /* Bold font weight for text */
+  margin-left: 40.55vw; /* Left margin to position the button on the far right */
 }
 
+/* General styling for popup components */
 .popup {
-  display: flex;
-  align-items: center;
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Vertically center all child elements */
 }
 
+/* Styling for buttons inside a popup, specifically styled as links */
 .popup .btn-link {
-  color: #1c2d5a;
-  border: 0;
-  width: 3.5vw;
-  height: 4.3vh;
-  font-size: 1.2vw;
-  font-weight: bold;
-  text-align: left;
-  margin-left: 1.5vw;
+  color: #1c2d5a; /* Dark blue text color */
+  border: 0; /* No border */
+  width: 3.5vw; /* Width relative to the viewport width */
+  height: 4.3vh; /* Height relative to the viewport height */
+  font-size: 1.2vw; /* Font size larger than normal for emphasis */
+  font-weight: bold; /* Bold text for emphasis */
+  text-align: left; /* Align text to the left */
+  margin-left: 1.5vw; /* Left margin to provide spacing */
 }
 
+/* Styles for displaying employee names, typically in a list or table */
 .employee-name {
-  flex-grow: 1; 
-  height: 4vh;
-  max-width: 15vw; 
-  border-radius: 0;
-  font-size: 1.5vw;
-  border: none; 
-  color: #708090; 
-  text-align: left;
-  margin-top: 0.5vh;
+  flex-grow: 1; /* Allow this element to grow to fill available space */
+  height: 4vh; /* Fixed height relative to the viewport height */
+  max-width: 15vw; /* Maximum width relative to the viewport width */
+  border-radius: 0; /* No border radius for square edges */
+  font-size: 1.5vw; /* Relatively large font size for readability */
+  border: none; /* No border */
+  color: #708090; /* Slate gray text color */
+  text-align: left; /* Align text to the left */
+  margin-top: 0.5vh; /* Small top margin for spacing */
 }
 
+/* Generic styling for delete buttons, often used to remove items or entries */
 .delete-btn {
-  border: 0;
-  font-weight: bold;
-  text-align: center;
-  background: none; 
-  cursor: pointer;
+  border: 0; /* No border */
+  font-weight: bold; /* Bold text for emphasis */
+  text-align: center; /* Center the text within the button */
+  background: none; /* Transparent background */
+  cursor: pointer; /* Change cursor to pointer to indicate clickable */
 }
 
+/* Specific styling for delete buttons within the admin dashboard */
 .DeleteButton {
-  width: 1.5vw;
-  margin-left: 1.7vw;
+  width: 1.5vw; /* Narrow width relative to the viewport width */
+  margin-left: 1.7vw; /* Left margin to separate from other elements */
 }
 
-.employee-status-select{
-  text-align: center;
-
+/* Additional styling to ensure text in employee status dropdown is centered */
+.employee-status-select {
+  text-align: center; /* Center align the text */
 }
+
 
 

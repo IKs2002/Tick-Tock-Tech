@@ -1,99 +1,111 @@
-
+/* Styles for the main container of the Manager Dashboard, occupying full height and width */
 .ManagerDashboard_ParentBorder {
-    margin-top: 1vh;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .ManagerDashboardTable {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    background-color: #ededed;
-  }
-  
-  .ManagerDashboardInputs {
-    display: flex;
-    flex-direction: row;
-    margin-top: 1vh;
-    margin-left: 1vw;
-  }
-  
-  .ManagerDashboard_SearchEmployee {
-    width: 20vw;
-    height: 4vh;
-    margin-left: 54.3%;
-    margin-bottom: 1vh;
-    margin-top: 1vh;
-    font-size: 0.9vw;
-    border: 0.2vw solid #708090;
-    border-radius: 0.1vw;
-    background-color: #FFFFFF;
-  }
-  
-  .table {
-    width: 45.1vw;
-    margin: auto;
-    border-bottom: 0.4vw solid #ddd;
-    border-collapse: collapse;
-    margin-bottom: 3vh;
-  }
-  
-  .table th {
-    background-color: #708090;
-    padding: 0.65vw;
-    text-align: center;
-    font-weight: normal;
-    color: white;
-    font-size: 1.3vw;
-    border: 0.4vw solid #ddd;
-  }
-  
-  .table tr {
-    border-bottom: 0.4vw solid #ddd;
-    border-left: 0.4vw solid #ddd;
-  }
-  
-  .table td {
-    padding: 0.65vw;
-    border-right: 0.4vw solid #ddd;
-  }
-  
-  .table tr:nth-child(even) {
-    background-color: #f5f5f5;
-  }
-  
-  .manager-employee-status-select {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--statusColors);
-    color: var(--statusColorsText);
-    outline: none;
-    width: 8vw;
-    height: 4.3vh;
-    font-size: 1.1vw;
-    font-weight: bold;
-    text-align: center;
-    margin-left: 28.5%;
-    border-width: 0vw;
-  }
-  
-  .employee-name2 {
-    flex-grow: 1; 
-    height: 4vh;
-    max-width: 15vw; 
-    border-radius: 0;
-    font-size: 1.5vw;
-    border: none; 
-    color: #708090; 
-    text-align: left;
-  }
-  .ManagerDashboard_clickable-cell:hover {
-    background-color: #f5f5f5;
-  }
-  .employee-status-select{
-    text-align: center;
-  
-  }
-  
+  margin-top: 1vh; /* Top margin set to 1% of viewport height */
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+}
+
+/* Styling for the table container in the Manager Dashboard */
+.ManagerDashboardTable {
+  width: 50%; /* Table width set to 50% of its container */
+  display: flex; /* Use flexbox layout */
+  flex-direction: column; /* Stack children vertically */
+  background-color: #ededed; /* Light grey background */
+}
+
+/* Container for input fields in the Manager Dashboard */
+.ManagerDashboardInputs {
+  display: flex; /* Use flexbox layout */
+  flex-direction: row; /* Arrange children in a row */
+  margin-top: 1vh; /* Top margin of 1% of viewport height */
+  margin-left: 1vw; /* Left margin of 1% of viewport width */
+}
+
+/* Style for the search input in the Manager Dashboard */
+.ManagerDashboard_SearchEmployee {
+  width: 20vw; /* Width set to 20% of viewport width */
+  height: 4vh; /* Height set to 4% of viewport height */
+  margin-left: 54.3%; /* Left margin set to 54.3% for center alignment */
+  margin-bottom: 1vh; /* Bottom margin of 1% of viewport height */
+  margin-top: 1vh; /* Top margin of 1% of viewport height */
+  font-size: 0.9vw; /* Font size relative to viewport width */
+  border: 0.2vw solid #708090; /* Solid grey border */
+  border-radius: 0.1vw; /* Slightly rounded corners */
+  background-color: #FFFFFF; /* White background color */
+}
+
+/* Styles for the main table in the Manager Dashboard */
+.table {
+  width: 45.1vw; /* Width set to 45.1% of viewport width */
+  margin: auto; /* Center the table horizontally */
+  border-bottom: 0.4vw solid #ddd; /* Solid bottom border */
+  border-collapse: collapse; /* Collapse border for a cleaner look */
+  margin-bottom: 3vh; /* Bottom margin of 3% of viewport height */
+}
+
+/* Styling for table headers */
+.table th {
+  background-color: #708090; /* Grey background */
+  padding: 0.65vw; /* Padding around text */
+  text-align: center; /* Center text alignment */
+  font-weight: normal; /* Normal font weight */
+  color: white; /* White text color */
+  font-size: 1.3vw; /* Font size relative to viewport width */
+  border: 0.4vw solid #ddd; /* Solid border */
+}
+
+/* Styling for table rows */
+.table tr {
+  border-bottom: 0.4vw solid #ddd; /* Solid bottom border */
+  border-left: 0.4vw solid #ddd; /* Solid left border */
+}
+
+/* Styling for table data cells */
+.table td {
+  padding: 0.65vw; /* Padding around content */
+  border-right: 0.4vw solid #ddd; /* Solid right border */
+}
+
+/* Alternate row background color for better readability */
+.table tr:nth-child(even) {
+  background-color: #f5f5f5; /* Light grey background for even rows */
+}
+
+/* Styling for employee status dropdown in the Manager Dashboard */
+.manager-employee-status-select {
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Vertically center content */
+  justify-content: center; /* Horizontally center content */
+  background-color: var(--statusColors); /* Background color variable */
+  color: var(--statusColorsText); /* Text color variable */
+  outline: none; /* Remove outline */
+  width: 8vw; /* Width relative to viewport width */
+  height: 4.3vh; /* Height relative to viewport height */
+  font-size: 1.1vw; /* Font size relative to viewport width */
+  font-weight: bold; /* Bold font weight */
+  text-align: center; /* Center text alignment */
+  margin-left: 28.5%; /* Left margin for positioning */
+  border-width: 0vw; /* No border width */
+}
+
+/* Style for employee names */
+.employee-name2 {
+  flex-grow: 1; /* Grow to take up available space */
+  height: 4vh; /* Height relative to viewport height */
+  max-width: 15vw; /* Maximum width relative to viewport width */
+  border-radius: 0; /* No rounded corners */
+  font-size: 1.5vw; /* Larger font size for visibility */
+  border: none; /* No border */
+  color: #708090; /* Grey text color */
+  text-align: left; /* Left text alignment */
+}
+
+/* Hover effect for clickable cells in the Manager Dashboard */
+.ManagerDashboard_clickable-cell:hover {
+  background-color: #f5f5f5; /* Light grey background on hover */
+}
+
+/* Ensure text alignment in the status select dropdown is centered */
+.employee-status-select {
+  text-align: center;
+}

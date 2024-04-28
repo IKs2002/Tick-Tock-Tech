@@ -1,3 +1,4 @@
+// THIS FILE IS A PAY PERIOD FOR AUTO PAY PERIOD GENERATION IN THE DATABASE
 const mongoose = require('mongoose');
 
 // schema for pay period 

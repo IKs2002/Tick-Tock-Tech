@@ -1,39 +1,41 @@
+/* Main container for the tabs, occupies the full width of its parent and has a fixed height */
 .tabs-container {
   width: 100%;
-  /* This container holds all the tabs and their content, setting a fixed height */
+  /* Ensures the container stretches to the full width of its parent */
 }
 
+/* Styling for the row of tabs within the container */
 .tabs {
-  font-size: 2vh;
-  display: flex;
-  font-weight: bold;
-  /* Styles the row of tabs, making them bold and evenly spaced */
+  font-size: 2vh; /* Sets the font size relative to the viewport height */
+  display: flex; /* Uses flexbox layout to align child elements (tabs) in a row */
+  font-weight: bold; /* Makes the text within each tab bold */
+  /* Ensures tabs are laid out in a row and spaced evenly */
 }
 
+/* Individual tab styling */
 .tab {
-  height: 4vh;
-  width: 20vh;
-  cursor: pointer;
-  border: 1px solid black;
-  border-bottom: 2px solid black;
-  background-color: #f1f1f1;
-  margin-bottom: 1px;
+  height: 4vh; /* Sets the height of each tab relative to the viewport height */
+  width: 20vh; /* Sets the width of each tab relative to the viewport height */
+  cursor: pointer; /* Changes the mouse cursor to a pointer to indicate clickable items */
+  border: 1px solid black; /* Adds a solid black border around each tab */
+  border-bottom: 2px solid black; /* Makes the bottom border thicker to distinguish it visually */
+  background-color: #f1f1f1; /* Sets a light grey background color for each tab */
+  margin-bottom: 1px; /* Adds a small margin at the bottom of each tab */
   
-  /* Centering content within each tab */
+  /* Flexbox settings to center content within each tab */
   display: flex;
-  justify-content: center;
-  align-items: center;
-  /* Additional styles to make the tabs interactive and visually distinct */
+  justify-content: center; /* Centers content horizontally within the tab */
+  align-items: center; /* Centers content vertically within the tab */
+  /* Provides interactive feedback and visual separation between tabs */
 }
 
-
-
+/* Additional styling for the active tab to highlight it visually */
 .tab.active {
-  border-bottom: 4px solid black; /* Highlights the currently active tab */
+  border-bottom: 4px solid black; /* Increases the bottom border thickness to highlight the active tab */
 }
 
-
+/* Container for the content displayed when a tab is selected */
 .tab-content {
-  height: 80vh;
-  /* Defines the area where content related to each tab is displayed */
+  height: 80vh; /* Sets a fixed height for the content area relative to the viewport height */
+  /* Defines a large area to accommodate content related to each tab, separate from the tabs themselves */
 }

@@ -1,4 +1,4 @@
-
+//THIS FILE IS THE SCHEMA FOR TIMESHEETS
 const mongoose = require('mongoose');
 const timesheetSchema = new mongoose.Schema({
     day: String,

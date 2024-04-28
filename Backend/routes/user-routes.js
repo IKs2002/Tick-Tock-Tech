@@ -1,3 +1,4 @@
+// THIS FILE IS ALL ROUTES FOR THE USERS FUNCTIONS IN THIS APPLICATION
 const express = require("express");
 const router = express.Router();
 

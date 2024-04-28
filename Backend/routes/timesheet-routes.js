@@ -1,3 +1,4 @@
+//THIS FILE HOSTS ALL ROUTES FOR THE TIMESHEETS IN THIS APPPLICATION
 const express = require("express");
 const router = express.Router();
 

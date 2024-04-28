@@ -1,4 +1,4 @@
-
+//THIS FILE IS THE SCHEMA FOR AN INACTIVE USER'S TIME SHEETS. ALL OF THE TIMESHEETS OF A DELETED USER WILL BE CONVERTED INTO THIS FORMAT, THEN PLACED INTO THIS COLLECTION
 const mongoose = require('mongoose');
 const InactiveUserTimesheetsSchema = new mongoose.Schema({
     day: String,

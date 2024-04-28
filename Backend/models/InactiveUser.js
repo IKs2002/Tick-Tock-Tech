@@ -1,3 +1,4 @@
+//THIS FILE IS THE SCHEMA FOR A USER WHO WAS DELETED FROM THE ADMIN GUI
 const mongoose = require("mongoose");
 const inactiveUserSchema = new mongoose.Schema({
   name:{type: String, required: true},
