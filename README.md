@@ -5,14 +5,14 @@
 - Implementation of API endpoint in chat bot. 
 ## SET-UP
 -------------------------------------------------------
--After placing the downloaded repository into a directory open two terminals at the present working Directory
--Navigate in the terminals to the Backend and Frontend folders
--To start the application use the command "npm start"
+- After placing the downloaded repository into a directory open two terminals at the present working Directory
+- Navigate in the terminals to the Backend and Frontend folders
+- To start the application use the command "npm start"
 
 ## Configuration/Dependencies
--Each API call will need to be edited to a specific IP or it will just run on localhost port 5000 for the Backend and port 3000 for Frontend
--node.js will be required for the application to run
--All packages required for the application can be installed by using the command "npm install" in the Backend and Frontend terminals.
+- Each API call will need to be edited to a specific IP or it will just run on localhost port 5000 for the Backend and port 3000 for Frontend
+- node.js will be required for the application to run
+- All packages required for the application can be installed by using the command "npm install" in the Backend and Frontend terminals.
 
 API ENDPOINTS FOR IMPLEMENTING IT INTO THE SYSTEM
 -------------------------------------------------------
